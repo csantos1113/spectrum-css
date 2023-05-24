@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.31"></a>
+## 6.0.31
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.30...@spectrum-css/avatar@6.0.31)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
+<a name="6.0.30"></a>
+## 6.0.30
+🗓 2023-05-22 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.29...@spectrum-css/avatar@6.0.30)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
+<a name="6.0.29"></a>
+## 6.0.29
+🗓 2023-05-18 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.28...@spectrum-css/avatar@6.0.29)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
+<a name="6.0.28"></a>
+## 6.0.28
+🗓 2023-05-17 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.27...@spectrum-css/avatar@6.0.28)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
+<a name="6.0.27"></a>
+## 6.0.27
+🗓 2023-05-11 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.26...@spectrum-css/avatar@6.0.27)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
+<a name="6.0.26"></a>
+## 6.0.26
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.25...@spectrum-css/avatar@6.0.26)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
+<a name="6.0.25"></a>
+## 6.0.25
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.24...@spectrum-css/avatar@6.0.25)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
+<a name="6.0.24"></a>
+## 6.0.24
+🗓 2023-05-08 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.23...@spectrum-css/avatar@6.0.24)
+
+**Note:** Version bump only for package @spectrum-css/avatar
+
+
+
+
+
 <a name="6.0.23"></a>
 ## 6.0.23
 🗓 2023-05-04 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/avatar@6.0.22...@spectrum-css/avatar@6.0.23)

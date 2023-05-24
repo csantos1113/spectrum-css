@@ -3,6 +3,96 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.60"></a>
+## 3.0.60
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.59...@spectrum-css/cyclebutton@3.0.60)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.59"></a>
+## 3.0.59
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.58...@spectrum-css/cyclebutton@3.0.59)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.58"></a>
+## 3.0.58
+🗓 2023-05-22 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.57...@spectrum-css/cyclebutton@3.0.58)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.57"></a>
+## 3.0.57
+🗓 2023-05-18 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.56...@spectrum-css/cyclebutton@3.0.57)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.56"></a>
+## 3.0.56
+🗓 2023-05-17 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.55...@spectrum-css/cyclebutton@3.0.56)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.55"></a>
+## 3.0.55
+🗓 2023-05-11 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.54...@spectrum-css/cyclebutton@3.0.55)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.54"></a>
+## 3.0.54
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.53...@spectrum-css/cyclebutton@3.0.54)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.53"></a>
+## 3.0.53
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.52...@spectrum-css/cyclebutton@3.0.53)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
+<a name="3.0.52"></a>
+## 3.0.52
+🗓 2023-05-08 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.51...@spectrum-css/cyclebutton@3.0.52)
+
+**Note:** Version bump only for package @spectrum-css/cyclebutton
+
+
+
+
+
 <a name="3.0.51"></a>
 ## 3.0.51
 🗓 2023-05-04 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/cyclebutton@3.0.50...@spectrum-css/cyclebutton@3.0.51)

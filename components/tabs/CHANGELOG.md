@@ -3,6 +3,106 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.2.55"></a>
+## 3.2.55
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.54...@spectrum-css/tabs@3.2.55)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.54"></a>
+## 3.2.54
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.53...@spectrum-css/tabs@3.2.54)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.53"></a>
+## 3.2.53
+🗓 2023-05-22 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.52...@spectrum-css/tabs@3.2.53)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.52"></a>
+## 3.2.52
+🗓 2023-05-18 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.51...@spectrum-css/tabs@3.2.52)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.51"></a>
+## 3.2.51
+🗓 2023-05-17 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.50...@spectrum-css/tabs@3.2.51)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.50"></a>
+## 3.2.50
+🗓 2023-05-11 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.49...@spectrum-css/tabs@3.2.50)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.49"></a>
+## 3.2.49
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.48...@spectrum-css/tabs@3.2.49)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.48"></a>
+## 3.2.48
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.47...@spectrum-css/tabs@3.2.48)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.47"></a>
+## 3.2.47
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.46...@spectrum-css/tabs@3.2.47)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
+<a name="3.2.46"></a>
+## 3.2.46
+🗓 2023-05-08 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.45...@spectrum-css/tabs@3.2.46)
+
+**Note:** Version bump only for package @spectrum-css/tabs
+
+
+
+
+
 <a name="3.2.45"></a>
 ## 3.2.45
 🗓 2023-05-04 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tabs@3.2.44...@spectrum-css/tabs@3.2.45)

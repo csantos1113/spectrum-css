@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.0.2"></a>
+## 7.0.2
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/treeview@7.0.1...@spectrum-css/treeview@7.0.2)
+
+**Note:** Version bump only for package @spectrum-css/treeview
+
+
+
+
+
+<a name="7.0.1"></a>
+## 7.0.1
+🗓 2023-05-17 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/treeview@7.0.0...@spectrum-css/treeview@7.0.1)
+
+**Note:** Version bump only for package @spectrum-css/treeview
+
+
+
+
+
+<a name="7.0.0"></a>
+# 7.0.0
+🗓 2023-05-09 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/treeview@6.0.39...@spectrum-css/treeview@7.0.0)
+
+* feat(thumbnail)!: migrate to spectrum-tokens (#1568) ([9d4ec09](https://github.com/adobe/spectrum-css/commit/9d4ec09)), closes [#1568](https://github.com/adobe/spectrum-css/issues/1568)
+
+
+### 🛑 BREAKING CHANGES
+
+* migrates the Thumbnail component to the `@adobe/spectrum-tokens` package.
+
+
+
+
+
 <a name="6.0.39"></a>
 ## 6.0.39
 🗓 2023-05-02 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/treeview@6.0.38...@spectrum-css/treeview@6.0.39)

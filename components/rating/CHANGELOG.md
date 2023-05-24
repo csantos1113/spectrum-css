@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.0.4"></a>
+## 4.0.4
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/rating@4.0.3...@spectrum-css/rating@4.0.4)
+
+**Note:** Version bump only for package @spectrum-css/rating
+
+
+
+
+
+<a name="4.0.3"></a>
+## 4.0.3
+🗓 2023-05-22 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/rating@4.0.2...@spectrum-css/rating@4.0.3)
+
+**Note:** Version bump only for package @spectrum-css/rating
+
+
+
+
+
+<a name="4.0.2"></a>
+## 4.0.2
+🗓 2023-05-18 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/rating@4.0.1...@spectrum-css/rating@4.0.2)
+
+**Note:** Version bump only for package @spectrum-css/rating
+
+
+
+
+
+<a name="4.0.1"></a>
+## 4.0.1
+🗓 2023-05-17 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/rating@4.0.0...@spectrum-css/rating@4.0.1)
+
+**Note:** Version bump only for package @spectrum-css/rating
+
+
+
+
+
+<a name="4.0.0"></a>
+# 4.0.0
+🗓 2023-05-11 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/rating@3.0.43...@spectrum-css/rating@4.0.0)
+
+* feat(rating)!: token migration (#1642) ([957c9b7](https://github.com/adobe/spectrum-css/commit/957c9b7)), closes [#1642](https://github.com/adobe/spectrum-css/issues/1642)
+
+
+### 🛑 BREAKING CHANGES
+
+* migrates the Rating component to use `@adobe/spectrum-tokens`.
+
+
+
+
+
 <a name="3.0.43"></a>
 ## 3.0.43
 🗓 2023-05-02 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/rating@3.0.42...@spectrum-css/rating@3.0.43)

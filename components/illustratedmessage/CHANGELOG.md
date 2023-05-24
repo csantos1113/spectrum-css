@@ -3,6 +3,103 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.0"></a>
+# 6.0.0
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.18...@spectrum-css/illustratedmessage@6.0.0)
+
+* feat(dropzone)!: migrate tokens (#1831) ([5216021](https://github.com/adobe/spectrum-css/commit/5216021)), closes [#1831](https://github.com/adobe/spectrum-css/issues/1831)
+
+
+### 🛑 BREAKING CHANGES
+
+* migrates DropZone to use `@adobe/spectrum-tokens`.
+
+Also updates IllustratedMessage and ActionButton to share `--mod-` properties.
+
+
+
+
+
+<a name="5.0.18"></a>
+## 5.0.18
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.17...@spectrum-css/illustratedmessage@5.0.18)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
+<a name="5.0.17"></a>
+## 5.0.17
+🗓 2023-05-22 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.16...@spectrum-css/illustratedmessage@5.0.17)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
+<a name="5.0.16"></a>
+## 5.0.16
+🗓 2023-05-18 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.15...@spectrum-css/illustratedmessage@5.0.16)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
+<a name="5.0.15"></a>
+## 5.0.15
+🗓 2023-05-17 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.14...@spectrum-css/illustratedmessage@5.0.15)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
+<a name="5.0.14"></a>
+## 5.0.14
+🗓 2023-05-11 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.13...@spectrum-css/illustratedmessage@5.0.14)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
+<a name="5.0.13"></a>
+## 5.0.13
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.12...@spectrum-css/illustratedmessage@5.0.13)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
+<a name="5.0.12"></a>
+## 5.0.12
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.11...@spectrum-css/illustratedmessage@5.0.12)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
+<a name="5.0.11"></a>
+## 5.0.11
+🗓 2023-05-08 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.10...@spectrum-css/illustratedmessage@5.0.11)
+
+**Note:** Version bump only for package @spectrum-css/illustratedmessage
+
+
+
+
+
 <a name="5.0.10"></a>
 ## 5.0.10
 🗓 2023-05-04 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/illustratedmessage@5.0.9...@spectrum-css/illustratedmessage@5.0.10)

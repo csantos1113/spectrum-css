@@ -11,6 +11,8 @@ governing permissions and limitations under the License.
 */
 
 const gulp = require('gulp');
+const logger = require('gulplog');
+const colors = require('colors');
 const path = require('path');
 const through = require('through2');
 const postcss = require('gulp-postcss');
@@ -41,7 +43,7 @@ function getTokensUsedInCSS(root, coreTokens, componentTokens) {
   let coreTokensUsed = {};
   let componentTokensUsed = {};
 
-  root.walkRules((rule, ruleIndex) => {
+  root.walkRules((rule) => {
     rule.walkDecls((decl) => {
       let matches = decl.value.match(/var\(.*?\)/g);
       if (matches) {
@@ -70,7 +72,7 @@ function getTokensUsedInCSS(root, coreTokens, componentTokens) {
 function getTokensDefinedInCSS(root) {
   let variables = {};
 
-  root.walkRules((rule, ruleIndex) => {
+  root.walkRules((rule) => {
     rule.walkDecls((decl) => {
       if (decl.prop.startsWith('--')) {
         variables[decl.prop] = decl.value;
@@ -115,7 +117,7 @@ function buildCSSWithoutThemes() {
       'themes/*.css'
     ])
     .pipe(concat('index-base.css'))
-    .pipe(postcss(processorsFunction(false, { noFlatVariables: true }), {
+    .pipe(postcss(processorsFunction({ noFlatVariables: true }), {
       from: './index.css' // gulp-concat sets the file.path wrong, so override here
     }))
     .pipe(gulp.dest('dist/'));
@@ -127,7 +129,7 @@ function buildCSSThemeIndex() {
       'themes/*.css'
     ])
     .pipe(concat('index-theme.css'))
-    .pipe(postcss(processorsFunction(true, { noSelectors: true })))
+    .pipe(postcss(processorsFunction({ noSelectors: true })))
     .pipe(gulp.dest('dist/'));
 }
 
@@ -135,7 +137,7 @@ function buildCSSThemes() {
   return gulp.src([
       'themes/*.css'
     ])
-    .pipe(postcss(processorsFunction(true, { noSelectors: true })))
+    .pipe(postcss(processorsFunction({ noSelectors: true })))
     .pipe(gulp.dest('dist/themes/'));
 }
 
@@ -147,7 +149,7 @@ function buildExpressTheme() {
       'dist/index-theme.css'
     ])
     .pipe(concat('express.css'))
-    .pipe(postcss(processorsFunction(true).concat(require('postcss-combininator'))))
+    .pipe(postcss(processorsFunction().concat(require('postcss-combininator'))))
     .pipe(gulp.dest('dist/themes/'));
 }
 
@@ -173,23 +175,21 @@ function checkCSS(glob) {
       let { usedTokens } = getTokensUsedInCSS(root, coreTokens, componentTokens);
 
       // Make sure the component doesn't use any undefined tokens
-      let errors = [];
       usedTokens.forEach(tokenName => {
         if (!coreTokens[tokenName] && !componentTokens[tokenName] && !tokenName.startsWith('--mod') && !tokenName.startsWith('--highcontrast')) {
-          errors.push(`${pkg.name} uses undefined token ${tokenName}`);
+          tokenName = `${tokenName}`.cyan;
+          logger.warn(`${'◆'.yellow}  ${pkg.name} uses ${'undefined'.underline} token ${tokenName}`);
         }
       });
 
+      // 2023-05-10: Should remove this to allow for more cascading values to influence nested components
       // Make sure all tokens defined in the component are used
       Object.keys(componentTokens).forEach(tokenName => {
         if (!usedTokens.includes(tokenName)) {
-          errors.push(`${pkg.name} defines ${tokenName}, but never uses it`);
+          tokenName = `${tokenName}`.cyan;
+          logger.warn(`${'◆'.yellow}  ${pkg.name} defines ${tokenName}, but does not use it ${'internally'.italic}`);
         }
       });
-
-      if (errors.length) {
-        return cb(new Error(errors.join('\n')), file);
-      }
 
       cb(null);
     }));

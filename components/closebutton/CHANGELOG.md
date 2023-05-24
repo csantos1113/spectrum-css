@@ -3,6 +3,88 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.1"></a>
+## 3.1.1
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.1.0...@spectrum-css/closebutton@3.1.1)
+
+**Note:** Version bump only for package @spectrum-css/closebutton
+
+
+
+
+
+<a name="3.1.0"></a>
+# 3.1.0
+🗓 2023-05-22 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.43...@spectrum-css/closebutton@3.1.0)
+
+### ✨ Features
+
+* **alertbanner:** add AlertBanner component  ([#1798](https://github.com/adobe/spectrum-css/issues/1798)) ([1610e7a](https://github.com/adobe/spectrum-css/commit/1610e7a))
+
+
+
+
+
+<a name="3.0.43"></a>
+## 3.0.43
+🗓 2023-05-18 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.42...@spectrum-css/closebutton@3.0.43)
+
+**Note:** Version bump only for package @spectrum-css/closebutton
+
+
+
+
+
+<a name="3.0.42"></a>
+## 3.0.42
+🗓 2023-05-17 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.41...@spectrum-css/closebutton@3.0.42)
+
+**Note:** Version bump only for package @spectrum-css/closebutton
+
+
+
+
+
+<a name="3.0.41"></a>
+## 3.0.41
+🗓 2023-05-11 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.40...@spectrum-css/closebutton@3.0.41)
+
+**Note:** Version bump only for package @spectrum-css/closebutton
+
+
+
+
+
+<a name="3.0.40"></a>
+## 3.0.40
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.39...@spectrum-css/closebutton@3.0.40)
+
+**Note:** Version bump only for package @spectrum-css/closebutton
+
+
+
+
+
+<a name="3.0.39"></a>
+## 3.0.39
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.38...@spectrum-css/closebutton@3.0.39)
+
+**Note:** Version bump only for package @spectrum-css/closebutton
+
+
+
+
+
+<a name="3.0.38"></a>
+## 3.0.38
+🗓 2023-05-08 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.37...@spectrum-css/closebutton@3.0.38)
+
+**Note:** Version bump only for package @spectrum-css/closebutton
+
+
+
+
+
 <a name="3.0.37"></a>
 ## 3.0.37
 🗓 2023-05-04 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/closebutton@3.0.36...@spectrum-css/closebutton@3.0.37)

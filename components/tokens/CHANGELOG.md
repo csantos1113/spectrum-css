@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="10.1.1"></a>
+## 10.1.1
+🗓 2023-05-23 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tokens@10.1.0...@spectrum-css/tokens@10.1.1)
+
+**Note:** Version bump only for package @spectrum-css/tokens
+
+
+
+
+
+<a name="10.1.0"></a>
+# 10.1.0
+🗓 2023-05-22 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tokens@10.0.0...@spectrum-css/tokens@10.1.0)
+
+### ✨ Features
+
+* **alertbanner:** add AlertBanner component  ([#1798](https://github.com/adobe/spectrum-css/issues/1798)) ([1610e7a](https://github.com/adobe/spectrum-css/commit/1610e7a))
+
+
+
+
+
+<a name="10.0.0"></a>
+# 10.0.0
+🗓 2023-05-10 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tokens@9.3.0...@spectrum-css/tokens@10.0.0)
+
+* chore(colorhandle, colorloupe, tokens)!: remove custom tokens  (#1826) ([c41af3a](https://github.com/adobe/spectrum-css/commit/c41af3a)), closes [#1826](https://github.com/adobe/spectrum-css/issues/1826)
+
+
+### 🛑 BREAKING CHANGES
+
+* removes several Color-component related tokens from `@spectrum-css/tokens`
+
+* chore(colorhandle): remove custom tokens
+* chore(colorhandle): remove use of custom tokens
+* chore(colorloupe): update tokens for colorloupe
+* chore(colorhandle, colorloupe): remove comments
+
+
+
+
+
+<a name="9.3.0"></a>
+# 9.3.0
+🗓 2023-05-08 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tokens@9.2.0...@spectrum-css/tokens@9.3.0)
+
+### ✨ Features
+
+* **tokens:** use v12.8.0 of @adobe/spectrum-tokens ([#1843](https://github.com/adobe/spectrum-css/issues/1843)) ([19abf2f](https://github.com/adobe/spectrum-css/commit/19abf2f))
+
+
+
+
+
 <a name="9.2.0"></a>
 # 9.2.0
 🗓 2023-05-04 • 📝 [Commits](https://github.com/adobe/spectrum-css/compare/@spectrum-css/tokens@9.1.0...@spectrum-css/tokens@9.2.0)
