@@ -6,6 +6,7 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies"
+      - "skip_vrt"
     assignees:
       - "castastrophe"
     reviewers:

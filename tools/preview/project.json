@@ -1,0 +1,74 @@
+{
+	"name": "preview",
+	"tags": ["tooling"],
+	"targets": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": [
+				"{workspaceRoot}/assets",
+				"{workspaceRoot}/decorators",
+				"{workspaceRoot}/*.js",
+				"{workspaceRoot}/*.html",
+				"{projectRoot}/components/*/dist"
+			],
+			"outputs": ["{workspaceRoot}/storybook-static"],
+			"executor": "nx:run-script",
+			"options": {
+				"script": "storybook"
+			}
+		},
+		"clean": {
+			"inputs": ["{workspaceRoot}/storybook-static"],
+			"outputs": [],
+			"executor": "nx:run-script",
+			"options": {
+				"script": "clean"
+			}
+		},
+		"test": {
+			"dependsOn": ["^build"],
+			"inputs": [
+				"{workspaceRoot}/assets",
+				"{workspaceRoot}/decorators",
+				"{workspaceRoot}/*.js",
+				"{workspaceRoot}/*.html",
+				"{projectRoot}/components/*/dist"
+			],
+			"executor": "nx:run-script",
+			"options": {
+				"script": "test"
+			}
+		},
+		"test:scope": {
+			"dependsOn": ["^build"],
+			"inputs": [
+				"{workspaceRoot}/assets",
+				"{workspaceRoot}/decorators",
+				"{workspaceRoot}/*.js",
+				"{workspaceRoot}/*.html",
+				"{projectRoot}/components/*/dist"
+			],
+			"executor": "nx:run-script",
+			"options": {
+				"script": "test:scope"
+			}
+		},
+		"storybook": {
+			"dependsOn": ["^build"],
+			"inputs": [
+				"{workspaceRoot}/assets",
+				"{workspaceRoot}/decorators",
+				"{workspaceRoot}/*.js",
+				"{workspaceRoot}/*.html",
+				"{projectRoot}/components/*/dist"
+			],
+			"outputs": ["{workspaceRoot}/storybook-static"],
+			"executor": "nx:run-script",
+			"options": {
+				"script": "storybook"
+			}
+		}
+	},
+	"implicitDependencies": ["@spectrum-css/*"],
+	"includedScripts": ["clean", "test", "test:scope", "storybook", "build"]
+}

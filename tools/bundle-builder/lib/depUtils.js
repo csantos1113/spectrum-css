@@ -13,6 +13,7 @@ governing permissions and limitations under the License.
 const fsp = require("fs").promises;
 const path = require("path");
 const depSolver = require("dependency-solver");
+const { existsSync } = require("fs");
 
 /*
   Given a package path, get its dependencies
@@ -22,21 +23,25 @@ const depSolver = require("dependency-solver");
   @return {Object} An object mapping the package name to its dependencies, or null if no dependencies
 */
 async function getDependencies(package) {
-	let pkg = JSON.parse(await fsp.readFile(path.join(package, "package.json")));
-	let dependencies = [];
+	const { name, devDependencies } = await fsp
+		.readFile(path.join(package, "package.json"))
+		.then(JSON.parse);
+	const dependencies = [];
 
-	if (pkg.devDependencies) {
-		dependencies = Object.keys(pkg.devDependencies).filter((dep) => {
-			return (
-				dep.indexOf("@spectrum-css") === 0 &&
-				dep !== "@spectrum-css/bundle-builder" &&
-				dep !== "@spectrum-css/component-builder" &&
-				dep !== "@spectrum-css/component-builder-simple"
-			);
-		});
+	if (devDependencies) {
+		dependencies.push(
+			...Object.keys(devDependencies).filter((dep) => {
+				return (
+					dep.indexOf("@spectrum-css") === 0 &&
+					dep !== "@spectrum-css/bundle-builder" &&
+					dep !== "@spectrum-css/component-builder" &&
+					dep !== "@spectrum-css/component-builder-simple"
+				);
+			})
+		);
 	}
 
-	return { name: pkg.name, dependencies: dependencies };
+	return { name, dependencies };
 }
 
 /*
@@ -48,36 +53,34 @@ async function getDependencies(package) {
 */
 async function solveDependencies(packages) {
 	async function getDependenciesForSolver(package) {
-		let { name, dependencies } = await getDependencies(package);
+		if (!existsSync(path.join(package, "package.json"))) return;
 
-		if (dependencies.length === 0) {
-			return null;
-		}
+		const { name, dependencies } = await getDependencies(package);
 
+		if (dependencies.length === 0) return;
 		return { [name]: dependencies };
 	}
 
-	let depArray = (
+	const depArray = (
 		await Promise.all(packages.map(getDependenciesForSolver))
 	).filter(Boolean);
 
-	let dependencies = {};
+	let d = {};
 	depArray.forEach((dep) => {
-		Object.assign(dependencies, dep);
+		Object.assign(d, dep);
 	});
 
-	return depSolver.solve(dependencies);
+	return depSolver.solve(d);
 }
 
-/*
-  Get the list of all packages in given directory
-
-  @param {string} packageDir - package directory
-
-  @return {Object} An array of package names in dependency order
-*/
+/**
+ * Get the list of all packages in given directory
+ * @param {string} packageDir - package directory
+ * @return {string[]} An array of package names in dependency order
+ */
 async function getPackageDependencyOrder(packageDir) {
-	let { name, dependencies } = await getDependencies(packageDir);
+	if (!existsSync(path.join(packageDir, "package.json"))) return [];
+	const { dependencies } = await getDependencies(packageDir);
 
 	return solveDependencies(
 		dependencies.map((dep) =>
@@ -86,30 +89,29 @@ async function getPackageDependencyOrder(packageDir) {
 	);
 }
 
-/*
-  Get the list of all packages in given directory
-
-  @param {string} packagesDir - directory of packages
-
-  @return {Object} An array of package names in dependency order
-*/
+/**
+ * Get the list of all packages in given directory
+ * @param {string} packagesDir - directory of packages
+ * @return {Object} An array of package names in dependency order
+ */
 async function getFolderDependencyOrder(packagesDir) {
+	const packages = [];
 	// Get list of all packages
-	let packages = (await fsp.readdir(packagesDir, { withFileTypes: true }))
-		.filter((dirent) => dirent.isDirectory() || dirent.isSymbolicLink())
-		.map((dirent) => path.join(packagesDir, dirent.name));
+	for (const dirent of (
+		await fsp.readdir(packagesDir, { withFileTypes: true })
+	).filter((dirent) => dirent.isDirectory() || dirent.isSymbolicLink())) {
+		if (existsSync(path.join(packagesDir, dirent.name, "package.json"))) {
+			packages.push(path.join(packagesDir, dirent.name));
+		}
+	}
 
-	let solution = await solveDependencies(packages);
-
-	// Nobody relies on it, so it gets clipped, weird
-	solution.push("@spectrum-css/expressvars");
+	const solution = ((await solveDependencies(packages)) ?? []).filter(
+		(p) => p !== "@spectrum-css/tokens"
+	);
 
 	// Build tokens first
 	// This is because not every package relies on tokens, but the builder needs tokens to bake vars
-	solution = solution.filter((p) => p !== "@spectrum-css/tokens");
-	solution.unshift("@spectrum-css/tokens");
-
-	return solution;
+	return ["@spectrum-css/tokens", "@spectrum-css/expressvars", ...solution];
 }
 
 exports.getDependencies = getDependencies;

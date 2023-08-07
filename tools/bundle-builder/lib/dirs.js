@@ -13,35 +13,10 @@ governing permissions and limitations under the License.
 const path = require("path");
 
 exports.builder = path.resolve(__dirname, "..");
-exports.siteResources = path.resolve(
-	__dirname,
-	"..",
-	"node_modules",
-	"@spectrum-css",
-	"site"
-);
-exports.topLevel = path.resolve(exports.builder, "..", "..");
-exports.isTopLevel = process.cwd() === exports.topLevel;
-exports.site = path.resolve(exports.topLevel, "site");
-
-if (exports.isTopLevel) {
-	exports.components = path.join(exports.topLevel, "components");
-} else {
-	exports.components = path.join(
-		process.cwd(),
-		"node_modules",
-		"@spectrum-css"
-	);
-}
-
-exports.resolve = function (component) {
-	if (exports.isTopLevel) {
-		return path.join(exports.components, component.split("/").pop());
-	}
-
-	return path.dirname(
-		require.resolve(component, {
-			paths: [path.join(process.cwd(), "node_modules")],
-		})
-	);
-};
+exports.siteResources = path.resolve(__dirname, "../../../site");
+exports.topLevel = path.resolve(__dirname, "../../..");
+exports.isTopLevel = process.cwd() === path.resolve(__dirname, "../../..");
+exports.site = path.resolve(__dirname, "../../../site");
+exports.components = path.join(__dirname, "../../../components");
+exports.resolve = (component) =>
+	path.join(exports.components, component.split("/").pop());

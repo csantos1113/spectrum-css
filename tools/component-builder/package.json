@@ -48,7 +48,13 @@
     "through2": "^3.0.1"
   },
   "peerDependencies": {
-    "@spectrum-css/tokens": ">=11",
+    "@spectrum-css/tokens": ">=7 <=11",
     "@spectrum-css/vars": ">=8 <=9"
+  },
+  "nx": {
+    "tags": [
+      "builder",
+      "tooling"
+    ]
   }
 }

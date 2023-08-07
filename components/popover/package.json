@@ -1,36 +1,37 @@
 {
-  "name": "@spectrum-css/popover",
-  "version": "6.0.66",
-  "description": "The Spectrum CSS popover component",
-  "license": "Apache-2.0",
-  "author": "Adobe",
-  "homepage": "https://opensource.adobe.com/spectrum-css/popover",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/adobe/spectrum-css.git",
-    "directory": "components/popover"
-  },
-  "bugs": {
-    "url": "https://github.com/adobe/spectrum-css/issues"
-  },
-  "main": "dist/index-vars.css",
-  "scripts": {
-    "build": "gulp"
-  },
-  "peerDependencies": {
-    "@spectrum-css/dialog": ">=6",
-    "@spectrum-css/tokens": ">=11"
-  },
-  "devDependencies": {
-    "@spectrum-css/button": "^11.0.0",
-    "@spectrum-css/component-builder-simple": "^2.0.17",
-    "@spectrum-css/dialog": "^6.0.67",
-    "@spectrum-css/divider": "^2.1.18",
-    "@spectrum-css/menu": "^5.0.3",
-    "@spectrum-css/tokens": "^11.2.0",
-    "gulp": "^4.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@spectrum-css/popover",
+	"version": "6.0.66",
+	"description": "The Spectrum CSS popover component",
+	"license": "Apache-2.0",
+	"author": "Adobe",
+	"homepage": "https://opensource.adobe.com/spectrum-css/popover",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/adobe/spectrum-css.git",
+		"directory": "components/popover"
+	},
+	"bugs": {
+		"url": "https://github.com/adobe/spectrum-css/issues"
+	},
+	"main": "dist/index-vars.css",
+	"scripts": {
+		"build": "gulp"
+	},
+	"peerDependencies": {
+		"@spectrum-css/dialog": ">=6",
+		"@spectrum-css/tokens": ">=11"
+	},
+	"devDependencies": {
+		"@spectrum-css/button": "^11.0.0",
+		"@spectrum-css/commons": "^8.0.0",
+		"@spectrum-css/component-builder-simple": "^2.0.17",
+		"@spectrum-css/dialog": "^6.0.67",
+		"@spectrum-css/divider": "^2.1.18",
+		"@spectrum-css/menu": "^5.0.3",
+		"@spectrum-css/tokens": "^11.2.0",
+		"gulp": "^4.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }

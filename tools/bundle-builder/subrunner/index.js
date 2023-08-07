@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 
 const colors = require("colors");
 const logger = require("gulplog");
+const fs = require("fs");
 const path = require("path");
 const dirs = require("../lib/dirs");
 const depUtils = require("../lib/depUtils");
@@ -27,6 +28,14 @@ function chdir(dir) {
 function runComponentTask(packageDir, task, callback) {
 	// Drop org
 	packageName = packageDir.split("/").pop();
+	if (packageName === "commons") return callback();
+
+	if (!fs.existsSync(path.join(packageDir, "gulpfile.js"))) {
+		logger.warn(
+			`No gulpfile found for ${packageName.yellow}, skipping...`.bold.yellow
+		);
+		return callback();
+	}
 
 	var gulpfile = path.join(packageDir, "gulpfile.js");
 

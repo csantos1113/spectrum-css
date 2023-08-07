@@ -149,21 +149,8 @@ function watchSite() {
 	);
 }
 
-function watchCommons() {
-	gulp.watch(
-		[`${dirs.components}/commons/*.css`],
-		gulp.series(
-			bundleBuilder.buildDepenenciesOfCommons,
-			bundleBuilder.copyPackages,
-			reload
-		)
-	);
-}
-
 function watch() {
 	serve();
-
-	watchCommons();
 
 	watchWithinPackages(
 		`${dirs.components}/*/{index,skin}.css`,

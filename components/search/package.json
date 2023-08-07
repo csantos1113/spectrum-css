@@ -21,7 +21,7 @@
     "@spectrum-css/clearbutton": ">=1",
     "@spectrum-css/icon": ">=3",
     "@spectrum-css/textfield": ">=5.1.7",
-    "@spectrum-css/tokens": ">=10"
+    "@spectrum-css/tokens": ">=10 <=11"
   },
   "devDependencies": {
     "@spectrum-css/clearbutton": "^2.0.0",

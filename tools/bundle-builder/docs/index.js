@@ -16,7 +16,6 @@ const path = require("path");
 const pugCompiler = require("pug");
 const pug = require("gulp-pug");
 const data = require("gulp-data");
-const rename = require("gulp-rename");
 const yaml = require("js-yaml");
 const through = require("through2");
 const ext = require("replace-ext");
@@ -29,80 +28,79 @@ const depUtils = require("../lib/depUtils");
 
 const npmFetch = require("npm-registry-fetch");
 
-let minimumDeps = [
-	"icon",
-	"statuslight",
-	"link",
-	"page",
-	"site",
-	"typography",
-	"tooltip",
-	"sidenav",
-	"actionbutton",
-	"button",
-	"textfield",
-	"clearbutton",
-	"search",
-	"menu",
-	"fieldlabel",
-	"picker",
-	"popover",
-	"underlay",
-	"card",
-	"divider",
-	"illustratedmessage",
-	"accordion",
-	"table",
-];
-
 let templateData = {
 	nav: [],
-	pkg: JSON.parse(fs.readFileSync("package.json", "utf8")),
 };
 
 async function buildDocs_forDep(dep) {
 	// Drop package org
 	dep = dep.split("/").pop();
 
-	let metadata = JSON.parse(
-		await fsp.readFile(
-			path.join(dirs.components, "vars", "dist", "spectrum-metadata.json")
+	const metadata = await fsp
+		.readFile(
+			path.join(
+				__dirname,
+				"../../../components/vars/dist/spectrum-metadata.json"
+			)
 		)
-	);
+		.then(JSON.parse)
+		.catch(console.error);
 
-	let dependencyOrder = await depUtils.getPackageDependencyOrder(
+	const dependencyOrder = await depUtils.getPackageDependencyOrder(
 		path.join(dirs.components, dep)
 	);
 
-	let dirName = `${dirs.components}/${dep}`;
-
-	logger.debug(`Will build docs for package in ${dirs.components}/${dep}`);
-
 	return new Promise((resolve, reject) => {
 		gulp
-			.src([`${dirName}/metadata.yml`, `${dirName}/metadata/*.yml`], {
-				allowEmpty: true,
-			})
-			.pipe(
-				rename(function (file) {
-					if (file.basename === "metadata") {
-						file.basename = dep;
-					}
-				})
+			.src(
+				[path.join(__dirname, "../../../components", dep, "metadata/*.yml")],
+				{
+					allowEmpty: true,
+				}
 			)
 			.pipe(
 				data(async function (file) {
-					let componentDeps = dependencyOrder.map((dep) =>
-						dep.split("/").pop()
-					);
-					componentDeps.push(dep);
+					const componentDeps = [
+						...(dependencyOrder.map((dep) => dep.split("/").pop()) ?? []),
+						dep,
+					];
 
-					let pkg = JSON.parse(
-						await fsp.readFile(path.join(dirs.components, dep, "package.json"))
-					);
+					const pkg = await fsp
+						.readFile(
+							path.join(__dirname, "../../../components", dep, "package.json")
+						)
+						.then(JSON.parse)
+						.catch(console.error);
 
-					let docsDeps = minimumDeps.concat(componentDeps);
-					docsDeps = docsDeps.filter((dep, i) => docsDeps.indexOf(dep) === i);
+					let docsDeps = [
+						"icon",
+						"statuslight",
+						"link",
+						"page",
+						"site",
+						"typography",
+						"tooltip",
+						"sidenav",
+						"actionbutton",
+						"button",
+						"textfield",
+						"clearbutton",
+						"search",
+						"menu",
+						"fieldlabel",
+						"picker",
+						"popover",
+						"underlay",
+						"card",
+						"divider",
+						"illustratedmessage",
+						"accordion",
+						"table",
+					];
+
+					docsDeps = docsDeps
+						.concat(componentDeps)
+						?.filter((dep, i) => docsDeps.indexOf(dep) === i);
 
 					let date;
 					try {
@@ -120,20 +118,15 @@ async function buildDocs_forDep(dep) {
 						);
 					}
 
-					return Object.assign(
-						{},
-						{
-							util: require(`${dirs.site}/util`),
-							dnaVars: metadata,
-						},
-						templateData,
-						{
-							pageURL: path.basename(file.basename, ".yml") + ".html",
-							dependencyOrder: docsDeps,
-							releaseDate: date,
-							pkg: pkg,
-						}
-					);
+					return {
+						util: require(`${dirs.site}/util`),
+						dnaVars: metadata,
+						...templateData,
+						pageURL: path.basename(file.basename, ".yml") + ".html",
+						dependencyOrder: docsDeps,
+						releaseDate: date,
+						pkg,
+					};
 				})
 			)
 			.pipe(
@@ -155,24 +148,21 @@ async function buildDocs_forDep(dep) {
 					}
 
 					if (!component.id) {
-						if (file.basename === "metadata.yml") {
-							// Use the component's name
-							component.id = dep;
-						} else {
-							// Use the example file name
-							component.id = path.basename(file.basename, ".yml");
-						}
+						// Use the example file name
+						component.id = path.basename(file.basename, ".yml");
 					}
-					let templateData = Object.assign(
-						{},
-						{ component: component },
-						file.data || {}
-					);
+					let templateData = {
+						component,
+						...(file.data ?? {}),
+					};
 
 					file.path = ext(file.path, ".html");
 
 					try {
-						const templatePath = `${dirs.site}/templates/siteComponent.pug`;
+						const templatePath = path.join(
+							__dirname,
+							"../../../site/templates/siteComponent.pug"
+						);
 						let compiled = pugCompiler.renderFile(templatePath, templateData);
 						file.contents = Buffer.from(compiled);
 					} catch (err) {
@@ -189,17 +179,18 @@ async function buildDocs_forDep(dep) {
 
 // Combined
 async function buildDocs_individualPackages() {
-	let dependencies = await depUtils.getFolderDependencyOrder(dirs.components);
-
-	return Promise.all(dependencies.map(buildDocs_forDep));
+	const promises = [];
+	for (const dep of await depUtils.getFolderDependencyOrder(
+		path.join(__dirname, "../../../components/")
+	)) {
+		promises.push(buildDocs_forDep(dep));
+	}
+	return Promise.all(promises);
 }
 
 function buildSite_generateIndex() {
 	return gulp
-		.src([
-			`${dirs.components}/*/metadata.yml`,
-			`${dirs.components}/*/metadata/*.yml`,
-		])
+		.src([`${dirs.components}/*/metadata/*.yml`])
 		.pipe(
 			(function () {
 				let docs = [];
@@ -317,10 +308,8 @@ function buildSite_getData() {
 				cb(null, file);
 			})
 		)
-		.on("end", function () {
-			templateData.nav = nav.sort(function (a, b) {
-				return a.name <= b.name ? -1 : 1;
-			});
+		.on("end", () => {
+			templateData.nav = nav.sort((a, b) => (a.name <= b.name ? -1 : 1));
 		});
 }
 
@@ -340,7 +329,31 @@ function buildSite_html() {
 				return {
 					util: require(`${dirs.site}/util`),
 					pageURL: path.basename(file.basename, ".pug") + ".html",
-					dependencyOrder: minimumDeps,
+					dependencyOrder: [
+						"icon",
+						"statuslight",
+						"link",
+						"page",
+						"site",
+						"typography",
+						"tooltip",
+						"sidenav",
+						"actionbutton",
+						"button",
+						"textfield",
+						"clearbutton",
+						"search",
+						"menu",
+						"fieldlabel",
+						"picker",
+						"popover",
+						"underlay",
+						"card",
+						"divider",
+						"illustratedmessage",
+						"accordion",
+						"table",
+					],
 				};
 			})
 		)
@@ -363,9 +376,10 @@ function copySiteWorkflowIcons() {
 		.pipe(gulp.dest("dist/img/"));
 }
 
-let buildSite_pages = gulp.series(buildSite_getData, buildSite_html);
-
-exports.buildSite = gulp.parallel(buildSite_copyResources, buildSite_pages);
+exports.buildSite = gulp.parallel(
+	buildSite_copyResources,
+	gulp.series(buildSite_getData, buildSite_html)
+);
 
 let buildDocs = gulp.series(
 	buildSite_getData,
@@ -385,7 +399,7 @@ let build = gulp.series(
 exports.buildSite_getData = buildSite_getData;
 exports.buildSite_copyResources = buildSite_copyResources;
 exports.buildSite_copyFreshResources = buildSite_copyFreshResources;
-exports.buildSite_pages = buildSite_pages;
+exports.buildSite_pages = gulp.series(buildSite_getData, buildSite_html);
 exports.buildSite_html = buildSite_html;
 exports.buildDocs_forDep = buildDocs_forDep;
 exports.buildDocs = buildDocs;

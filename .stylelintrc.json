@@ -1,5 +1,12 @@
 {
 	"extends": ["stylelint-config-standard"],
+	"cache": true,
+	"color": true,
+	"allowEmptyInput": true,
+	"reportDescriptionlessDisables": true,
+	"reportInvalidScopeDisables": true,
+	"reportNeedlessDisables": true,
+	"outputFile": "lint-results.txt",
 	"plugins": [
 		"stylelint-use-logical",
 		"stylelint-no-missing-parenthesis",
