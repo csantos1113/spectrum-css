@@ -46,11 +46,6 @@ governing permissions and limitations under the License.
 @media (forced-colors: active) {
   .spectrum-FloatingActionButton {
 
-    &::after {
-      /* make sure focus-ring renders */
-      forced-color-adjust: none;
-    }
-
     --highcontrast-floating-action-button-background-color: ButtonText;
     --highcontrast-floating-action-button-background-color-hover: Highlight;
     --highcontrast-floating-action-button-background-color-down: Highlight;
@@ -60,6 +55,11 @@ governing permissions and limitations under the License.
     --highcontrast-floating-action-button-icon-color-hover: ButtonFace;
     --highcontrast-floating-action-button-icon-color-down: ButtonFace;
     --highcontrast-floating-action-button-icon-color-key-focus: ButtonFace;
+
+    &::after {
+      /* make sure focus-ring renders */
+      forced-color-adjust: none;
+    }
 
   }
 }

@@ -61,19 +61,19 @@ governing permissions and limitations under the License.
   /* animation all themes */
   --spectrum-radio-animation-duration: var(--spectrum-animation-duration-100);
 
-  /* CJK language support all themes */
-  &:lang(ja),
-  &:lang(zh),
-  &:lang(ko) {
-    --spectrum-radio-line-height-cjk: var(--spectrum-cjk-line-height-100);
-  }
-
   /* default radio size for no t-shirt size */
   --spectrum-radio-height: var(--spectrum-component-height-100);
   --spectrum-radio-button-control-size: var(--spectrum-radio-button-control-size-medium);
 
   /* default radio spacing for no t-shirt size */
   --spectrum-radio-button-top-to-control: var(--spectrum-radio-button-top-to-control-medium);
+
+  /* CJK language support all themes */
+  &:lang(ja),
+  &:lang(zh),
+  &:lang(ko) {
+    --spectrum-radio-line-height-cjk: var(--spectrum-cjk-line-height-100);
+  }
 }
 
 .spectrum-Radio--sizeS {
@@ -363,7 +363,7 @@ governing permissions and limitations under the License.
   inline-size: 100%;
   block-size: 100%;
 
-  opacity: 0;
+  opacity: 0%;
   z-index: 1;
 
   cursor: pointer;
@@ -408,8 +408,11 @@ governing permissions and limitations under the License.
 
   font-size: var(--mod-radio-font-size,
                 var(--spectrum-radio-font-size));
+
   /* TODO: font weight and style tokens */
+
   /* font-weight: var(--spectrum-radio-text-font-weight); **** missing token resolves to 400 ****/
+
   /* font-style: var(--spectrum-radio-text-font-style); **** missing token resolves to normal ****/
   color: var(--highcontrast-radio-neutral-content-color,
             var(--mod-radio-neutral-content-color,

@@ -10,84 +10,161 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+const fs = require("fs");
 const path = require("path");
 
+const postcss = require("postcss");
+const camelCase = require("lodash/camelCase");
+const upperFirst = require("lodash/upperFirst");
+
 /**
- * @description This is the PostCSS config for our development code; this
- * includes assets **not** in the dist output, such as index.css or themes/*.css
+ * @description This is the PostCSS config for our development code and
+ * offers more verbose logging and reporting than the production config.
+ * It retains most of the original comments and generates sourcemaps to
+ * make debugging easier.
  * @type import('postcss-load-config').ConfigFn
  */
-module.exports = (options) => {
+module.exports = (ctx) => {
 	const {
-		to = undefined,
-		from = undefined,
+		foldername,
 		isTheme = false,
 		isExpress = false,
 		isLegacy = false,
-		map = { inline: false },
-	} = options;
+		varsOnly = false,
+		...options
+	} = ctx.options;
 
-	const fromPath = from?.split(path.sep);
-	const idx = fromPath.indexOf("components");
-	const foldername = fromPath[idx + 1];
+	const tokens = isLegacy
+		? [
+				require.resolve("@spectrum-css/vars/dist/spectrum-global.css", {
+					paths: [
+						path.join(ctx.cwd, "node_modules"),
+						path.join(__dirname, "node_modules"),
+					],
+				}),
+				require.resolve("@spectrum-css/vars/dist/spectrum-medium.css", {
+					paths: [
+						path.join(ctx.cwd, "node_modules"),
+						path.join(__dirname, "node_modules"),
+					],
+				}),
+				require.resolve("@spectrum-css/vars/dist/spectrum-light.css", {
+					paths: [
+						path.join(ctx.cwd, "node_modules"),
+						path.join(__dirname, "node_modules"),
+					],
+				}),
+		  ]
+		: [
+				// require.resolve("@spectrum-css/tokens", {
+				// 	paths: [path.join(ctx.cwd, "node_modules"), path.join(__dirname, "node_modules")],
+				// }),
+				path.join(__dirname, "tokens/dist/index.css"),
+		  ];
 
-	const tokens = [
-		require.resolve("@spectrum-css/vars/dist/spectrum-global.css"),
-		require.resolve("@spectrum-css/vars/dist/spectrum-medium.css"),
-		require.resolve("@spectrum-css/vars/dist/spectrum-light.css"),
-	];
-
-	/**
-	 * Why a try/catch here? Because we aren't too concerned if the resolve fails
-	 * we're basically guessing at what the file's name *might* be so it's okay if
-	 * it doesn't exist.
-	 */
-	try {
-		if (foldername) {
-			tokens.push(
-				require.resolve(
-					`@spectrum-css/vars/dist/components/spectrum-${foldername}.css`
-				)
-			);
-		}
-	} catch (error) {}
-
-	if (isExpress) {
-		tokens.push(
-			require.resolve("@spectrum-css/expressvars/dist/spectrum-global.css"),
-			require.resolve("@spectrum-css/expressvars/dist/spectrum-medium.css"),
-			require.resolve("@spectrum-css/expressvars/dist/spectrum-light.css")
-		);
-
+	if (isLegacy) {
+		/**
+		 * Why a try/catch here? Because we aren't too concerned if the resolve fails
+		 * we're basically guessing at what the file's name *might* be so it's okay if
+		 * it doesn't exist.
+		 */
 		try {
 			if (foldername) {
 				tokens.push(
 					require.resolve(
-						`@spectrum-css/expressvars/dist/components/spectrum-${foldername}.css`
+						`@spectrum-css/vars/dist/components/spectrum-${foldername}.css`,
+						{
+							paths: [
+								path.join(ctx.cwd, "node_modules"),
+								path.join(__dirname, "node_modules"),
+							],
+						}
 					)
 				);
 			}
 		} catch (error) {}
+
+		if (isExpress) {
+			tokens.push(
+				require.resolve("@spectrum-css/expressvars/dist/spectrum-global.css", {
+					paths: [
+						path.join(ctx.cwd, "node_modules"),
+						path.join(__dirname, "node_modules"),
+					],
+				}),
+				require.resolve("@spectrum-css/expressvars/dist/spectrum-medium.css", {
+					paths: [
+						path.join(ctx.cwd, "node_modules"),
+						path.join(__dirname, "node_modules"),
+					],
+				}),
+				require.resolve("@spectrum-css/expressvars/dist/spectrum-light.css", {
+					paths: [
+						path.join(ctx.cwd, "node_modules"),
+						path.join(__dirname, "node_modules"),
+					],
+				})
+			);
+
+			try {
+				if (foldername) {
+					tokens.push(
+						require.resolve(
+							`@spectrum-css/expressvars/dist/components/spectrum-${foldername}.css`,
+							{
+								paths: [
+									path.join(ctx.cwd, "node_modules"),
+									path.join(__dirname, "node_modules"),
+								],
+							}
+						)
+					);
+				}
+			} catch (error) {}
+		}
 	}
 
-	tokens.push(require.resolve("@spectrum-css/tokens"));
+	const globalVariables = new Map();
+	/**
+	 * Read in the content for the global variables files
+	 * and parse it for key/value pairs
+	 */
+	for (const file of tokens) {
+		/* if the file doesn't exist, move on quietly */
+		if (!fs.existsSync(file)) {
+			console.debug(`Token file not found: ${file}.`);
+			continue;
+		}
+
+		/* read in the file content */
+		const content = fs.readFileSync(file);
+		postcss
+			.parse(content, {
+				from: file,
+			})
+			.walkDecls((decl) => {
+				if (decl.prop.startsWith("--")) {
+					globalVariables.set(decl.prop, decl.value);
+				}
+			});
+	}
 
 	return {
 		...options,
-		map,
 		plugins: {
 			/* --------------------------------------------------- */
-			/* ------------------- KEY PROCESSING ---------------- */
-			"postcss-use": {}, // @note: when does postcss-use resolve the plugins? at the end?
-			"postcss-each": {},
-			"postcss-import": {},
-			/** @note @inherit: used in *button, icon, modal, picker, popover, quickaction, table, tooltip, underlay */
-			"postcss-inherit": {},
-			/**
-			 * @note custom plugin to transform transforms; might just hardcode these in future
-			 * @used accordion, actionbutton, assetlist, breadcrumb, calendar, pagination, slider, treeview
-			 **/
-			"@spectrum-tools/postcss-transform-logical": {},
+			/* ------------------- IMPORTS ---------------- */
+			"postcss-import": {
+				root: ctx.cwd,
+				addModulesDirectories: [
+					path.join(ctx.cwd, "node_modules"),
+					path.join(__dirname, "node_modules"),
+				],
+			},
+			/** @note used in *button, modal, picker, popover, quickaction, tooltip, underlay */
+			"postcss-extend-rule": {
+				onUnusedExtend: "warn",
+			},
 			/* --------------------------------------------------- */
 			/* ------------------- POLYFILLS --------------------- */
 			"postcss-preset-env": {
@@ -97,6 +174,14 @@ module.exports = (options) => {
 				 */
 				stage: 2,
 			},
+			/* --------------------------------------------------- */
+			/* ------------------- KEY PROCESSING ---------------- */
+			"postcss-each": {},
+			/**
+			 * @note custom plugin to transform transforms; might just hardcode these in future
+			 * @used accordion, actionbutton, assetlist, breadcrumb, calendar, pagination, slider, treeview
+			 **/
+			"@spectrum-tools/postcss-transform-logical": {},
 			/* --------------------------------------------------- */
 			/* ------------------- ORGANIZE/DEDUPE --------------- */
 			/**
@@ -114,23 +199,20 @@ module.exports = (options) => {
 			 */
 			"@spectrum-tools/postcss-splitinator": !isLegacy
 				? {
-						processIdentifier: isTheme
-							? (identifierValue, identifierName) => {
-									if (identifierName !== "system") return;
-									if (identifierValue !== "spectrum") {
-										return `spectrum--${identifierValue}`;
-									}
-									return identifierValue;
-							  }
-							: undefined,
+						processIdentifier: (identifierValue, identifierName) => {
+							if (identifierName !== "system") return identifierValue;
+							if (identifierValue !== "spectrum") {
+								return `spectrum--${identifierValue}`;
+							}
+							return identifierValue;
+						},
 						selectors: !isTheme,
-						flatVariables: !(path.basename(to, "css") === "index-base"),
+						flatVariables: ctx.to
+							? path.basename(ctx.to, ".css") !== "index-base"
+							: false,
 				  }
 				: false,
-			perfectionist: {
-				format: "expanded",
-				sourcemap: true,
-			},
+			"postcss-use": {},
 			"postcss-sorting": {
 				order: ["custom-properties", "declarations", "at-rules", "rules"],
 				"properties-order": "alphabetical",
@@ -142,13 +224,19 @@ module.exports = (options) => {
 			/* --------------------------------------------------- */
 			/* ------------------- VARIABLE PARSING -------------- */
 			/** @note this enables reporting of unused variables in a file */
+			"@spectrum-tools/postcss-dropunusedvars": {
+				fix: false,
+				ignoreList: [/^--mod-/, /^--system/],
+			},
+			/** @note this enables reporting of duplicate variables in a file */
 			"@spectrum-tools/postcss-dropdupedvars": {
 				lint: true,
 			},
-			"@spectrum-tools/postcss-custom-properties-mapping": {
-				lint: true,
-				globalVariables: tokens,
-			},
+			// "@spectrum-tools/postcss-custom-properties-mapping": {
+			// 	lint: true,
+			// 	globalVariables,
+			// 	customPropertiesOnly: true,
+			// },
 			/** @todo do we need this still? */
 			"@spectrum-tools/postcss-notnested": isLegacy
 				? { replaceWith: ".spectrum" }
@@ -159,7 +247,14 @@ module.exports = (options) => {
 			 * it's somewhat heavy-handed as it will remove the previous selector
 			 * @todo do we need this still?
 			 */
-			// "postcss-combininator": !isLegacy && isExpress ? {} : false,
+			"@spectrum-tools/postcss-combininator":
+				isExpress || varsOnly
+					? {
+							selector: isExpress
+								? ".spectrum--express"
+								: `.spectrum-${upperFirst(camelCase(foldername))}`,
+					  }
+					: false,
 			/** @note [CSS-289] Coordinating with SWC */
 			// "postcss-hover-media-feature": {},
 			/* --------------------------------------------------- */

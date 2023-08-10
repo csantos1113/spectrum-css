@@ -17,10 +17,13 @@ governing permissions and limitations under the License.
   --spectrum-progressbar-corner-radius: var(--spectrum-corner-radius-100);
 
   --spectrum-progressbar-fill-size-indeterminate: 70%;
+
   /* --spectrum-global-dimension-static-size-2400 */
   --spectrum-progressbar-size-2400: 192px;
+
   /* --spectrum-global-dimension-static-size-2500 */
   --spectrum-progressbar-size-2500: 200px;
+
   /* --spectrum-global-dimension-static-size-2800 */
   --spectrum-progressbar-size-2800: 224px;
 
@@ -151,13 +154,13 @@ governing permissions and limitations under the License.
 
     line-height: var(--mod-progressbar-line-height, var(--spectrum-progressbar-line-height));
 
+    color: var(--mod-progressbar-text-color, var(--spectrum-progressbar-text-color));
+
     &:lang(ja),
     &:lang(zh),
     &:lang(ko) {
       line-height: var(--mod-progressbar-line-height-cjk, var(--spectrum-progressbar-line-height-cjk));
     }
-
-    color: var(--mod-progressbar-text-color, var(--spectrum-progressbar-text-color));
   }
 
   /* Label */
@@ -197,6 +200,7 @@ governing permissions and limitations under the License.
   }
 
   /* Variants  */
+
   /* Side Label */
   &--sideLabel {
     display: inline-flex;
@@ -245,6 +249,7 @@ governing permissions and limitations under the License.
   animation: indeterminate-loop-ltr
              var(--mod-progressbar-animation-duration-indeterminate, var(--spectrum-progressbar-animation-duration-indeterminate)) infinite;
 }
+
 [dir="rtl"] .spectrum-ProgressBar--indeterminate .spectrum-ProgressBar-fill {
   animation: indeterminate-loop-rtl
              var(--mod-progressbar-animation-duration-indeterminate, var(--spectrum-progressbar-animation-duration-indeterminate)) infinite;
@@ -256,6 +261,7 @@ governing permissions and limitations under the License.
       calc(-1 * var(--mod-progressbar-fill-size-indeterminate, var(--spectrum-progressbar-fill-size-indeterminate)))
     );
   }
+
   to {
     transform: translate(var(--mod-progressbar-size-default, var(--spectrum-progressbar-size-default)));
   }
@@ -265,6 +271,7 @@ governing permissions and limitations under the License.
   from {
     transform: translate(var(--mod-progressbar-size-default, var(--spectrum-progressbar-fill-size-indeterminate)));
   }
+
   to {
     transform: translate(calc(-1 * var(--mod-progressbar-size-default, var(--spectrum-progressbar-size-default))));
   }
@@ -272,9 +279,9 @@ governing permissions and limitations under the License.
 
 @media (forced-colors: active) {
   .spectrum-ProgressBar-track {
-    forced-color-adjust: none;
     --highcontrast-progressbar-fill-color: ButtonText;
     --highcontrast-progressbar-track-color: ButtonFace;
+    forced-color-adjust: none;
     border: 1px solid ButtonText;
   }
 }

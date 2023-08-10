@@ -3,26 +3,15 @@
 	"name": "icon",
 	"tags": ["component", "assets", "legacy"],
 	"targets": {
+		"profile": {},
 		"build": {
-			"dependsOn": ["copy"],
+			"dependsOn": ["^build", "clean", "copy"],
 			"defaultConfiguration": "legacy"
 		},
 		"copy": {
-			"dependsOn": [
-				{
-					"projects": ["ui-icons"],
-					"target": "build"
-				}
-			],
+			"dependsOn": ["^build", "clean"],
 			"outputs": ["{workspaceRoot}/dist/spectrum-css-icons*.svg"],
-			"executor": "nx:run-commands",
-			"options": {
-				"commands": [
-					"mkdir -p ./components/icon/dist/",
-					"cp -f ./ui-icons/dist/spectrum-css-icons*.svg ./components/icon/dist/"
-				],
-				"parallel": false
-			}
+			"command": "mkdir -p ./components/icon/dist/ && cp -f ./ui-icons/dist/spectrum-css-icons*.svg ./components/icon/dist/"
 		},
 		"test": {
 			"defaultConfiguration": "scoped"

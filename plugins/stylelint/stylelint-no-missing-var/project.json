@@ -3,9 +3,6 @@
     "tags": ["tooling", "stylelint"],
     "name": "stylelint-no-missing-var",
 	"targets": {
-		"build": {
-			"executor": "nx:noop"
-		},
         "lint": {
             "defaultConfiguration": "js"
         },

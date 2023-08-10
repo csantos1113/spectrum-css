@@ -126,7 +126,12 @@ async function main() {
 	return Promise.all(promises);
 }
 
-main().catch((e) => {
-	console.error(e);
-	process.exit(1);
-});
+main()
+	.then(() => {
+		console.log("✔ Icons generated successfully.");
+		process.exit(0);
+	})
+	.catch((e) => {
+		console.error(e);
+		process.exit(1);
+	});

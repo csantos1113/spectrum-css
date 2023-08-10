@@ -61,6 +61,7 @@
 		inset-inline-start: 50%;
 		inset-block-start: 0;
 	}
+
 	.spectrum-ColorSlider-handle {
 		inset-inline-start: 50%;
 		inset-block-start: 0;
@@ -105,7 +106,7 @@
 
 /* Visually hidden "range" input field */
 .spectrum-ColorSlider-slider {
-	opacity: 0;
+	opacity: 0%;
 	position: absolute;
 	inset-block-start: 0;
 	inset-inline-start: 0;

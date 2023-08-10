@@ -74,6 +74,7 @@ governing permissions and limitations under the License.
   direction: ltr;
 
   /* Fix for Safari rendering bug */
+
   /* more info: https://github.com/adobe/spectrum-web-components/issues/1392 */
   transform: translate3d(0, 0, 0);
 }
@@ -129,6 +130,7 @@ governing permissions and limitations under the License.
     border-color: var(--mod-progress-circle-track-border-color-over-background,
                       var(--spectrum-progress-circle-track-border-color-over-background));
   }
+
   .spectrum-ProgressCircle-fill {
     border-color: var(--highcontrast-progress-circle-fill-border-color-over-background,
                       var(--mod-progress-circle-fill-border-color-over-background,
@@ -169,6 +171,7 @@ governing permissions and limitations under the License.
       spectrum-fills-rotate;
     transform-origin: center;
   }
+
   .spectrum-ProgressCircle-fillSubMask1 {
     will-change: transform;
     transform: translateZ(0);

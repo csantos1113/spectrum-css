@@ -227,7 +227,7 @@ governing permissions and limitations under the License.
   }
 
   /* Default */
-  &:not(:disabled):not(.is-invalid) {
+  &:not(:disabled, .is-invalid) {
     .spectrum-PickerButton-fill {
       border-color: var(--highcontrast-combobox-border-color, var(--mod-combobox-border-color-default, var(--spectrum-combobox-border-color-default)));
     }
@@ -235,6 +235,7 @@ governing permissions and limitations under the License.
     &.is-focused,
     &:focus {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-focus, var(--spectrum-combobox-font-color-focus)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-focus-indicator-color, var(--mod-combobox-border-color-focus, var(--spectrum-combobox-border-color-focus)));
       }
@@ -243,6 +244,7 @@ governing permissions and limitations under the License.
     &.is-keyboardFocused,
     &:focus-visible {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-key-focus, var(--spectrum-combobox-font-color-key-focus)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-border-color, var(--mod-combobox-border-color-key-focus, var(--spectrum-combobox-border-color-key-focus)));
       }
@@ -251,6 +253,7 @@ governing permissions and limitations under the License.
     &:hover,
     &:active {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-hover, var(--spectrum-combobox-font-color-hover)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-focus-indicator-color, var(--mod-combobox-border-color-hover, var(--spectrum-combobox-border-color-hover)));
       }
@@ -259,6 +262,7 @@ governing permissions and limitations under the License.
     &:focus:hover,
     &.is-focused:hover {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-focus-hover, var(--spectrum-combobox-font-color-focus-hover)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-focus-indicator-color, var(--mod-combobox-border-color-focus-hover, var(--spectrum-combobox-border-color-focus-hover)));
       }
@@ -274,6 +278,7 @@ governing permissions and limitations under the License.
     &.is-focused,
     &:focus {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-focus, var(--spectrum-combobox-font-color-focus)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-focus-indicator-color, var(--mod-combobox-border-color-invalid-focus, var(--spectrum-combobox-border-color-invalid-focus)));
       }
@@ -282,6 +287,7 @@ governing permissions and limitations under the License.
     &.is-keyboardFocused,
     &:focus-visible {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-key-focus, var(--spectrum-combobox-font-color-key-focus)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-focus-indicator-color, var(--mod-combobox-border-color-invalid-key-focus, var(--spectrum-combobox-border-color-invalid-key-focus)));
       }
@@ -290,6 +296,7 @@ governing permissions and limitations under the License.
     &:hover,
     &:active {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-hover, var(--spectrum-combobox-font-color-hover)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-focus-indicator-color, var(--mod-combobox-border-color-invalid-hover, var(--spectrum-combobox-border-color-invalid-hover)));
       }
@@ -298,6 +305,7 @@ governing permissions and limitations under the License.
     &:focus:hover,
     &.is-focused:hover {
       color: var(--highcontrast-combobox-font-color, var(--mod-combobox-font-color-focus-hover, var(--spectrum-combobox-font-color-focus-hover)));
+
       .spectrum-PickerButton-fill {
         border-color: var(--highcontrast-combobox-focus-indicator-color, var(--mod-combobox-border-color-invalid-focus-hover, var(--spectrum-combobox-border-color-invalid-focus-hover)));
       }
@@ -308,6 +316,7 @@ governing permissions and limitations under the License.
   .spectrum-Combobox.is-disabled &,
   &:disabled {
     color: var(--highcontrast-combobox-font-color-disabled, var(--mod-combobox-font-color-disabled, var(--spectrum-combobox-font-color-disabled)));
+
     .spectrum-PickerButton-fill {
       background-color: var(--highcontrast-combobox-background-color, var(--mod-combobox-background-color-disabled, var(--spectrum-combobox-background-color-disabled)));
     }
@@ -481,7 +490,7 @@ governing permissions and limitations under the License.
 .spectrum-Combobox--quiet {
   border-radius: 0;
 
-  &.spectrum-Combobox .spectrum-Combobox-button:not(:disabled):not(.is-invalid),
+  &.spectrum-Combobox .spectrum-Combobox-button:not(:disabled, .is-invalid),
   &.spectrum-Combobox .spectrum-Combobox-button.is-invalid:not(:disabled) {
     .spectrum-PickerButton-fill {
       background: transparent;

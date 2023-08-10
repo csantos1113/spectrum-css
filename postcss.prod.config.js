@@ -10,87 +10,38 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+const path = require("path");
+
 /**
- * @description This is the PostCSS config for our production code; this
- * includes assets in the **dist** output
+ * @description This is the PostCSS config for our development code; this
+ * includes assets **not** in the dist output, such as index.css or themes/*.css
  * @type import('postcss-load-config').ConfigFn
  */
-module.exports = ({ file, isTheme, isLegacy, map = false }) => {
-	/** @todo temporary */
-	const keepVars = true;
+module.exports = (ctx) => {
+	const {
+		foldername,
+		isTheme = false,
+		isExpress = false,
+		isLegacy = false,
+		...options
+	} = ctx.options;
 
 	return {
-		map,
+		...options,
 		plugins: {
 			/* --------------------------------------------------- */
-			/* ------------------- KEY PROCESSING ---------------- */
-			"postcss-use": {},
-			"postcss-import": {},
-			/** @note @inherit: used in *button, icon, modal, picker, popover, quickaction, table, tooltip, underlay */
-			"postcss-inherit": {},
-			/**
-			 * @note only used in migrated builds
-			 *
-			 * @todo could this be broken out into smaller, focused plugins?
-			 *
-			 * @note processIdentifier: this functions as a kind of style query polyfill
-			 * @example @\container (--spectrum: express) -> .spectrum--express
-			 * @todo need to convert to @\container style (...) syntax
-			 * @link https://blog.logrocket.com/new-css-style-queries/
-			 * @link https://developer.chrome.com/blog/style-queries/
-			 *
-			 * @note noFlatVariables: used for dist/index-base.css
-			 * @note noSelectors: used for themes/*.css
-			 */
-			"postcss-splitinator": !isLegacy
-				? {
-						processIdentifier: isTheme
-							? (identifierValue, identifierName) => {
-									if (identifierName !== "system") return;
-									if (identifierValue !== "spectrum") {
-										return `spectrum--${identifierValue}`;
-									}
-									return identifierValue;
-							  }
-							: undefined,
-						noSelectors: !!isTheme,
-						noFlatVariables: !!(file?.basename === "index-base.css"),
-				  }
-				: false,
-			/**
-			 * @note custom plugin to transform transforms; might just hardcode these in future
-			 * @used accordion, actionbutton, assetlist, breadcrumb, calendar, menu, pagination, slider, treeview (9 files)
-			 **/
-			"@spectrum-tools/postcss-transform-logical": {},
-			/* --------------------------------------------------- */
-			/* ------------------- ORGANIZE/DEDUPE --------------- */
-			"postcss-sorting": {
-				order: ["custom-properties", "declarations", "at-rules", "rules"],
-				"properties-order": "alphabetical",
+			/* ------------------- IMPORTS ---------------- */
+			"postcss-import": {
+				root: ctx.cwd,
+				addModulesDirectories: [
+					path.join(ctx.cwd, "node_modules"),
+					path.join(__dirname, "node_modules"),
+				],
 			},
-			"postcss-combine-duplicated-selectors": {},
-			/** @note Merges _adjacent_ rules only; hense the sorting is first */
-			"postcss-merge-rules": {},
-			"postcss-combine-media-query": {},
-			/* --------------------------------------------------- */
-			/* ------------------- VARIABLE PARSING -------------- */
-			/** @note this provides access to the global variable data for checking use */
-			"@csstools/postcss-global-data": {
-				files: fg.sync(isLegacy ? vars : tokens),
+			/** @note used in *button, modal, picker, popover, quickaction, tooltip, underlay */
+			"postcss-extend-rule": {
+				onUnusedExtend: "warn",
 			},
-			/** @note this enables reporting of unused variables in a file */
-			"postcss-dropdupedvars": {
-				lint: true,
-			},
-			"postcss-custom-properties-mapping": isLegacy && keepVars ? {} : false,
-			// "postcss-notnested": isLegacy ? { replaceWith: ".spectrum" } : false,
-			// "postcss-notnested": isLegacy ? {} : false,
-			/**
-			 * @note this is only running on updated components in the themes/express.css file
-			 * it's somewhat heavy-handed as it will remove the previous selector
-			 * @todo do we need this still?
-			 */
-			"postcss-combininator": !isLegacy && isExpress ? {} : false,
 			/* --------------------------------------------------- */
 			/* ------------------- POLYFILLS --------------------- */
 			"postcss-preset-env": {
@@ -101,8 +52,75 @@ module.exports = ({ file, isTheme, isLegacy, map = false }) => {
 				stage: 2,
 			},
 			/* --------------------------------------------------- */
+			/* ------------------- KEY PROCESSING ---------------- */
+			"postcss-each": {},
+			/**
+			 * @note custom plugin to transform transforms; might just hardcode these in future
+			 * @used accordion, actionbutton, assetlist, breadcrumb, calendar, pagination, slider, treeview
+			 **/
+			"@spectrum-tools/postcss-transform-logical": {},
+			/* --------------------------------------------------- */
+			/* ------------------- ORGANIZE/DEDUPE --------------- */
+			/**
+			 * @note only used in migrated builds
+			 *
+			 * @todo could this be broken out into smaller, focused plugins?
+			 *
+			 * @note processIdentifier: this functions as a kind of style query polyfill
+			 * @example @\container style(--spectrum: express) -> .spectrum--express
+			 * @link https://blog.logrocket.com/new-css-style-queries/
+			 * @link https://developer.chrome.com/blog/style-queries/
+			 *
+			 * @note noFlatVariables: used for dist/index-base.css
+			 * @note noSelectors: used for themes/*.css
+			 */
+			"@spectrum-tools/postcss-splitinator": !isLegacy
+				? {
+						processIdentifier: isTheme
+							? (identifierName, identifierValue) => {
+									if (identifierName !== "system") return;
+									if (identifierValue !== "spectrum") {
+										return `spectrum--${identifierValue}`;
+									}
+									return identifierValue;
+							  }
+							: undefined,
+						selectors: !isTheme,
+						flatVariables: ctx.to
+							? path.basename(ctx.to, ".css") !== "index-base"
+							: false,
+				  }
+				: false,
+			"postcss-use": {},
+			"postcss-sorting": {
+				order: ["custom-properties", "declarations", "at-rules", "rules"],
+				"properties-order": "alphabetical",
+			},
+			"postcss-combine-duplicated-selectors": {},
+			/** @note Merges _adjacent_ rules only; hense the sorting is first */
+			"postcss-merge-rules": {},
+			"postcss-combine-media-query": {},
+			/* --------------------------------------------------- */
+			/* ------------------- VARIABLE PARSING -------------- */
+			/** @todo do we need this still? */
+			"@spectrum-tools/postcss-notnested": isLegacy
+				? { replaceWith: ".spectrum" }
+				: false,
+			"@spectrum-tools/postcss-notnested": isLegacy ? {} : false,
+			/**
+			 * @note this is only running on updated components in the themes/express.css file
+			 * it's somewhat heavy-handed as it will remove the previous selector
+			 * @todo do we need this still?
+			 */
+			"@spectrum-tools/postcss-combininator": isExpress ? {} : false,
+			/** @note [CSS-289] Coordinating with SWC */
+			// "postcss-hover-media-feature": {},
+			/* --------------------------------------------------- */
 			/* ------------------- CLEAN-UP TASKS ---------------- */
-			"postcss-discard-comments": { removeAll: true },
+			"postcss-discard-comments": {
+				removeAll: true,
+			},
+			/* After cleaning up comments, remove all empty rules */
 			"postcss-discard-empty": {},
 			/* Ensure the license is at the top of the file */
 			"postcss-licensing": {
@@ -110,12 +128,11 @@ module.exports = ({ file, isTheme, isLegacy, map = false }) => {
 				cwd: __dirname,
 				skipIfEmpty: true,
 			},
-			perfectionist: {
-				format: "compact",
-			},
 			/* --------------------------------------------------- */
 			/* ------------------- REPORTING --------------------- */
-			"postcss-reporter": {},
+			"postcss-reporter": {
+				clearReportedMessages: true,
+			},
 		},
 	};
 };

@@ -268,15 +268,15 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Search-icon {
-	display: block;
-	position: absolute;
-	inset-block: 0;
-	margin-block: auto;
 
 	--spectrum-search-color: var(
 		--highcontrast-search-color-default,
 		var(--mod-search-color-default, var(--spectrum-search-color-default))
 	);
+	display: block;
+	position: absolute;
+	inset-block: 0;
+	margin-block: auto;
 	color: var(--spectrum-search-color);
 
 	.spectrum-Search-textfield:hover & {
@@ -320,15 +320,10 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Search-input {
-	/* Correct the odd appearance of input[type="search"] in Chrome and Safari.*/
-	/* Without this, it gets overridden by .spectrum-Textfield */
-	-webkit-appearance: none;
+	/* Correct the odd appearance of input[type="search"] in Chrome and Safari. */
 
-	/* Remove the inner padding and cancel buttons for input[type="search"] in Chrome and Safari on macOS. */
-	&::-webkit-search-cancel-button,
-	&::-webkit-search-decoration {
-		-webkit-appearance: none;
-	}
+	/* Without this, it gets overridden by .spectrum-Textfield */
+	appearance: none;
 
 	block-size: var(--mod-search-block-size, var(--spectrum-search-block-size));
 	padding-block-start: calc(
@@ -345,6 +340,12 @@ governing permissions and limitations under the License.
 		--mod-search-line-height,
 		var(--spectrum-search-line-height)
 	);
+
+	/* Remove the inner padding and cancel buttons for input[type="search"] in Chrome and Safari on macOS. */
+	&::-webkit-search-cancel-button,
+	&::-webkit-search-decoration {
+		appearance: none;
+	}
 }
 
 /* Standard / Default Only */

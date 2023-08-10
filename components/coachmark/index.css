@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import 'animation.css';
+@import './animation.css';
 
 .spectrum-CoachMarkPopover {
   position: relative;
@@ -23,6 +23,7 @@ governing permissions and limitations under the License.
   border-style: solid;
 
 }
+
 .spectrum-CoachMarkPopover-image {
   border-radius: var(--spectrum-coachmark-border-radius) var(--spectrum-coachmark-border-radius) 0 0;
 
@@ -133,4 +134,35 @@ governing permissions and limitations under the License.
       animation-delay: calc(var(--spectrum-coachmark-animation-indicator-ring-duration) * var(--spectrum-coachmark-quiet-animation-indicator-ring-inner-delay-multiple));
     }
   }
+}
+
+
+.spectrum-CoachMarkPopover {
+  background-color: var(--spectrum-coachmark-background-color);
+  border-color: var(--spectrum-coachmark-border-color);
+  box-shadow: 0 1px 4px var(--spectrum-coachmark-shadow-color);
+}
+
+.spectrum-CoachMarkPopover-title {
+  color: var(--spectrum-coachmark-title-text-color);
+}
+
+.spectrum-CoachMarkPopover-step {
+  color: var(--spectrum-coachmark-step-text-color);
+}
+
+.spectrum-CoachMarkPopover-content {
+  color: var(--spectrum-coachmark-content-text-color);
+}
+
+.spectrum-CoachMarkIndicator-ring {
+  border-color: var(--spectrum-coachmark-indicator-ring-default-color);
+}
+
+.spectrum-CoachMarkIndicator--light .spectrum-CoachMarkIndicator-ring {
+  border-color: var(--spectrum-coachmark-indicator-ring-low-contrast-color);
+}
+
+.spectrum-CoachMarkIndicator--dark .spectrum-CoachMarkIndicator-ring {
+  border-color: var(--spectrum-coachmark-indicator-ring-high-contrast-color);
 }

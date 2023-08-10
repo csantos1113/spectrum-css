@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import "@spectrum-css/commons/basebutton-coretokens.css";
+@import "@spectrum-css/commons";
 
 .spectrum-ActionButton {
 	--spectrum-actionbutton-animation-duration: var(
@@ -253,13 +253,13 @@ governing permissions and limitations under the License.
 
 @media (forced-colors: active) {
   .spectrum-ActionButton {
+    /* force a more visible focus indicator color */
+    --highcontrast-actionbutton-focus-indicator-color: ButtonText;
+
     &::after {
       /* make sure focus indicator renders */
       forced-color-adjust: none;
     }
-
-    /* force a more visible focus indicator color */
-    --highcontrast-actionbutton-focus-indicator-color: ButtonText;
 
 		&.is-selected {
 			--highcontrast-actionbutton-background-color-default: Highlight;
@@ -284,6 +284,7 @@ governing permissions and limitations under the License.
 			.spectrum-ActionButton-hold,
 			.spectrum-ActionButton-label {
 				/* ensure custom text colors from above get applied */
+
 				/* it seems like this shouldn't have to be done, but colors are wrong without it */
 				forced-color-adjust: none;
 			}
@@ -292,7 +293,6 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-ActionButton {
-	@inherit: %spectrum-BaseButton;
 	position: relative;
 
   min-inline-size: var(--mod-actionbutton-min-width, var(--spectrum-actionbutton-min-width));
@@ -351,6 +351,8 @@ governing permissions and limitations under the License.
 			var(--spectrum-actionbutton-content-color-default)
 		)
 	);
+
+	@extend %spectrum-BaseButton;
 
 	&:hover {
 		background-color: var(
@@ -433,11 +435,10 @@ governing permissions and limitations under the License.
 }
 
 a.spectrum-ActionButton {
-	@inherit: %spectrum-AnchorButton;
+	@extend %spectrum-AnchorButton;
 }
 
 .spectrum-ActionButton-icon {
-	@inherit: %spectrum-ButtonIcon;
 
   inline-size: var(--mod-actionbutton-icon-size, var(--spectrum-actionbutton-icon-size));
   block-size: var(--mod-actionbutton-icon-size, var(--spectrum-actionbutton-icon-size));
@@ -465,6 +466,8 @@ a.spectrum-ActionButton {
 	);
 
 	color: inherit;
+
+	@extend %spectrum-ButtonIcon;
 }
 
 .spectrum-ActionButton-hold + .spectrum-ActionButton-icon,
@@ -483,7 +486,6 @@ a.spectrum-ActionButton {
 }
 
 .spectrum-ActionButton-label {
-  @inherit: %spectrum-ButtonLabel;
   pointer-events: none;
 
 	font-size: var(
@@ -495,6 +497,8 @@ a.spectrum-ActionButton {
 
 	text-overflow: ellipsis;
 	overflow: hidden;
+
+  @extend %spectrum-ButtonLabel;
 }
 
 .spectrum-ActionButton-hold {

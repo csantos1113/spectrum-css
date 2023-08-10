@@ -22,7 +22,7 @@
     "@spectrum-css/vars": ">=9"
   },
   "devDependencies": {
-    "@spectrum-css/clearbutton": "^2.0.0",
+    "@spectrum-css/clearbutton": "^5.0.6",
     "@spectrum-css/icon": "^4.0.3",
     "@spectrum-css/picker": "^7.0.11",
     "@spectrum-css/textfield": "^6.0.23",

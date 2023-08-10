@@ -43,6 +43,7 @@ governing permissions and limitations under the License.
     The `spectrum` & `express` theme vars get appended below this in the dist file
     & the higher specificity here will override.
   */
+
   /* selected + emphasized */
   --spectrum-switch-background-color-selected-default: var(--spectrum-accent-color-900);
   --spectrum-switch-background-color-selected-hover: var(--spectrum-accent-color-1000);
@@ -123,7 +124,7 @@ governing permissions and limitations under the License.
   block-size: 100%;
   inset-block-start: 0;
   inset-inline-start: 0;
-  opacity: 0;
+  opacity: 0%;
   z-index: 1;
 
   cursor: pointer;
@@ -163,6 +164,7 @@ governing permissions and limitations under the License.
 .spectrum-Switch-switch {
   display: inline-block;
   box-sizing: border-box;
+
   /* positions the pseudo elements relative to this one */
   position: relative;
 
@@ -310,6 +312,7 @@ governing permissions and limitations under the License.
     /* selected, not emphasized */
     &:checked:enabled + .spectrum-Switch-switch {
       background-color: var(--highcontrast-switch-background-color-selected-down, var(--mod-switch-background-color-selected-down, var(--spectrum-switch-background-color-selected-down)));
+
       &::before {
         border-color: var(--highcontrast-switch-handle-border-color-selected-down, var(--mod-switch-handle-border-color-selected-down, var(--spectrum-switch-handle-border-color-selected-down)));
       }
@@ -318,7 +321,9 @@ governing permissions and limitations under the License.
 }
 
 /* key focus */
+
 /* :after is the focus ring */
+
 /* :before is used for the handle of the switch */
 .spectrum-Switch,
 .spectrum-Switch:hover {
@@ -398,7 +403,6 @@ governing permissions and limitations under the License.
 /* high contrast mode */
 @media (forced-colors: active) {
   .spectrum-Switch {
-    forced-color-adjust: none;
 
     --highcontrast-switch-label-color-default: ButtonText;
     --highcontrast-switch-label-color-hover: ButtonText;
@@ -427,6 +431,7 @@ governing permissions and limitations under the License.
     --highcontrast-switch-background-color-selected-disabled: Highlight;
 
     --highcontrast-switch-focus-indicator-color: ButtonText;
+    forced-color-adjust: none;
 
     .spectrum-Switch-input {
       &:not(:checked)+.spectrum-Switch-switch {

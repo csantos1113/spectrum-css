@@ -10,12 +10,11 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import "@spectrum-css/overlay/index.css";
+/** @todo should this be sourced from commons? */
+@import "@spectrum-css/overlay";
 
 .spectrum-QuickActions {
 	box-sizing: border-box;
-
-	@inherit: %spectrum-overlay;
 
 	display: inline-flex;
 	align-items: center;
@@ -27,9 +26,12 @@ governing permissions and limitations under the License.
 	block-size: var(--spectrum-quickactions-height);
 
 	border-radius: var(--spectrum-quickactions-border-radius);
+	background-color: var(--spectrum-quickactions-background-color);
+
+	@extend %spectrum-overlay;
 
 	&.is-open {
-		@inherit: %spectrum-overlay--open;
+		@extend %spectrum-overlay--open;
 	}
 
 	.spectrum-ActionButton + .spectrum-ActionButton {
@@ -45,12 +47,16 @@ governing permissions and limitations under the License.
 
 .spectrum-QuickActions--right {
 	&.is-open {
-		@inherit: %spectrum-overlay--left--open; /* should animate to the left when aligned right */
+		@extend %spectrum-overlay--left--open; /* should animate to the left when aligned right */
 	}
 }
 
 .spectrum-QuickActions--left {
 	&.is-open {
-		@inherit: %spectrum-overlay--right--open; /* should animate to the right when aligned left */
+		@extend %spectrum-overlay--right--open; /* should animate to the right when aligned left */
 	}
 }
+
+.spectrum-QuickActions-overlay {
+	background-color: var(--spectrum-quickactions-overlay-color);
+  }

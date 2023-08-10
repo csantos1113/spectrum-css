@@ -3,6 +3,7 @@
 	"name": "opacitycheckerboard",
 	"tags": ["component"],
 	"targets": {
+		"profile": {},
 		"build": {},
 		"test": {
 			"defaultConfiguration": "scoped"

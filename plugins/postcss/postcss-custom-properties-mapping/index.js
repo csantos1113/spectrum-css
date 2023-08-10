@@ -10,10 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const fs = require("fs");
-
-/** @type import("postcss") */
-const postcss = require("postcss");
+const valueParser = require("postcss-value-parser");
 
 /**
  * Notes about global variables json object - currently this is being
@@ -23,83 +20,131 @@ const postcss = require("postcss");
  * is a string with either the value or a reference to another token name.
  *
  * @typedef Options
- * @property {string[]} [globalVariables = []] - an array of files to read in that contain global variables
+ * @property {Map<string, string>} [globalVariables = new Map()] - a map global variables keyed on the property name
+ * @property {boolean} [customPropertiesOnly = false] - whether to resolve var stacks for just custom properties or include vars assigned to other properties
+ * @property {boolean} [lint = false] - whether to throw a warning when a variable is not found
  */
 /** @type import('postcss').PluginCreator<Options> */
-module.exports = ({ globalVariables = [], lint = false } = {}) => ({
+module.exports = ({
+	globalVariables = new Map(),
+	customPropertiesOnly = false,
+	lint = false,
+} = {}) => ({
 	postcssPlugin: "postcss-custom-properties-mapping",
-	prepare() {
-		// A cache of recently found values for faster lookups
-		const valuesCache = new Map();
-		const globalCache = new Map();
-
-		/**
-		 * Read in the content for the global variables files
-		 * and parse it for key/value pairs
-		 */
-		for (const file of globalVariables) {
-			/* if the file doesn't exist, move on quietly */
-			if (!fs.existsSync(file)) continue;
-
-			/* read in the file content */
-			const content = fs.readFileSync(file);
-			postcss
-				.parse(content, {
-					from: file,
-				})
-				.walkDecls((decl) => {
-					if (decl.prop.startsWith("--")) {
-						globalCache.set(decl.prop, decl.value);
-					}
-				});
-		}
+	prepare(result) {
+		const varFunctionRegex = /var\(\s*(--[a-z][a-z|0-9|-]*)\s*\)/i;
+		const localCache = new Map();
+		const foundCache = new Map();
+		const skipped = new Set();
 
 		return {
-			/** @type import('postcss').Processors.Declaration */
-			Declaration(decl) {
-				// Check if this declaration is a custom property
-				const isProp = decl.prop.startsWith("--");
-				const isMod = decl.prop.startsWith("--mod");
+			RuleExit(rule) {
+				function lookupFallback(value, { source = rule } = {}) {
+					if (!value) return;
 
-				// Add this declaration to the cache if it's a custom property
-				// in case a descendant declaration needs it
-				if (isProp && !isMod) valuesCache.set(decl.prop, decl.value);
-			},
-			/**
-			 * This needs to be run in Once or OnceExit so we don't report
-			 * on the same line more than once
-			 */
-			OnceExit(root, { result }) {
-				root.walkDecls((decl) => {
+					const parsed = valueParser(value);
+
+					parsed.walk((node) => {
+						if (
+							node.type !== "function" ||
+							node.value !== "var" ||
+							!node.nodes
+						) {
+							return;
+						}
+
+						// Filter out any space or div nodes to decide if a fallback is needed
+						if (
+							node.nodes.filter((n) => n.type !== "space" && n.type !== "div")
+								.length > 1
+						) {
+							return;
+						}
+
+						const lookup = node.nodes[0]?.value;
+						if (!lookup) return;
+						if (lookup.startsWith("--mod") || !lookup.startsWith("--")) {
+							return;
+						}
+
+						if (skipped.has(lookup)) return;
+
+						let found;
+						// Start with the found cache to avoid circular references
+						if (foundCache.has(lookup)) {
+							found = foundCache.get(lookup);
+							// } else if (localCache.has(lookup)) {
+							// 	found = localCache.get(lookup);
+						} else if (globalVariables.has(lookup)) {
+							found = globalVariables.get(lookup);
+						}
+
+						if (!found) {
+							skipped.add(lookup);
+
+							if (lint) {
+								source.warn(result, `Variable not found: ${lookup}`, {
+									node: source,
+								});
+							}
+
+							return;
+						}
+
+						if (varFunctionRegex.test(found)) {
+							// @todo is this causing a loop??
+							found = lookupFallback(found);
+						}
+
+						if (found !== lookup) {
+							node.nodes = [
+								...node.nodes,
+								{
+									type: "div",
+									value: ", ",
+								},
+								{
+									type: "word",
+									value: found,
+								},
+							];
+						}
+					});
+
+					return parsed.toString();
+				}
+
+				rule.walkDecls((decl) => {
 					// Check if this declaration is a custom property
 					const isProp = decl.prop.startsWith("--");
 					const isMod = decl.prop.startsWith("--mod");
 					// Check if this declaration uses a custom property
-					const usesProp = decl.value.match(/var\((--[a-z|-]+)[,|\)]/g);
+					const usesProp = varFunctionRegex.test(decl.value);
 
 					// If this neither is a custom property nor uses a custom property, stop processing
 					if ((!isProp || isMod) && !usesProp) return;
 
-					const matches = decl.value.matchAll(/var\(\s*(--[a-z|-]+)\s*(,|\))/g);
-					if (matches) {
-						[...matches].forEach((use) => {
-							const lookup = use[1];
-							if (!lookup || lookup.startsWith("--mod")) return;
+					// If the user has opted to only resolve stacks for custom properties, stop processing
+					if (customPropertiesOnly && !isProp) return;
 
-							if (valuesCache.has(lookup)) {
-								// do a thing
-								return;
-							} else if (globalCache.has(lookup)) {
-								// do a thing
-								return;
-							} else if (lint) {
-								console.log(valuesCache);
-								decl.warn(result, `Variable not found: ${lookup}`, {
-									node: decl,
-								});
-							}
-						});
+					const newValue = lookupFallback(decl.value, { source: decl });
+
+					if (!newValue || newValue === decl.value) return;
+
+					localCache.set(decl, newValue);
+
+					// Update the values cache for faster lookups
+					if (decl.prop.startsWith("--")) {
+						foundCache.set(decl.prop, newValue);
 					}
+				});
+
+				foundCache.clear();
+			},
+			OnceExit() {
+				// Update all declarations at the end of the processing
+				localCache.forEach((value, decl) => {
+					decl.value = value;
 				});
 			},
 		};

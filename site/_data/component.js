@@ -109,11 +109,7 @@ async function fetchStoryBook(storyPath) {
 }
 
 const isMigrated = (dependencies) =>
-	!!(
-		dependencies &&
-		(dependencies["@spectrum-css/component-builder-simple"] ||
-			dependencies["@spectrum-css/tokens"])
-	);
+	!!(dependencies && dependencies["@spectrum-css/tokens"]);
 
 /**
  * This type defines what information is available in the object passed

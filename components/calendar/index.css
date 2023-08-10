@@ -121,6 +121,7 @@ governing permissions and limitations under the License.
 
   &[title] {
     /* Normalize abbr[title] */
+
     /* Remove the bottom border in Chrome 57- and Firefox 39-. */
     border-block-end: none;
 
@@ -139,14 +140,15 @@ governing permissions and limitations under the License.
 
 .spectrum-Calendar-table {
   table-layout: fixed;
-  /*width: 100%;*/
+
+  /* width: 100%; */
 
   border-collapse: collapse;
   border-spacing: 0;
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  user-select: none;
+  user-select: none;
+  user-select: none;
   user-select: none;
 }
 
@@ -157,6 +159,7 @@ governing permissions and limitations under the License.
   block-size: var(--mod-calendar-day-height, var(--spectrum-calendar-day-height));
   inline-size: var(--mod-calendar-day-width, var(--spectrum-calendar-day-width));
   padding: var(--mod-calendar-day-padding, var(--spectrum-calendar-day-padding));
+
   &:focus {
     outline: 0;
   }
@@ -310,17 +313,18 @@ governing permissions and limitations under the License.
 
 .spectrum-Calendar-date {
   color: var(--highcontrast-calendar-day-title-text-color, var(--mod-calendar-day-title-text-color, var(--spectrum-calendar-day-title-text-color)));
+
   &:hover {
     color: var(--highcontrast-calendar-day-text-color-hover, var(--mod-calendar-day-text-color-hover, var(--spectrum-calendar-day-text-color-hover)));
 
-    &:not(.is-selection-end):not(.is-selection-start) {
+    &:not(.is-selection-end, .is-selection-start) {
       &::before {
         background: var(--highcontrast-calendar-day-background-color-hover, var(--mod-calendar-day-background-color-hover, var(--spectrum-calendar-day-background-color-hover)));
       }
     }
 
     &.is-selected {
-      &:not(.is-selection-end):not(.is-selection-start) {
+      &:not(.is-selection-end, .is-selection-start) {
         &::before {
           background: var(--highcontrast-calendar-day-background-color-selected-hover, var(--mod-calendar-day-background-color-selected-hover, var(--spectrum-calendar-day-background-color-selected-hover)));
         }
@@ -433,14 +437,13 @@ governing permissions and limitations under the License.
     --highcontrast-calendar-button-icon-color-disabled: GrayText;
     --highcontrast-calendar-button-icon-color: ButtonText;
   }
+
   .spectrum-Calendar-date {
-    color: CanvasText; /* stylelint-disable-line declaration-property-value-no-unknown */
-    forced-color-adjust: none;
     --highcontrast-calendar-day-background-color-cap-selected: Highlight;
     --highcontrast-calendar-day-background-color-down: ButtonFace;
-    --highcontrast-calendar-day-background-color-hover: Transparent;
+    --highcontrast-calendar-day-background-color-hover: transparent;
     --highcontrast-calendar-day-background-color-key-focus: ButtonFace;
-    --highcontrast-calendar-day-background-color-selected-hover: Transparent;
+    --highcontrast-calendar-day-background-color-selected-hover: transparent;
     --highcontrast-calendar-day-background-color-selected: Highlight;
     --highcontrast-calendar-day-border-color-key-focus: ButtonText;
     --highcontrast-calendar-day-text-color-cap-selected: HighlightText;
@@ -455,15 +458,20 @@ governing permissions and limitations under the License.
     --highcontrast-calendar-day-today-border-color: ButtonText;
     --highcontrast-calendar-day-today-text-color-disabled: GrayText;
     --highcontrast-calendar-day-today-text-color: ButtonText;
+    color: CanvasText; /* stylelint-disable-line declaration-property-value-no-unknown */
+    forced-color-adjust: none;
+
     &.is-range-selection {
       &.is-today {
         color: HighlightText;
       }
+
       &.is-selection-start::after,
       &.is-selection-end::after {
         content: none;
       }
     }
+
     &.is-disabled {
       &.is-range-selection {
         background: Highlight;

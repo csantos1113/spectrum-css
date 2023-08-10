@@ -38,6 +38,7 @@ governing permissions and limitations under the License.
 .spectrum-LogicButton {
   &:focus-visible {
     outline: none;
+
     &::after {
       box-shadow: 0 0 0 var(--spectrum-button-m-primary-outline-texticon-focus-ring-size) var(--spectrum-button-m-primary-outline-texticon-focus-ring-color-key-focus);
     }
@@ -93,7 +94,6 @@ governing permissions and limitations under the License.
 	}
 
 	.spectrum-LogicButton {
-		forced-color-adjust: none;
 		--spectrum-button-primary-texticon-focus-ring-size: 2;
 		--spectrum-button-m-primary-fill-texticon-background-color-disabled: ButtonFace;
 		--spectrum-button-m-secondary-texticon-border-color-disabled: GrayText;
@@ -110,5 +110,6 @@ governing permissions and limitations under the License.
 		--spectrum-logicbutton-or-border-color: ButtonText;
 		--spectrum-logicbutton-or-border-color-hover: Highlight;
 		--spectrum-logicbutton-or-text-color: ButtonText;
+		forced-color-adjust: none;
 	}
 }

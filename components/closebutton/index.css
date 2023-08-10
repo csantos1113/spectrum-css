@@ -15,7 +15,7 @@ governing permissions and limitations under the License.
  * .spectrum-Closebutton::after is the Focus ring
  */
 
-@import "@spectrum-css/commons/basebutton-coretokens.css";
+@import "@spectrum-css/commons";
 
 .spectrum-CloseButton {
 	/* Hardcoded tokens */
@@ -165,11 +165,10 @@ governing permissions and limitations under the License.
 }
 
 a.spectrum-CloseButton {
-	@inherit: %spectrum-AnchorButton;
+	@extend %spectrum-AnchorButton;
 }
 
 .spectrum-CloseButton {
-	@inherit: %spectrum-BaseButton;
 
   block-size: var(--mod-closebutton-height, var(--spectrum-closebutton-height));
   inline-size: var(--mod-closebutton-width, var(--spectrum-closebutton-width));
@@ -201,6 +200,8 @@ a.spectrum-CloseButton {
 	margin-inline: var(--mod-closebutton-margin-inline);
 	margin-block-start: var(--mod-closebutton-margin-top);
 	align-self: var(--mod-closebutton-align-self);
+
+	@extend %spectrum-BaseButton;
 
   &::after {
     pointer-events: none;

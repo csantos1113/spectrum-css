@@ -37,11 +37,7 @@ async function getDependencies({ name, devDependencies }) {
 	if (devDependencies && Object.keys(devDependencies).length) {
 		dependencies.push(
 			...(Object.keys(devDependencies).filter(
-				(dep) =>
-					dep.indexOf("@spectrum-css") === 0 &&
-					dep !== "@spectrum-css/bundle-builder" &&
-					dep !== "@spectrum-css/component-builder" &&
-					dep !== "@spectrum-css/component-builder-simple"
+				(dep) => dep.indexOf("@spectrum-css") === 0
 			) ?? [])
 		);
 	}

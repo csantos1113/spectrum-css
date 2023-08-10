@@ -3,9 +3,6 @@
     "tags": ["tooling", "postcss"],
     "name": "postcss-custom-properties-mapping",
 	"targets": {
-		"build": {
-			"executor": "nx:noop"
-		},
         "lint": {
             "defaultConfiguration": "js"
         },

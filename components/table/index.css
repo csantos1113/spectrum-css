@@ -59,6 +59,7 @@ governing permissions and limitations under the License.
   --spectrum-table-row-active-color: rgba(var(--spectrum-gray-900-rgb), var(--spectrum-table-row-down-opacity));
   --spectrum-table-selected-row-background-color-focus: rgba(var(--spectrum-blue-900-rgb), var(--spectrum-table-selected-row-background-opacity-hover));
   --spectrum-table-selected-row-background-color-non-emphasized-focus: rgba(var(--spectrum-gray-700-rgb), var(--spectrum-table-selected-row-background-opacity-non-emphasized-hover));
+
   /* ----- */
 
   --spectrum-table-icon-color-default: var(--spectrum-neutral-subdued-content-color-default);
@@ -347,12 +348,6 @@ governing permissions and limitations under the License.
     --highcontrast-table-selected-row-text-color: HighlightText;
     --highcontrast-table-selected-row-text-color-default: HighlightText;
 
-    @supports (color: SelectedItem) {
-      --highcontrast-table-selected-row-background-color: SelectedItem;
-      --highcontrast-table-selected-row-text-color: SelectedItemText;
-      --highcontrast-table-selected-row-text-color-default: SelectedItemText;
-    }
-
     --highcontrast-table-selected-row-background-color-focus: Highlight;
     --highcontrast-table-selected-row-text-color-focus: HighlightText;
     --highcontrast-table-row-background-color-hover: Highlight;
@@ -363,6 +358,12 @@ governing permissions and limitations under the License.
 
     --highcontrast-table-focus-indicator-color: Highlight;
     --highcontrast-table-transition-duration: 0;
+
+    @supports (color: SelectedItem) {
+      --highcontrast-table-selected-row-background-color: SelectedItem;
+      --highcontrast-table-selected-row-text-color: SelectedItemText;
+      --highcontrast-table-selected-row-text-color-default: SelectedItemText;
+    }
   }
 
   .spectrum-Table-cell {
@@ -502,12 +503,9 @@ governing permissions and limitations under the License.
   border-radius: var(--mod-table-border-radius, var(--spectrum-table-border-radius));
 
   &.is-drop-target {
-    outline-width: var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
-    outline-style: solid;
-    outline-color: var(--highcontrast-table-focus-indicator-color, var(--mod-table-drop-zone-outline-color, var(--spectrum-table-drop-zone-outline-color)));
-
     /* Make sure negative offset outline is not covered by borders. */
     --mod-table-border-color: transparent;
+    outline: var(--highcontrast-table-focus-indicator-color, var(--mod-table-drop-zone-outline-color, var(--spectrum-table-drop-zone-outline-color))) solid var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
   }
 }
 
@@ -592,7 +590,7 @@ governing permissions and limitations under the License.
   );
   padding-block-end: var(--mod-table-row-bottom-to-text, var(--spectrum-table-row-bottom-to-text));
   padding-inline: calc(
-    var(--mod-table-edge-to-content, var(--spectrum-table-edge-to-content)) - 
+    var(--mod-table-edge-to-content, var(--spectrum-table-edge-to-content)) -
     var(--mod-table-outer-border-inline-width, var(--spectrum-table-outer-border-inline-width))
   );
 }
@@ -604,9 +602,7 @@ governing permissions and limitations under the License.
 
   &:focus-visible,
   &.is-focused {
-    outline-width: var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
-    outline-style: solid;
-    outline-color: var(--highcontrast-table-cell-focus-indicator-color, var(--highcontrast-table-focus-indicator-color, var(--mod-table-focus-indicator-color, var(--spectrum-table-focus-indicator-color))));
+    outline: var(--highcontrast-table-cell-focus-indicator-color, var(--highcontrast-table-focus-indicator-color, var(--mod-table-focus-indicator-color, var(--spectrum-table-focus-indicator-color)))) solid var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
     outline-offset: calc(
       (-1 * var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness))) -
       var(--highcontrast-table-cell-focus-extra-offset, 0px)
@@ -677,16 +673,13 @@ governing permissions and limitations under the License.
   }
 
   &.is-drop-target {
-    outline-width: var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
-    outline-style: solid;
-    outline-color: var(--highcontrast-table-focus-indicator-color, var(--mod-table-drop-zone-outline-color, var(--spectrum-table-drop-zone-outline-color)));
-    outline-offset: calc(-1 * var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness)));
-
     /* Make sure negative offset outline is not covered by borders. */
     --mod-table-border-color: var(--highcontrast-table-focus-indicator-color, transparent);
+    outline: var(--highcontrast-table-focus-indicator-color, var(--mod-table-drop-zone-outline-color, var(--spectrum-table-drop-zone-outline-color))) solid var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
+    outline-offset: calc(-1 * var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness)));
     
     .spectrum-Table-cell {
-      border-top-color: var(--highcontrast-table-focus-indicator-color, var(--mod-table-drop-zone-outline-color, var(--spectrum-table-drop-zone-outline-color)));
+      border-block-start-color: var(--highcontrast-table-focus-indicator-color, var(--mod-table-drop-zone-outline-color, var(--spectrum-table-drop-zone-outline-color)));
     }
   }
 }
@@ -743,12 +736,14 @@ governing permissions and limitations under the License.
 .spectrum-Table-checkboxCell {
   /* Prevent width expansion with 100% width table. */
   inline-size: var(--spectrum-checkbox-control-size-small);
+
   /* The calc subtraction is because the --spectrum-table-checkbox-to-text spacing value
      includes the inline start padding in the adjacent cell. */
   padding-inline-end: calc(
-    var(--mod-table-checkbox-to-text, var(--spectrum-table-checkbox-to-text)) - 
+    var(--mod-table-checkbox-to-text, var(--spectrum-table-checkbox-to-text)) -
     var(--mod-table-edge-to-content, var(--spectrum-table-edge-to-content))
   );
+
   /* Block spacing must be moved to calculated margin on the checkbox element. */
   padding-block: 0;
   
@@ -775,6 +770,7 @@ governing permissions and limitations under the License.
 }
 
 /********* DIVS *********/
+
 /* Make sure markup that uses divs instead of <table> elements displays like a regular table. */
 .spectrum-Table:not(.spectrum-Table-scroller),
 .spectrum-Table-main {
@@ -800,6 +796,7 @@ governing permissions and limitations under the License.
 }
 
 /********* SCROLLABLE *********/
+
 /* Wrapper that allows a scrollable body and sticky column header. */
 .spectrum-Table-scroller {
   --spectrum-table-header-background-color: var(--mod-table-header-background-color-scrollable, var(--spectrum-background-layer-1-color, var(--spectrum-global-color-gray-100)));
@@ -816,24 +813,24 @@ governing permissions and limitations under the License.
   border-inline: var(--mod-table-outer-border-inline-width, var(--spectrum-table-outer-border-inline-width)) 
     solid 
     var(--highcontrast-table-border-color, var(--mod-table-border-color, var(--spectrum-table-border-color)));
+
+  /* Make sure shift-tab reverse keyboard navigation keeps the whole cell in focus.
+     --mod-table-current-header-height should be dynamically updated with JS to match the table header height. */
+  scroll-padding-top: var(--mod-table-current-header-height, calc(
+    (var(--mod-table-header-line-height, var(--spectrum-table-row-line-height)) * var(--mod-table-header-font-size, var(--spectrum-table-row-font-size))) +
+    var(--mod-table-header-top-to-text, var(--spectrum-table-header-top-to-text)) +
+    var(--mod-table-header-bottom-to-text, var(--spectrum-table-header-bottom-to-text)) +
+    var(--mod-table-border-width, var(--spectrum-table-border-width))
+  ));
   
   &.spectrum-Table--quiet {
     --mod-table-header-background-color--quiet: var(--mod-table-header-background-color-scrollable, var(--spectrum-background-layer-1-color, var(--spectrum-global-color-gray-100)));
     border-block-start: none;
   }
 
-  /* Make sure shift-tab reverse keyboard navigation keeps the whole cell in focus.
-     --mod-table-current-header-height should be dynamically updated with JS to match the table header height. */
-  scroll-padding-top: var(--mod-table-current-header-height, calc(
-    (var(--mod-table-header-line-height, var(--spectrum-table-row-line-height)) * var(--mod-table-header-font-size, var(--spectrum-table-row-font-size))) + 
-    var(--mod-table-header-top-to-text, var(--spectrum-table-header-top-to-text)) + 
-    var(--mod-table-header-bottom-to-text, var(--spectrum-table-header-bottom-to-text)) +
-    var(--mod-table-border-width, var(--spectrum-table-border-width))
-  ));
-
   .spectrum-Table-head {
     position: sticky;
-    top: 0;
+    inset-block-start: 0;
     z-index: 2;
   }
 
@@ -876,7 +873,7 @@ governing permissions and limitations under the License.
   &[data-tier="6"] { --spectrum-table-row-tier: 6; }
 
   .spectrum-Table-checkboxCell {
-    padding-inline-end: 0px;
+    padding-inline-end: 0;
   }
 
   &.is-last-tier {
@@ -888,6 +885,7 @@ governing permissions and limitations under the License.
         (var(--mod-table-collapsible-disclosure-inline-spacing, var(--spectrum-table-collapsible-disclosure-inline-spacing)) * 2)
       );
     }
+
     .spectrum-Table-disclosureIcon {
       display: none;
     }
@@ -915,8 +913,7 @@ governing permissions and limitations under the License.
 
 .spectrum-Table-collapseInner {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: flex-start;
 
@@ -932,10 +929,8 @@ governing permissions and limitations under the License.
 .spectrum-Table-disclosureIcon.spectrum-Table-disclosureIcon {
   --spectrum-table-icon-color: var(--highcontrast-table-icon-color, var(--mod-table-icon-color-default, var(--spectrum-table-icon-color-default)));
 
-  height: var(--mod-table-disclosure-icon-size, var(--spectrum-table-disclosure-icon-size));
-  flex-basis: var(--mod-table-disclosure-icon-size, var(--spectrum-table-disclosure-icon-size));
-  flex-grow: 0;
-  flex-shrink: 0;
+  block-size: var(--mod-table-disclosure-icon-size, var(--spectrum-table-disclosure-icon-size));
+  flex: 0 0 var(--mod-table-disclosure-icon-size, var(--spectrum-table-disclosure-icon-size));
   transition: transform ease var(--mod-table-collapsible-icon-animation-duration, var(--spectrum-table-collapsible-icon-animation-duration));
 
   border-radius: 0;
@@ -963,6 +958,7 @@ governing permissions and limitations under the License.
 
   &:focus {
     --spectrum-table-icon-color: var(--highcontrast-table-icon-color, var(--mod-table-icon-color-focus, var(--spectrum-table-icon-color-focus)));
+
     &:hover {
       --spectrum-table-icon-color: var(--highcontrast-table-icon-color, var(--mod-table-icon-color-focus-hover, var(--spectrum-table-icon-color-focus-hover)));
     }
@@ -972,9 +968,7 @@ governing permissions and limitations under the License.
   &.is-keyboardFocused {
     --spectrum-table-icon-color: var(--highcontrast-table-icon-color, var(--mod-table-icon-color-key-focus, var(--spectrum-table-icon-color-key-focus)));
 
-    outline-width: var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
-    outline-style: solid;
-    outline-color: var(--highcontrast-table-focus-indicator-color, var(--mod-table-focus-indicator-color, var(--spectrum-table-focus-indicator-color)));
+    outline: var(--highcontrast-table-focus-indicator-color, var(--mod-table-focus-indicator-color, var(--spectrum-table-focus-indicator-color))) solid var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness));
     outline-offset: calc(
       (-1 * var(--mod-table-focus-indicator-thickness, var(--spectrum-table-focus-indicator-thickness))) - 2px
     );
@@ -997,7 +991,7 @@ governing permissions and limitations under the License.
 
   /* Cell that does have a thumbnail has its padding moved within the "Inner" and "Content" alignment wrappers. */
   .spectrum-Table-cell--thumbnail {
-    padding-block: 0px;
+    padding-block: 0;
   }
 
   /* Sometimes the padding must be larger to match any extra space created by the disclosure icon (e.g. compact + large ). */
@@ -1016,8 +1010,7 @@ governing permissions and limitations under the License.
 
 .spectrum-Table-thumbnailInner {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: flex-start;
   padding-block: var(--table-thumbnail-cell-block-spacing);

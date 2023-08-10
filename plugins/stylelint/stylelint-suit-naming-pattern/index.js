@@ -25,13 +25,10 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 		`Expected class name for a utility to follow '.is-<utilityName>', received '${selector}' instead.`,
 });
 const pattern = {
-	utility: new RegExp("^is-[a-z]+[a-zA-Z0-9]+"),
-	component: new RegExp(
-		"^spectrum-([A-Z][a-zA-Z0-9]+)([-]{1,2}((S*d+S*)[a-zA-Z0-9]+|[a-z][a-zA-Z0-9-]+]*(?!d))?(?!s|\n|,=)?$"
-	),
-	context: new RegExp(
-		"^spectrum(?:--(express|light|lightest|dark|darkest|medium|large))$"
-	),
+	utility: /^is-[a-z]+[a-zA-Z0-9]+/,
+	component:
+		/^spectrum-([A-Z][a-zA-Z0-9]+)([-]{1,2}((S*d+S*)[a-zA-Z0-9]+|[a-z][a-zA-Z0-9-]+]*(?!d))?(?!s|\n|,=))?$/,
+	context: /^spectrum(?:--(express|light|lightest|dark|darkest|medium|large))$/,
 };
 
 module.exports = stylelint.createPlugin(ruleName, () => {

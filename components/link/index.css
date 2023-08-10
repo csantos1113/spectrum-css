@@ -14,6 +14,7 @@ governing permissions and limitations under the License.
   --spectrum-link-animation-duration: var(--spectrum-animation-duration-100);
 
   /* Colors */
+
   /* Primary */
   --spectrum-link-text-color-primary-default: var(--spectrum-accent-content-color-default);
   --spectrum-link-text-color-primary-hover: var(--spectrum-accent-content-color-hover);
@@ -51,8 +52,9 @@ governing permissions and limitations under the License.
 .spectrum-Link {
   /* Remove the gray background on active links in IE 10. */
   background-color: transparent;
+
   /* Remove gaps in links underline in iOS 8+ and Safari 8+. */
-  -webkit-text-decoration-skip: objects;
+  text-decoration-skip: objects;
   text-decoration: underline;
   transition: color var(--mod-link-animation-duration, var(--spectrum-link-animation-duration)) ease-in-out;
   outline: none;

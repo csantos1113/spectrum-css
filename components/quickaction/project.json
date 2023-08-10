@@ -3,6 +3,7 @@
 	"name": "quickaction",
 	"tags": ["component", "legacy"],
 	"targets": {
+		"profile": {},
 		"build": {
 			"defaultConfiguration": "legacy"
 		},

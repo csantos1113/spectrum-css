@@ -3,6 +3,7 @@
 	"name": "coachmark",
 	"tags": ["component", "legacy"],
 	"targets": {
+		"profile": {},
 		"build": {
 			"defaultConfiguration": "legacy"
 		},

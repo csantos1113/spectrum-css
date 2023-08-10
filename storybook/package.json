@@ -5,13 +5,13 @@
   "license": "Apache-2.0",
   "author": "Adobe",
   "homepage": "https://opensource.adobe.com/spectrum-css/preview",
-  "module": "main.js",
   "type": "module",
+  "module": "main.js",
   "devDependencies": {
     "@babel/core": "^7.22.10",
     "@etchteam/storybook-addon-status": "^4.2.4",
     "@spectrum-css/expressvars": "^3.0.9",
-    "@spectrum-css/tokens": "^11.3.0",
+    "@spectrum-css/tokens": "^11.3.7",
     "@spectrum-css/vars": "^9.0.8",
     "@storybook/addon-a11y": "^7.3.2",
     "@storybook/addon-actions": "^7.3.2",
@@ -39,8 +39,8 @@
     "rimraf": "^5.0.1",
     "source-map-loader": "^4.0.1",
     "storybook": "^7.3.2",
-    "storybook-addon-pseudo-states": "^2.1.1",
     "storybook-addon-performance": "^0.17.1",
+    "storybook-addon-pseudo-states": "^2.1.1",
     "style-loader": "3.3.3",
     "webpack": "^5.88.2"
   }

@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import "@spectrum-css/commons/basebutton-coretokens.css";
+@import "@spectrum-css/commons";
 
 .spectrum-Picker {
 	/* font */
@@ -71,12 +71,6 @@ governing permissions and limitations under the License.
 	--spectrum-picker-spacing-edge-to-disclosure-icon-quiet: var(
 		--spectrum-picker-end-edge-to-disclousure-icon-quiet
 	);
-
-	& + .spectrum-Popover--bottom.is-open {
-		--spectrum-picker-spacing-picker-to-popover: var(
-			--spectrum-component-to-menu-medium
-		);
-	}
 
 	/* animation */
 	--spectrum-picker-animation-duration: var(--spectrum-animation-duration-100);
@@ -155,6 +149,12 @@ governing permissions and limitations under the License.
 	--spectrum-picker-focus-indicator-color: var(
 		--spectrum-focus-indicator-color
 	);
+
+	& + .spectrum-Popover--bottom.is-open {
+		--spectrum-picker-spacing-picker-to-popover: var(
+			--spectrum-component-to-menu-medium
+		);
+	}
 }
 
 .spectrum-Picker--sizeS {
@@ -330,6 +330,7 @@ governing permissions and limitations under the License.
 			);
 		}
 	}
+
 	.spectrum-Picker--quiet {
 		&:focus-visible,
 		&.is-focused {
@@ -340,8 +341,6 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Picker {
-	@inherit: %spectrum-BaseButton;
-
 	/* Layout */
 	display: flex;
 	box-sizing: border-box;
@@ -420,6 +419,8 @@ governing permissions and limitations under the License.
 			var(--spectrum-picker-border-color-default)
 		)
 	);
+
+	@extend %spectrum-BaseButton;
 
 	&::after {
 		pointer-events: none;
@@ -1050,4 +1051,5 @@ governing permissions and limitations under the License.
 .spectrum-Picker--sideLabel {
 	display: inline-flex;
 	vertical-align: top;
+}
 }

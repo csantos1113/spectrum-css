@@ -19,10 +19,9 @@ module.exports = (ctx) => {
 	} = ctx.options;
 
 	return {
-		...ctx,
+		...ctx.options,
 		plugins: {
 			"postcss-import": {},
-			"postcss-rgb-mapping": {},
 			"postcss-sorting": {
 				order: ["custom-properties", "declarations", "at-rules", "rules"],
 				"properties-order": "alphabetical",
@@ -42,6 +41,7 @@ module.exports = (ctx) => {
 					);
 				},
 			},
+			"@spectrum-tools/postcss-rgb-mapping": {},
 			/* After cleaning up comments, remove all empty rules */
 			"postcss-discard-empty": {},
 			/* Ensure the license is at the top of the file */

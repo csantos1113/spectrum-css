@@ -1,109 +1,117 @@
-const postcss = require("postcss");
+/*!
+Copyright 2023 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
 const valueParser = require("postcss-value-parser");
 
-function getUsedVars(root) {
-	const usedAnywhere = [];
-	const usedInProps = [];
-	const variableRelationships = {};
+module.exports = ({ fix = true, ignoreList = [] } = {}) => ({
+	postcssPlugin: "postcss-dropunusedvars",
+	prepare() {
+		const usedAnywhere = new Set();
+		const usedInProps = new Set();
+		const variableRelationships = {};
 
-	root.walkRules((rule) => {
-		rule.walkDecls((decl) => {
-			const usedInDecl = [];
-			const isVar = decl.prop.startsWith("--");
-			const matches = decl.value.match(/var\(.*?\)/g);
-			if (matches) {
-				// Parse value and get a list of variables used
-				const parsed = valueParser(decl.value);
-				parsed.walk((node) => {
-					if (node.type === "function" && node.value === "var") {
-						if (node.nodes.length) {
-							const varName = node.nodes[0].value;
-							usedInDecl.push(varName);
-							usedAnywhere.push(varName);
-							if (!isVar) {
-								usedInProps.push(varName);
+		return {
+			// Drop unused variable definitions
+			Declaration(decl) {
+				const usedInDecl = new Set();
+				const isVar = decl.prop.startsWith("--");
+
+				if (/var\(.*?\)/g.test(decl.value)) {
+					// Parse value and get a list of variables used
+					const parsed = valueParser(decl.value);
+					parsed.walk((node) => {
+						if (node.type === "function" && node.value === "var") {
+							if (node.nodes.length) {
+								const varName = node.nodes[0].value;
+
+								usedInDecl.add(varName);
+								usedAnywhere.add(varName);
+
+								if (!isVar) usedInProps.add(varName);
 							}
+						}
+					});
+				}
+
+				// Store every variable referenced by this var
+				if (isVar && usedInDecl.size > 0) {
+					for (let varName of usedInDecl) {
+						variableRelationships[varName] =
+							variableRelationships[varName] || [];
+						variableRelationships[varName].push(decl.prop);
+					}
+				}
+			},
+			OnceExit(root, { result }) {
+				root.walkDecls((decl) => {
+					if (!decl.prop.startsWith("--")) return;
+
+					const varName = decl.prop;
+					if (!varName) return;
+
+					// Note if it seems like this variable is unused
+					if (
+						!usedAnywhere.has(varName) &&
+						!ignoreList.some((regex) => regex.test(varName))
+					) {
+						if (!fix) {
+							decl.warn(
+								result,
+								`Possible unused variable definition: ${varName}`,
+								{
+									word: varName,
+									index: decl.sourceIndex,
+								}
+							);
+						} else {
+							decl.remove();
+						}
+
+						return;
+					}
+
+					if (!usedInProps.has(varName)) {
+						// Drop a variable if everything that references it has been removed
+						const relatedVars = variableRelationships[varName];
+
+						if (!relatedVars || relatedVars.length === 0) return;
+
+						// Check if everything that references this variable has been removed
+						const keep = Object.entries(relatedVars).reduce(
+							(keep, [, relatedVar]) => {
+								if (usedAnywhere.has(relatedVar)) return true;
+								else return keep;
+							},
+							false
+						);
+
+						if (keep) return;
+
+						if (fix) {
+							decl.remove();
+						} else if (!ignoreList.some((regex) => regex.test(varName))) {
+							/** @todo account for passthroughs; don't warn for intentional passthroughs */
+							decl.warn(
+								result,
+								`Possible unused variable definition: ${varName}`,
+								{
+									word: varName,
+									index: decl.sourceIndex,
+								}
+							);
 						}
 					}
 				});
-			}
-
-			// Store every variable referenced by this var
-			if (isVar && usedInDecl.length) {
-				for (let varName of usedInDecl) {
-					variableRelationships[varName] = variableRelationships[varName] || [];
-					variableRelationships[varName].push(decl.prop);
-				}
-			}
-		});
-	});
-
-	return {
-		usedAnywhere,
-		usedInProps,
-		variableRelationships,
-	};
-}
-
-function dropUnused(
-	root,
-	{ usedAnywhere, usedInProps, variableRelationships },
-	fix = true
-) {
-	root.walkRules((rule) => {
-		rule.walkDecls((decl) => {
-			if (!decl.prop.startsWith("--")) return;
-
-			const varName = decl.prop;
-
-			// Note if it seems like this variable is unused
-			if (!usedAnywhere.includes(varName)) {
-				if (!fix)
-					decl.warn(root.toResult(), "Possible unused variable definition", {
-						word: varName,
-						index: decl.sourceIndex,
-					});
-				else decl.remove();
-
-				return;
-			}
-
-			if (!usedInProps.includes(varName)) {
-				// Drop a variable if everything that references it has been removed
-				const relatedVars = variableRelationships[varName];
-
-				if (!relatedVars || relatedVars.length === 0) return;
-
-				// Check if everything that references this variable has been removed
-				const keep = Object.entries(relatedVars).reduce(
-					(keep, [, relatedVar]) => {
-						if (usedAnywhere.includes(relatedVar)) return true;
-						else return keep;
-					},
-					false
-				);
-
-				if (keep) return;
-
-				if (fix) decl.remove();
-				else {
-					decl.warn(root.toResult(), "Possible unused variable definition", {
-						word: varName,
-						index: decl.sourceIndex,
-					});
-				}
-			}
-		});
-	});
-}
-
-module.exports = postcss.plugin(
-	"postcss-dropunusedvars",
-	function (options = {}) {
-		return (root) => {
-			const fix = options.fix ?? true;
-			// Drop unused variable definitions
-			dropUnused(root, getUsedVars(root), fix);
+			},
 		};
-	}
-);
+	},
+});

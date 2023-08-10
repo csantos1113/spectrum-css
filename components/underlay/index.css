@@ -10,7 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import "@spectrum-css/overlay/index.css";
+/** @todo should this be sourced from commons? */
+@import "@spectrum-css/overlay";
 
 .spectrum-Underlay {
   --spectrum-underlay-background-entry-animation-delay: var(--spectrum-animation-duration-0);
@@ -26,7 +27,6 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Underlay {
-	@inherit: %spectrum-overlay;
 
   position: fixed;
   inset-block: 0;
@@ -47,13 +47,15 @@ governing permissions and limitations under the License.
               linear calc(
                       var(--mod-underlay-background-exit-animation-delay, var(--spectrum-underlay-background-exit-animation-delay)) +
                       var(--mod-underlay-background-exit-animation-duration, var(--spectrum-underlay-background-exit-animation-duration)));
+
+	@extend %spectrum-overlay;
 }
 
 .spectrum-Underlay.is-open {
-	@inherit: %spectrum-overlay--open;
-
   /* Entry animations */
   transition: opacity var(--mod-underlay-background-entry-animation-duration, var(--spectrum-underlay-background-entry-animation-duration))
                       var(--mod-underlay-background-entry-animation-ease, var(--spectrum-underlay-background-entry-animation-ease))
                       var(--mod-underlay-background-entry-animation-delay, var(--spectrum-underlay-background-entry-animation-delay));
+
+	@extend %spectrum-overlay--open;
 }

@@ -108,6 +108,7 @@ governing permissions and limitations under the License.
 }
 
 /* stylelint-disable max-nesting-depth */
+
 /* Default Unchecked */
 .spectrum-Checkbox {
   color: var(--highcontrast-checkbox-content-color-default, var(--mod-checkbox-content-color-default, var(--spectrum-checkbox-content-color-default)));
@@ -237,7 +238,7 @@ governing permissions and limitations under the License.
         display: block;
 
         transform: scale(1);
-        opacity: 1;
+        opacity: 100%;
       }
     }
 
@@ -382,7 +383,9 @@ governing permissions and limitations under the License.
   font-size: var(--mod-checkbox-font-size, var(--spectrum-checkbox-font-size));
 
   /* TODO Use font-weight and font-style tokens */
+
   /* font-weight: var(--spectrum-checkbox-text-font-weight); */
+
   /* font-style: var(--spectrum-checkbox-text-font-style); */
 
   transition: color var(--mod-checkbox-animation-duration, var(--spectrum-checkbox-animation-duration)) ease-in-out;
@@ -420,7 +423,7 @@ governing permissions and limitations under the License.
   inline-size: 100%;
   block-size: 100%;
 
-  opacity: .0001;
+  opacity: 0.01%;
   z-index: 1;
 
   cursor: pointer;
@@ -439,7 +442,7 @@ governing permissions and limitations under the License.
 
     .spectrum-Checkbox-checkmark {
       transform: scale(1);
-      opacity: 1;
+      opacity: 100%;
     }
   }
 
@@ -471,6 +474,8 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Checkbox-box {
+  /* Fix vertical alignment when not wrapping since we're flex-start */
+  --spectrum-checkbox-spacing: calc(var(--mod-checkbox-height, var(--spectrum-checkbox-height)) - var(--mod-checkbox-control-size, var(--spectrum-checkbox-control-size)));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -479,9 +484,6 @@ governing permissions and limitations under the License.
   box-sizing: border-box;
   inline-size: var(--mod-checkbox-control-size, var(--spectrum-checkbox-control-size));
   block-size: var(--mod-checkbox-control-size, var(--spectrum-checkbox-control-size));
-
-  /* Fix vertical alignment when not wrapping since we're flex-start */
-  --spectrum-checkbox-spacing: calc(var(--mod-checkbox-height, var(--spectrum-checkbox-height)) - var(--mod-checkbox-control-size, var(--spectrum-checkbox-control-size)));
   margin: calc(var(--mod-checkbox-spacing, var(--spectrum-checkbox-spacing)) / 2) 0;
 
   flex-grow: 0;
@@ -530,11 +532,10 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Checkbox {
-
   .spectrum-Checkbox-checkmark,
   .spectrum-Checkbox-partialCheckmark {
     color: var(--highcontrast-checkbox-background-color-default, var(--mode-checkbox-checkmark-color, var(--spectrum-checkbox-checkmark-color)));
-    opacity: 0;
+    opacity: 0%;
     transform: scale(0);
 
     transition: opacity var(--mod-checkbox-animation-duration, var(--spectrum-checkbox-animation-duration)) ease-in-out, transform var(--mod-checkbox-animation-duration, var(--spectrum-checkbox-animation-duration)) ease-in-out;
@@ -579,6 +580,7 @@ governing permissions and limitations under the License.
       }
     }
   }
+
   .spectrum-Checkbox {
     /* Label Text */
     --highcontrast-checkbox-content-color-default: CanvasText;

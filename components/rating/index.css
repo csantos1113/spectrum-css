@@ -14,17 +14,22 @@ governing permissions and limitations under the License.
   /* Icon */
   --spectrum-rating-icon-height: var(--spectrum-workflow-icon-size-100);
   --spectrum-rating-icon-width: var(--spectrum-workflow-icon-size-100);
+
   /* Focus ring */
   --spectrum-rating-border-radius: var(--spectrum-corner-radius-100);
   --spectrum-rating-focus-indicator-thickness: var(--spectrum-focus-indicator-thickness);
   --spectrum-rating-focus-indicator-color: var(--spectrum-focus-indicator-color);
   --spectrum-rating-focus-indicator-gap: var(--spectrum-focus-indicator-gap);
+
   /* Spacing (top/bottom edge to icon) */
   --spectrum-rating-icon-spacing-vertical-top: var(--spectrum-component-top-to-workflow-icon-100);
   --spectrum-rating-indicator-border-radius: var(--spectrum-corner-radius-75);
+
   /* Indicator height */
   --spectrum-rating-indicator-height: var(--spectrum-border-width-200);
+
   /* Colors */
+
   /* selected + emphasized */
   --spectrum-rating-emphasized-icon-color-default: var(--spectrum-accent-content-color-default);
   --spectrum-rating-emphasized-icon-color-hover: var(--spectrum-accent-content-color-hover);
@@ -97,6 +102,7 @@ governing permissions and limitations under the License.
     .spectrum-Rating-starActive {
       display: block;
     }
+
     .spectrum-Rating-starInactive {
       display: none;
     }
@@ -109,7 +115,7 @@ governing permissions and limitations under the License.
   inline-size: 100%;
   block-size: 100%;
   margin: 0;
-  opacity: 0;
+  opacity: 0%;
   pointer-events: none;
 }
 
@@ -124,6 +130,7 @@ governing permissions and limitations under the License.
   .spectrum-Rating-starActive {
     display: none;
   }
+
   .spectrum-Rating-starInactive {
     display: block;
   }
@@ -132,6 +139,7 @@ governing permissions and limitations under the License.
     .spectrum-Rating-starActive {
       display: block;
     }
+
     .spectrum-Rating-starInactive {
       display: none;
     }
@@ -153,6 +161,7 @@ governing permissions and limitations under the License.
     .spectrum-Rating-starActive {
       display: none;
     }
+
     .spectrum-Rating-starInactive {
       display: block;
     }

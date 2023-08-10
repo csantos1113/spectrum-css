@@ -3,8 +3,13 @@
 	"name": "assetcard",
 	"tags": ["component", "legacy"],
 	"targets": {
-		"build": { "defaultConfiguration": "legacy" },
-		"test": { "defaultConfiguration": "scoped" },
+		"profile": {},
+		"build": {
+			"defaultConfiguration": "legacy"
+		},
+		"test": {
+			"defaultConfiguration": "scoped"
+		},
 		"lint": {
 			"options": {
 				"cwd": "components/assetcard"

@@ -3,6 +3,7 @@
 	"name": "page",
 	"tags": ["component", "legacy"],
 	"targets": {
+		"profile": {},
 		"build": {
 			"defaultConfiguration": "legacy"
 		},

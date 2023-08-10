@@ -10,31 +10,43 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-module.exports = ({}) => {
-	return {
-		postcssPlugin: "postcss-combininator",
-		prepare() {
-			const rules = [];
-			const declarations = {};
-			return {
-				Rule(rule) {
-					rules.push(rule);
-				},
-				Declaration(decl) {
-					if (!decl.prop.startsWith("--")) return;
-					declarations[decl.prop] = decl;
-					decl.remove();
-				},
-				OnceExit() {
-					const lastRule = rules.pop();
-					if (!lastRule) return;
-					rules.forEach((rule) => rule.remove());
+/** @type import('postcss').ConfigFn */
+module.exports = ({ selector } = {}) => ({
+	postcssPlugin: "postcss-combininator",
+	OnceExit(root) {
+		let keeper;
+		const rules = [];
+		const declarations = {};
 
-					for (let decl of Object.values(declarations)) {
-						lastRule.append(decl);
-					}
-				},
-			};
-		},
-	};
-};
+		root.walkRules((rule) => {
+			if (
+				typeof selector === "string" &&
+				rule.selector === selector &&
+				!keeper
+			) {
+				keeper = rule.clone({
+					nodes: [],
+				});
+			}
+
+			rules.push(rule);
+
+			rule.walkDecls((decl) => {
+				if (!decl.prop.startsWith("--")) return;
+				declarations[decl.prop] = decl;
+				decl.remove();
+			});
+		});
+
+		if (!keeper) keeper = rules.pop()?.clone({});
+		rules.forEach((rule) => rule.remove());
+
+		for (let decl of Object.values(declarations)) {
+			keeper.append(decl);
+		}
+
+		root.append(keeper);
+	},
+});
+
+module.exports.postcss = true;

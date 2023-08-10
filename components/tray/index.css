@@ -36,6 +36,7 @@ governing permissions and limitations under the License.
 
 .spectrum-Tray-wrapper {
   inset-inline-start: 0;
+
   /* Positioned at the bottom of the window */
   position: fixed;
   inset-block-end: 0;
@@ -62,6 +63,7 @@ governing permissions and limitations under the License.
 
   /* Start offset by the animation distance */
   transform: translateY(100%);
+
   /* Exit animations */
   transition: opacity
       var(--mod-tray-exit-animation-duration, var(--spectrum-tray-exit-animation-duration))

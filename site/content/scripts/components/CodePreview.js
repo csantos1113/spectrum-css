@@ -31,7 +31,6 @@ export default class CodePreview {
 
 		// Get the height of the markup container on first load
 		const height = this.codeHeight;
-		console.log(height);
 
 		// Set the height to a variable so we can animate it later
 		this.codeHeight = height;
@@ -44,7 +43,6 @@ export default class CodePreview {
 		this.markup.addEventListener("click", this.clickHandler);
 
 		const observer = new MutationObserver(async (mutationList) => {
-			console.log(mutationList);
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") this.update();
 			}
@@ -102,7 +100,6 @@ export default class CodePreview {
 	}
 
 	clickHandler(event) {
-		console.log(event.target);
 		// Exit early if the user is trying to copy the code
 		if (
 			event.target.classList.contains("code-copy") ||

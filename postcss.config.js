@@ -10,7 +10,6 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { readFileSync } = require("fs");
 const path = require("path");
 
 /**
@@ -22,47 +21,80 @@ module.exports = ({
 	env = "development",
 	file = undefined,
 	from = undefined,
-	...settings
+	to = undefined,
+	cwd = undefined,
+	options = {},
 }) => {
-	// An array of folders to the from filepath
-	const fromPath = (from && path.dirname(from).split(path.sep)) ?? [];
+	// Prefer the foldername provided by the NX_TASK_TARGET_PROJECT env variable
+	options.foldername = process.env.NX_TASK_TARGET_PROJECT;
 
-	// Determine if this is a legacy or migrated build by checking for the tokens dependency
-	const componentIdx = fromPath.findIndex((dir) => dir === "components");
+	// If that doesn't exist, try to guess the foldername from the `from` path
+	if (!options.foldername && from) {
+		const fromPath = from?.split(path.sep);
+		const idx = fromPath ? fromPath.indexOf("components") : 0;
+		options.foldername = fromPath[idx + 1];
+	}
 
-	// This fetches the name of the component folder
-	const rootPath =
-		componentIdx >= 0
-			? fromPath.slice(0, componentIdx + 2)
-			: process.cwd().split(path.sep);
+	// If we got a foldername from the interpretation above, use it to set the paths if they are empty
+	if (options.foldername && typeof options.foldername === "string") {
+		if (cwd === __dirname || !cwd) {
+			cwd = path.join(__dirname, "components", options.foldername);
+		}
 
-	const pkgContent = readFileSync(
-		path.join(rootPath.join(path.sep), "package.json")
-	);
+		// If we haven't gotten a from path, try to interpolate the foldername
+		if (typeof from === "undefined") {
+			if (typeof file === "undefined") {
+				from = path.join(cwd, "index.css");
+			} else {
+				from = path.join(file.dirname, file.basename);
+			}
+		}
 
-	const pkg = pkgContent ? JSON.parse(pkgContent) : {};
+		// If we haven't gotten a from path, try to interpolate the foldername
+		if (typeof to === "undefined") {
+			if (typeof file === "undefined") {
+				to = path.join(cwd, "dist/index.css");
+			} else {
+				to = path.join(
+					file.dirname,
+					!file.dirname.includes("dist") ? "dist" : "",
+					file.basename
+				);
+			}
+		}
+	}
 
-	// Determine whether to use the legacy build process
-	settings.isLegacy = !pkg?.peerDependencies?.["@spectrum-css/tokens"];
+	options.isLegacy = false;
+	if (process.env.NX_TASK_TARGET_CONFIGURATION === "legacy") {
+		options.isLegacy = true;
+	} else {
+		const pkg = require(path.join(cwd, "package.json")) ?? {};
 
-	// Determine if this is a themes file
-	settings.isTheme =
-		file?.dirname?.split(path.sep)?.pop() === "themes" ? true : false;
+		// Determine whether to use the legacy build process
+		if (
+			pkg &&
+			pkg.peerDependencies &&
+			Object.keys(pkg.peerDependencies).includes("@spectrum-css/vars")
+		) {
+			options.isLegacy = true;
+		}
+	}
 
 	// Determine if this is an express file within themes
-	settings.isExpress = settings.isTheme && from && from.endsWith("express.css");
+	options.isExpress = from && from.endsWith("/express.css");
+	options.isTheme =
+		options.isExpress || (from && from.endsWith("/spectrum.css"));
+	options.varsOnly =
+		(to && to.endsWith("/vars.css")) || (from && from.endsWith("/vars.css"));
 
-	// if (env === "development") {
-	return require("./postcss.dev.config.js")({
+	const configName = `./postcss.${
+		env === "production" ? "prod" : "dev"
+	}.config.js`;
+	return require(configName)({
 		env,
+		file,
 		from,
-		...settings,
+		cwd,
+		options,
 	});
-	// }
-
-	// return require("./postcss.prod.config.js")({
-	// 	env,
-	// 	from,
-	// 	...settings,
-	// });
 };

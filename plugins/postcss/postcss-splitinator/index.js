@@ -11,7 +11,6 @@ governing permissions and limitations under the License.
 */
 
 const fallbackProcessor = (selector, prop) => {
-	// console.warn(selector, prop);
 	// selector = selector.replace(/^:where\((.*?)\)$/, "$1");
 
 	// This regex is designed to pull a component identifier out of a selector, i.e. spectrum-ActionButton
@@ -50,30 +49,27 @@ module.exports = ({
 			AtRule(query, { Rule }) {
 				if (query.name !== "container" || !query.params) return;
 
-				console.warn(query.params);
-
 				const capture = query.params.match(
-					/(?<identifier>\w+)?\(\s*--(.*?)\s*[:=]\s*(.*?)\s*\)/
+					/(\w+)?\(\s*--(.*?)\s*[:=]\s*(.*?)\s*\)/
 				);
 
-				console.warn(capture);
+				if (!capture || capture.length < 2) return;
 
 				const [, identiferFunc, identifierName, identifierValue] = capture;
 
-				if (!identiferFunc) return;
+				if (identiferFunc && identiferFunc !== "style") return;
+
+				let newSelector = identifierValue;
+				if (typeof processIdentifier === "function") {
+					newSelector = processIdentifier(identifierValue, identifierName);
+				} else if (typeof processIdentifier === "string") {
+					newSelector = processIdentifier;
+				}
 
 				const rule = new Rule({
-					selector: `.${
-						typeof processIdentifier === "function"
-							? processIdentifier(identifierValue, identifierName)
-							: identifierValue
-					}`,
+					selector: `.${newSelector}`,
 					source: query.source,
 				});
-
-				if (flatVariables) {
-					query.parent.insertAfter(query, rule);
-				}
 
 				query.walkDecls((decl) => {
 					if (!decl.prop.startsWith("--")) return;
@@ -88,10 +84,6 @@ module.exports = ({
 						});
 						newDecl.raws.before = "\n  ";
 
-						if (flatVariables) {
-							rule.append(newDecl);
-						}
-
 						const selectorNode =
 							(selectorMap[selector] = selectorMap[selector]) ?? {};
 
@@ -100,6 +92,7 @@ module.exports = ({
 						const fallbackMatch = decl.value.match(
 							/var\(\s*(.*?)\s*,\s*var\(\s*(.*?)\s*\)\)/
 						);
+
 						if (fallbackMatch) {
 							const [, override, fallback] = fallbackMatch;
 
@@ -113,8 +106,16 @@ module.exports = ({
 						} else {
 							selectorNode[decl.prop] = `var(${variableName})`;
 						}
+
+						// if (flatVariables) {
+						rule.append(newDecl);
+						// }
 					});
 				});
+
+				// if (flatVariables) {
+				query.parent.insertAfter(query, rule);
+				// }
 
 				query.remove();
 			},

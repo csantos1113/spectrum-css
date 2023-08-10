@@ -1,5 +1,5 @@
 {
-  "name": "stylelint-no-missing-parenthesis",
+  "name": "@spectrum-tools/stylelint-no-missing-parenthesis",
   "version": "1.1.0",
   "license": "Apache-2.0",
   "author": "Adobe",

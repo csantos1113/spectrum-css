@@ -22,16 +22,6 @@ governing permissions and limitations under the License.
   /* text and icon color default white for all t-shirt sizes and all themes */
   --spectrum-badge-label-icon-color: var(--spectrum-white);
 
-  /* text and icon color is black for these background colors */
-  &--orange, &--yellow, &--chartreuse, &--celery {
-    --spectrum-badge-label-icon-color: var(--spectrum-black);
-  }
-
-  /* dark theme all non-semantic colors are black */
-  &--gray, &--red, &--green, &--seafoam, &--cyan, &--blue, &--indigo, &--purple, &--fuchsia, &--magenta {
-    --spectrum-badge-label-icon-color: var(--spectrum-badge-label-icon-color-primary);
-  }
-
   /* background color default for all t-shirt sizes and all themes */
   --spectrum-badge-background-color-default: var(--spectrum-neutral-subdued-background-color-default);
 
@@ -60,6 +50,7 @@ governing permissions and limitations under the License.
 
 
   /*** DEFAULT STYLE fallbacks if no t-shirt size - uses Medium t-shirt styles ***/
+
   /* badge height - fallback if no t-shirt size */
   --spectrum-badge-height: var(--spectrum-component-height-100);
 
@@ -79,6 +70,16 @@ governing permissions and limitations under the License.
   --spectrum-badge-icon-spacing-horizontal: var(--spectrum-component-edge-to-visual-100);
   --spectrum-badge-icon-spacing-vertical-top: var(--spectrum-component-top-to-workflow-icon-100);
   --spectrum-badge-icon-only-spacing-horizontal: var(--spectrum-component-edge-to-visual-only-100);
+
+  /* text and icon color is black for these background colors */
+  &--orange, &--yellow, &--chartreuse, &--celery {
+    --spectrum-badge-label-icon-color: var(--spectrum-black);
+  }
+
+  /* dark theme all non-semantic colors are black */
+  &--gray, &--red, &--green, &--seafoam, &--cyan, &--blue, &--indigo, &--purple, &--fuchsia, &--magenta {
+    --spectrum-badge-label-icon-color: var(--spectrum-badge-label-icon-color-primary);
+  }
 }
 
 
@@ -318,6 +319,7 @@ governing permissions and limitations under the License.
 
   padding-inline-start: var(--mod-badge-icon-spacing-horizontal,
                       var(--spectrum-badge-icon-spacing-horizontal));
+
   /* icon with label has reduced padding between icon and text */
   padding-inline-end: var(--mod-badge-icon-text-spacing,
                       var(--spectrum-badge-icon-text-spacing));

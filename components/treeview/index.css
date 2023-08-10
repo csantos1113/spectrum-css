@@ -96,13 +96,6 @@ governing permissions and limitations under the License.
     --highcontrast-treeview-item-text-color-selected: HighlightText;
     --highcontrast-treeview-item-icon-color-selected: HighlightText;
 
-    @supports (color: SelectedItem) {
-      --highcontrast-treeview-item-background-color-selected: SelectedItem;
-      --highcontrast-treeview-item-border-color-selected: SelectedItem;
-      --highcontrast-treeview-item-text-color-selected: SelectedItemText;
-      --highcontrast-treeview-item-icon-color-selected: SelectedItemText;
-    }
-
     --highcontrast-treeview-item-icon-color: LinkText;
     --highcontrast-treeview-item-text-color: LinkText;
 
@@ -116,6 +109,13 @@ governing permissions and limitations under the License.
     --highcontrast-treeview-item-icon-color-disabled: GrayText;
 
     --highcontrast-treeview-heading-color: CanvasText;
+
+    @supports (color: SelectedItem) {
+      --highcontrast-treeview-item-background-color-selected: SelectedItem;
+      --highcontrast-treeview-item-border-color-selected: SelectedItem;
+      --highcontrast-treeview-item-text-color-selected: SelectedItemText;
+      --highcontrast-treeview-item-icon-color-selected: SelectedItemText;
+    }
   }
 
   .spectrum-TreeView-itemLabel {
@@ -123,7 +123,7 @@ governing permissions and limitations under the License.
     background: transparent;
   }
 
-  .spectrum-TreeView-itemLink:before {
+  .spectrum-TreeView-itemLink::before {
     forced-color-adjust: none;
   }
 }
@@ -170,7 +170,7 @@ governing permissions and limitations under the License.
     > .spectrum-TreeView-itemLink {
       color: var(--highcontrast-treeview-item-text-color-selected, var(--mod-treeview-item-text-color-selected, var(--spectrum-treeview-item-text-color-selected)));
 
-      &:before {
+      &::before {
         background-color: var(--highcontrast-treeview-item-background-color-selected, var(--mod-treeview-item-background-color-selected, var(--spectrum-treeview-item-background-color-selected)));
       }
 
@@ -180,7 +180,7 @@ governing permissions and limitations under the License.
     }
 
     > .spectrum-TreeView-itemLink:not(:focus-visible) {
-      &:before {
+      &::before {
         border-color: var(--highcontrast-treeview-item-border-color-selected, var(--mod-treeview-item-border-color-selected, var(--spectrum-treeview-item-border-color-selected)));
       }
     }
@@ -189,7 +189,7 @@ governing permissions and limitations under the License.
 
   &.is-selected {
     > .spectrum-TreeView-itemLink:not(:focus-visible) {
-      &:before {
+      &::before {
         border-width: var(--mod-treeview-item-border-size-selected, var(--spectrum-treeview-item-border-size-selected));
       }
     }
@@ -197,7 +197,7 @@ governing permissions and limitations under the License.
   
   &.is-drop-target {
     > .spectrum-TreeView-itemLink {
-      &:before {
+      &::before {
         border-width: var(--mod-treeview-item-border-size, var(--spectrum-treeview-item-border-size));
       }
     }
@@ -207,7 +207,7 @@ governing permissions and limitations under the License.
     > .spectrum-TreeView-itemLink {
       color: var(--highcontrast-treeview-item-text-color-disabled, var(--mod-treeview-item-text-color-disabled, var(--spectrum-treeview-item-text-color-disabled)));
 
-      &:before {
+      &::before {
         background-color: var(--highcontrast-treeview-item-background-color-disabled, transparent);
       }
 
@@ -245,7 +245,7 @@ governing permissions and limitations under the License.
   overflow: hidden;
 
   /* Background for hover, focus, and selection, that extends the full width of the list. */
-  &:before {
+  &::before {
     content: '\00a0';
 
     box-sizing: border-box;
@@ -273,7 +273,7 @@ governing permissions and limitations under the License.
   &:focus-visible {
     color: var(--highcontrast-treeview-item-text-color-focus, var(--mod-treeview-item-text-color-focus, var(--spectrum-treeview-item-text-color-focus)));
 
-    &:before {
+    &::before {
       background-color: var(--highcontrast-treeview-item-background-color-focus, var(--mod-treeview-item-background-color-focus, var(--spectrum-treeview-item-background-color-focus)));
       border-width: var(--mod-treeview-item-border-size, var(--spectrum-treeview-item-border-size));
       border-color: var(--highcontrast-treeview-item-border-color-focus, var(--mod-treeview-item-border-color-focus, var(--spectrum-treeview-item-border-color-focus)));
@@ -287,7 +287,7 @@ governing permissions and limitations under the License.
   &:hover {
     color: var(--highcontrast-treeview-item-text-color-focus, var(--mod-treeview-item-text-color-hover, var(--spectrum-treeview-item-text-color-hover)));
 
-    &:before {
+    &::before {
       background-color: var(--highcontrast-treeview-item-background-color-focus, var(--mod-treeview-item-background-color-hover, var(--spectrum-treeview-item-background-color-hover)));
     }
 
@@ -391,7 +391,7 @@ governing permissions and limitations under the License.
 /* ***** VARIANTS ***** */
 .spectrum-TreeView--standalone {
   .spectrum-TreeView-itemLink {
-    &:before {
+    &::before {
       border-radius: var(--mod-treeview-item-border-radius, var(--spectrum-treeview-item-border-radius));
       border-width: var(--mod-treeview-item-border-size, var(--spectrum-treeview-item-border-size));
     }
@@ -413,11 +413,11 @@ governing permissions and limitations under the License.
     min-block-size: var(--mod-treeview-link-min-block-size-thumbnail, var(--spectrum-treeview-link-min-block-size));
     padding-block-start: var(--mod-treeview-item-text-padding-block-start, var(--spectrum-treeview-item-text-padding-block-start));
     padding-block-end: calc(
-      var(--mod-treeview-item-text-padding-block-end, var(--spectrum-treeview-item-text-padding-block-end)) - 
+      var(--mod-treeview-item-text-padding-block-end, var(--spectrum-treeview-item-text-padding-block-end)) -
       var(--mod-treeview-item-border-size, var(--spectrum-treeview-item-border-size))
     );
 
-    &:before {
+    &::before {
       min-block-size: var(--mod-treeview-link-min-block-size-thumbnail, var(--spectrum-treeview-link-min-block-size));
     }
   }

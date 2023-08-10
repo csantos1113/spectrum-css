@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@spectrum-tools/postcss-combininator",
   "version": "1.0.2",
   "description": "Combines multiple blocks of custom properties",

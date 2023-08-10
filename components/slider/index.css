@@ -367,9 +367,9 @@ governing permissions and limitations under the License.
   inset-block-start: var(--mod-slider-input-top-size, var(--spectrum-slider-input-top-size));
   inset-inline-start: var(--mod-slider-input-left, var(--spectrum-slider-input-left));
   overflow: hidden;
-  opacity: 0.000001; /* stylelint-disable-line number-max-precision */
+  opacity: 0.0001%; /* stylelint-disable-line number-max-precision */
   cursor: default;
-  -webkit-appearance: none;
+  appearance: none;
   border: 0;
   pointer-events: none;
 
@@ -421,6 +421,7 @@ governing permissions and limitations under the License.
   .spectrum-Slider-handle {
     background-color: var(--highcontrast-slider-tick-handle-background-color, var(--mod-slider-tick-handle-background-color, var(--spectrum-slider-tick-handle-background-color)));
   }
+
   .spectrum-Slider-controls {
     margin-block-start:
       calc(
@@ -641,7 +642,7 @@ governing permissions and limitations under the License.
 
 .spectrum-Slider--range {
   .spectrum-Slider-track {
-    &:not(:first-of-type):not(:last-of-type)::before {
+    &:not(:first-of-type, :last-of-type)::before {
       background: var(--highcontrast-slider-track-fill-color, var(--mod-slider-track-fill-color, var(--spectrum-slider-track-fill-color)));
     }
   }
@@ -694,16 +695,14 @@ governing permissions and limitations under the License.
   }
 
   &.spectrum-Slider--range {
-    .spectrum-Slider-track:not(:first-of-type):not(:last-of-type)::before {
+    .spectrum-Slider-track:not(:first-of-type, :last-of-type)::before {
       background: var(--highcontrast-slider-track-color-disabled, var(--mod-slider-track-color-disabled, var(--spectrum-slider-track-color-disabled)));
     }
   }
 }
 
 @media (forced-colors: active) {
-
   .spectrum-Slider {
-
     /*  over-writes */
     --highcontrast-slider-track-color: ButtonText;
     --highcontrast-slider-track-fill-color: ButtonText;

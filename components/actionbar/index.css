@@ -18,13 +18,6 @@ governing permissions and limitations under the License.
   --spectrum-actionbar-item-counter-line-height: var(--spectrum-line-height-100);
   --spectrum-actionbar-item-counter-color: var(--spectrum-neutral-content-color-default);
 
-  /* cjk language support for item counter */
-  &:lang(ja),
-  &:lang(zh),
-  &:lang(ko) {
-    --spectrum-actionbar-item-counter-line-height-cjk: var(--spectrum-cjk-line-height-100);
-  }
-
   /* colors - applied to popover */
   --spectrum-actionbar-popover-background-color: var(--spectrum-gray-50);
   --spectrum-actionbar-popover-border-color: var(--spectrum-gray-400);
@@ -54,6 +47,13 @@ governing permissions and limitations under the License.
   --spectrum-actionbar-shadow-vertical: var(--spectrum-drop-shadow-y);
   --spectrum-actionbar-shadow-blur: var(--spectrum-drop-shadow-blur);
   --spectrum-actionbar-shadow-color: var(--spectrum-drop-shadow-color);
+
+  /* cjk language support for item counter */
+  &:lang(ja),
+  &:lang(zh),
+  &:lang(ko) {
+    --spectrum-actionbar-item-counter-line-height-cjk: var(--spectrum-cjk-line-height-100);
+  }
 }
 
 /* windows high contrast mode */
@@ -84,12 +84,12 @@ governing permissions and limitations under the License.
 
   /* Take up no space and be invisible when not open */
   block-size: 0;
-  opacity: 0;
+  opacity: 0%;
 
   &.is-open {
     /* add ActionBar bottom margin to height for correct spacing even when sticky */
     block-size: calc(var(--mod-actionbar-spacing-outer-edge, var(--spectrum-actionbar-spacing-outer-edge)) + var(--mod-actionbar-height, var(--spectrum-actionbar-height)));
-    opacity: 1;
+    opacity: 100%;
   }
 
   .spectrum-ActionBar-popover {
@@ -150,6 +150,7 @@ governing permissions and limitations under the License.
   .spectrum-ActionGroup {
     margin-inline-end: var(--mod-actionbar-spacing-action-group-end, var(--spectrum-actionbar-spacing-action-group-end));
     margin-block-start: var(--mod-actionbar-spacing-action-group-top, var(--spectrum-actionbar-spacing-action-group-top));
+
     /* align to end by default */
     margin-inline-start: auto;
   }
@@ -159,6 +160,7 @@ governing permissions and limitations under the License.
   .spectrum-ActionBar-popover {
     filter: none;
     background-color: var(--mod-actionbar-emphasized-background-color, var(--spectrum-actionbar-emphasized-background-color));
+
     /* border transparent instead of none so WHCM will have visible border */
     border-color: transparent;
   }

@@ -3,6 +3,7 @@
 	"name": "asset",
 	"tags": ["component", "legacy"],
 	"targets": {
+		"profile": {},
 		"build": {
 			"defaultConfiguration": "legacy"
 		},

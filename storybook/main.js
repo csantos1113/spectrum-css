@@ -1,20 +1,20 @@
-import { readdirSync } from 'fs';
-import { resolve } from 'path';
-const componentsPath = resolve(__dirname, '../../components');
+import { readdirSync } from "fs";
+import { resolve } from "path";
+const componentsPath = resolve(__dirname, "../../components");
 const componentPkgs = readdirSync(componentsPath, {
-  withFileTypes: true,
+	withFileTypes: true,
 })
-  .filter((dirent) => dirent.isDirectory())
-  .map((dirent) => dirent.name);
+	.filter((dirent) => dirent.isDirectory())
+	.map((dirent) => dirent.name);
 export const stories = [
 	// "../../components/*/stories/*.stories.mdx",
-	'../../components/*/stories/*.stories.js',
+	"../../components/*/stories/*.stories.js",
 ];
-export const rootDir = '../../';
-export const staticDirs = ['../../assets'];
+export const rootDir = "../../";
+export const staticDirs = ["../../assets"];
 export const addons = [
 	{
-		name: '@storybook/addon-essentials',
+		name: "@storybook/addon-essentials",
 		// Supported booleans: actions, controls, docs, toolbars, measure, outline.
 		options: {
 			viewport: false,
@@ -27,30 +27,29 @@ export const addons = [
 		},
 	},
 	// https://github.com/storybookjs/storybook/tree/next/code/addons/a11y
-	'@storybook/addon-a11y',
+	"@storybook/addon-a11y",
 	// https://www.npmjs.com/package/@whitespace/storybook-addon-html
-	'@whitespace/storybook-addon-html',
+	"@whitespace/storybook-addon-html",
 	// https://storybook.js.org/addons/@etchteam/storybook-addon-status
-	'@etchteam/storybook-addon-status',
-	'storybook-addon-pseudo-states',
+	"@etchteam/storybook-addon-status",
+	"storybook-addon-pseudo-states",
 	// https://storybook.js.org/addons/storybook-addon-performance
-	'storybook-addon-performance',
+	"storybook-addon-performance",
 ];
 export const core = {
 	disableTelemetry: true,
 };
 export const env = {
 	MIGRATED_PACKAGES: componentPkgs.filter((dir) => {
-		const pkg = require(resolve(componentsPath, dir, 'package.json'));
-		if (pkg.devDependencies &&
-			pkg.devDependencies['@spectrum-css/component-builder-simple']) {
+		const pkg = require(resolve(componentsPath, dir, "package.json"));
+		if (pkg.devDependencies && pkg.devDependencies["@spectrum-css/tokens"]) {
 			return true;
 		}
 		return false;
 	}),
 };
 export const framework = {
-	name: '@storybook/web-components-webpack5',
+	name: "@storybook/web-components-webpack5",
 	options: {},
 };
 export const features = {
@@ -61,5 +60,5 @@ export const features = {
 };
 export const docs = {
 	autodocs: true, // see below for alternatives
-	defaultName: 'Docs', // set to change the name of generated docs entries
+	defaultName: "Docs", // set to change the name of generated docs entries
 };

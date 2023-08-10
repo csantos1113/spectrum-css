@@ -1,6 +1,6 @@
 # postcss-custom-properties-mapping
 
->
+> Adds fallback values to custom properties when they are available
 
 ## Installation
 
@@ -28,18 +28,19 @@ Type: `object`
 
 An object of available global variables; key is the variable name, value is the variable value.
 
-### `allVariables`
-
-Type: `object`
-
-An object of all available variables in the system (allows for a wider search); key is the variable name, value is the variable value.
-
 ### `customPropertiesOnly`
 
 Type: `boolean`<br>
 Default: `false`
 
 If set to `true`, only custom properties mapped to variable functions will be resolved. If set to `false`, all variable functions will be resolved, whether assigned to a CSS property or a custom property.
+
+### `lint`
+
+Type: `boolean`<br>
+Default: `false`
+
+If set to `true`, the plugin will report back to PostCSS if a variable fallbacks cannot be determined.
 
 ## Usage
 

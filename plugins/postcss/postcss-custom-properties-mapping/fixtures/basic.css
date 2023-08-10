@@ -1,6 +1,7 @@
 .element {
 	--element-color: var(--color);
 	color: var(--element-color);
+	background-color: var(--local, var(--unfound-color));
 }
 
 .element--modifier {

@@ -3,6 +3,7 @@
 	"name": "splitbutton",
 	"tags": ["component", "legacy"],
 	"targets": {
+		"profile": {},
 		"build": {
 			"defaultConfiguration": "legacy"
 		},

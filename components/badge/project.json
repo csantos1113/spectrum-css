@@ -3,6 +3,7 @@
 	"name": "badge",
 	"tags": ["component"],
 	"targets": {
+		"profile": {},
 		"build": {},
 		"test": {
 			"defaultConfiguration": "scoped"

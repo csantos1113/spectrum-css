@@ -37,10 +37,9 @@ function readFile(filename) {
 
 test("create basic output", (t) => {
 	return compare(t, "basic.css", "basic.css", {
-		globalVariables: {
-			"--color": "red",
-			"--local-color": "var(--color)",
-		},
-		resolutionDepth: 3,
+		globalVariables: new Map([
+			["--color", "red"],
+			["--local-color", "var(--color)"],
+		]),
 	});
 });

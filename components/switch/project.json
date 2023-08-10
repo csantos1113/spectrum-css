@@ -3,6 +3,7 @@
 	"name": "switch",
 	"tags": ["component"],
 	"targets": {
+		"profile": {},
 		"build": {},
 		"test": {
 			"defaultConfiguration": "scoped"

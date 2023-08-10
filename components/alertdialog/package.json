@@ -21,7 +21,7 @@
     "@spectrum-css/icon": ">=4",
     "@spectrum-css/modal": ">=3",
     "@spectrum-css/tokens": ">=11",
-    "@spectrum-css/underlay": ">=2"
+    "@spectrum-css/underlay": ">=3"
   },
   "devDependencies": {
     "@spectrum-css/button": "^11.0.11",
@@ -30,7 +30,7 @@
     "@spectrum-css/icon": "^4.0.3",
     "@spectrum-css/modal": "^3.1.0",
     "@spectrum-css/tokens": "^11.3.7",
-    "@spectrum-css/underlay": "^2.1.0"
+    "@spectrum-css/underlay": "^3.0.4"
   },
   "publishConfig": {
     "access": "public"

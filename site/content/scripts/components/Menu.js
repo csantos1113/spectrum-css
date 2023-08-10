@@ -260,7 +260,7 @@ export class MenuItem extends LitElement {
 		super.disconnectedCallback();
 	}
 
-	clickHandler = (event) => {
+	clickHandler = async (event) => {
 		if (this.isDisabled) return;
 		this.isSelected = !this.isSelected;
 

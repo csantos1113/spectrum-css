@@ -16,6 +16,7 @@ governing permissions and limitations under the License.
   .spectrum-UIIcon--large {
     display: none;
   }
+
   .spectrum-UIIcon--medium {
     display: inline;
   }
@@ -25,63 +26,94 @@ governing permissions and limitations under the License.
   .spectrum-UIIcon--medium {
     display: none;
   }
+
   .spectrum-UIIcon--large {
     display: inline;
   }
 }
 
-@each $direction, $transform in (Right, Left, Up, Down),
-	(0deg, 180deg, 270deg, 90deg)
-{
-	/* Chevron */
-	@each $size in (50, 75, 100, 200, 300, 400, 500) {
-		.spectrum-UIIcon-Chevron$(direction)$(size) {
-			inline-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
-			block-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
-			transform: rotate($transform);
-		}
+/* Chevron */
+@each $size in (50, 75, 100, 200, 300, 400, 500) {
+	.spectrum-UIIcon-ChevronRight$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		transform: rotate(0deg);
 	}
-
-	/* Arrow */
-	@each $size in (75, 100, 200, 300, 400, 500, 600) {
-		.spectrum-UIIcon-Arrow$(direction)$(size) {
-			inline-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
-			block-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
-			transform: rotate($transform);
-		}
+	.spectrum-UIIcon-ChevronLeft$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		transform: rotate(180deg);
+	}
+	.spectrum-UIIcon-ChevronUp$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		transform: rotate(270deg);
+	}
+	.spectrum-UIIcon-ChevronDown$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-chevron-size-$(size));
+		transform: rotate(90deg);
 	}
 }
 
+/* Arrow */
+@each $size in (75, 100, 200, 300, 400, 500, 600) {
+	.spectrum-UIIcon-ArrowRight$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		transform: rotate(0deg);
+	}
+	.spectrum-UIIcon-ArrowLeft$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		transform: rotate(180deg);
+	}
+	.spectrum-UIIcon-ArrowUp$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		transform: rotate(270deg);
+	}
+	.spectrum-UIIcon-ArrowDown$(size) {
+		inline-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		block-size: var(--spectrum-alias-ui-icon-arrow-size-$(size));
+		transform: rotate(90deg);
+	}
+}
+
+/* Checkmark */
 @each $size in (50, 75, 100, 200, 300, 400, 500, 600) {
-	/* Checkmark */
 	.spectrum-UIIcon-Checkmark$(size) {
 		inline-size: var(--spectrum-alias-ui-icon-checkmark-size-$(size));
 		block-size: var(--spectrum-alias-ui-icon-checkmark-size-$(size));
 	}
+}
 
-	/* Dash */
+/* Dash */
+@each $size in (50, 75, 100, 200, 300, 400, 500, 600) {
 	.spectrum-UIIcon-Dash$(size) {
 		inline-size: var(--spectrum-alias-ui-icon-dash-size-$(size));
 		block-size: var(--spectrum-alias-ui-icon-dash-size-$(size));
 	}
 }
 
+/* Cross */
 @each $size in (75, 100, 200, 300, 400, 500, 600) {
-	/* Cross */
 	.spectrum-UIIcon-Cross$(size) {
 		inline-size: var(--spectrum-alias-ui-icon-cross-size-$(size));
 		block-size: var(--spectrum-alias-ui-icon-cross-size-$(size));
 	}
 }
 
+/* Corner Triangle */
 @each $size in (75, 100, 200, 300) {
-	/* Corner Triangle */
 	.spectrum-UIIcon-CornerTriangle$(size) {
 		inline-size: var(--spectrum-alias-ui-icon-cornertriangle-size-$(size));
 		block-size: var(--spectrum-alias-ui-icon-cornertriangle-size-$(size));
 	}
+}
 
-	/* Asterisk */
+/* Asterisk */
+@each $size in (75, 100, 200, 300) {
 	.spectrum-UIIcon-Asterisk$(size) {
 		inline-size: var(--spectrum-alias-ui-icon-asterisk-size-$(size));
 		block-size: var(--spectrum-alias-ui-icon-asterisk-size-$(size));

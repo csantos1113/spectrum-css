@@ -122,7 +122,6 @@ governing permissions and limitations under the License.
 
   /* vertical dividers */
   &--vertical {
-    block-size: 100%;
     inline-size: var(--mod-divider-thickness,
                     var(--spectrum-divider-thickness));
 

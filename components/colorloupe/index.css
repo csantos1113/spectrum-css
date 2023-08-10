@@ -35,7 +35,7 @@ governing permissions and limitations under the License.
 
   position: absolute;
   transform: translate(0, var(--mod-colorloupe-animation-distance, var(--spectrum-colorloupe-animation-distance)));
-  opacity: 0;
+  opacity: 0%;
   transform-origin: bottom center;
   inset-block-end: calc((var(--spectrum-color-handle-size) - var(--spectrum-color-handle-outer-border-width)) + var(--mod-colorloupe-offset, var(--spectrum-colorloupe-offset)));
   inset-inline-end: calc(50% - (var(--spectrum-colorloupe-width) / 2));
@@ -56,7 +56,7 @@ governing permissions and limitations under the License.
 
   &.is-open {
     transform: translate(0, 0);
-    opacity: 1;
+    opacity: 100%;
   }
 }
 

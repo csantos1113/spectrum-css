@@ -3,16 +3,12 @@
     "tags": ["tooling", "postcss"],
     "name": "postcss-notnested",
 	"targets": {
-		"build": {
-			"executor": "nx:noop"
-		},
         "lint": {
             "defaultConfiguration": "js"
         },
         "coverage": {},
         "test": {
             "defaultConfiguration": "plugins",
-            "inputs": ["{workspaceRoot}/index.js", "{workspaceRoot}/test.js", "{workspaceRoot}/expected/*.css", "{workspaceRoot}/fixtures/*.css"],
             "options": {
                 "cwd": "plugins/postcss/postcss-notnested"
             }

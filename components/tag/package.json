@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@spectrum-css/avatar": "^6.0.55",
-    "@spectrum-css/clearbutton": "^2.0.0",
+    "@spectrum-css/clearbutton": "^5.0.6",
     "@spectrum-css/icon": "^4.0.3",
     "@spectrum-css/tokens": "^11.3.7"
   },

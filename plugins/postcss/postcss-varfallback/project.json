@@ -3,9 +3,6 @@
     "tags": ["tooling", "postcss"],
     "name": "postcss-varfallback",
 	"targets": {
-		"build": {
-			"executor": "nx:noop"
-		},
         "lint": {
             "defaultConfiguration": "js"
         },

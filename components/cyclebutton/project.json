@@ -3,6 +3,7 @@
 	"name": "cyclebutton",
 	"tags": ["component", "legacy"],
 	"targets": {
+		"profile": {},
 		"build": {
 			"defaultConfiguration": "legacy"
 		},

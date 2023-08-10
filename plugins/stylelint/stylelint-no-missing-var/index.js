@@ -1,6 +1,6 @@
 const stylelint = require("stylelint");
 
-const ruleName = "custom-rule/no-missing-var";
+const ruleName = "spectrum-tools/no-missing-var";
 
 const plugin = stylelint.createPlugin(ruleName, (enabled, options) => {
 	return (root, result) => {

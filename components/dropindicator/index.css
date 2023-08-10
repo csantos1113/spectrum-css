@@ -12,9 +12,10 @@ governing permissions and limitations under the License.
 
 .spectrum-DropIndicator {
   position: relative;
+  background: var(--spectrum-dropindicator-border-color);
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: '';
     position: absolute;
     inline-size: var(--spectrum-dropindicator-circle-size);
@@ -22,6 +23,7 @@ governing permissions and limitations under the License.
     border-radius: 50%;
     border: var(--spectrum-dropindicator-border-size) solid;
     box-sizing: border-box;
+    border-color: var(--spectrum-dropindicator-circle-border-color);
   }
 }
 
@@ -29,16 +31,16 @@ governing permissions and limitations under the License.
   block-size: var(--spectrum-dropindicator-border-size);
   margin: 0 var(--spectrum-dropindicator-circle-size);
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     inset-block-start: calc(-1 * var(--spectrum-dropindicator-circle-size) / 2 + var(--spectrum-dropindicator-border-size) / 2);
   }
 
-  &:before {
+  &::before {
     inset-inline-start: calc(-1 * var(--spectrum-dropindicator-circle-size));
   }
 
-  &:after {
+  &::after {
     inset-inline-end: calc(-1 * var(--spectrum-dropindicator-circle-size));
   }
 }
@@ -48,16 +50,16 @@ governing permissions and limitations under the License.
   margin-block: var(--spectrum-dropindicator-circle-size);
   margin-inline: 0;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     inset-inline-start: calc(-1 * var(--spectrum-dropindicator-circle-size) / 2 + var(--spectrum-dropindicator-border-size) / 2);
   }
 
-  &:before {
+  &::before {
     inset-block-start: calc(-1 * var(--spectrum-dropindicator-circle-size));
   }
 
-  &:after {
+  &::after {
     inset-block-end: calc(-1 * var(--spectrum-dropindicator-circle-size));
   }
 }

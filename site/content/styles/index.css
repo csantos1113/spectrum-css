@@ -9,7 +9,7 @@
 @import "./_overrides.css";
 @import "./_site.css";
 
-@import "@spectrum-css/commons/basebutton-coretokens.css";
+@import "@spectrum-css/commons";
 
 /* Component customizations specific to the documentation site */
 :root {
