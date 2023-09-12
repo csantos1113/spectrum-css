@@ -78,6 +78,8 @@ governing permissions and limitations under the License.
 	max-block-size: var(--spectrum-dialog-max-height);
 	max-inline-size: var(--spectrum-dialog-max-width);
 
+	background: var(--spectrum-gray-100);
+
 	/* border-radius includes legacy token fallback, which can be deprecated once component is migrated */
 	border-radius: var(
 		--spectrum-dialog-confirm-border-radius,
