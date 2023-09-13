@@ -1,0 +1,24 @@
+{
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "tags": ["tooling"],
+    "name": "conventional-changelog-spectrum",
+	"targets": {
+		"build": {
+			"executor": "nx:noop"
+		},
+        "lint": {
+            "defaultConfiguration": "js"
+        },
+        "coverage": {
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "plugins/conventional-changelog-spectrum",
+                "command": "pwd && c8 yarn test"
+            }
+        },
+        "test": {
+            "cwd": "plugins/conventional-changelog-spectrum",
+            "command": "pwd && mocha"
+        }
+	}
+}

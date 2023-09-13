@@ -1,0 +1,7 @@
+{
+    "clean": true,
+    "reporter": [
+        "text",
+        "cobertura"
+    ]
+}

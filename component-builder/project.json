@@ -1,0 +1,10 @@
+{
+	"$schema": "../node_modules/nx/schemas/project-schema.json",
+    "name": "component-builder",
+    "tags": ["tooling"],
+	"targets": {
+		"build": {
+			"executor": "nx:noop"
+		}
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "tags": ["tooling", "stylelint"],
+    "name": "stylelint-no-missing-var",
+	"targets": {
+		"build": {
+			"executor": "nx:noop"
+		},
+        "lint": {
+            "defaultConfiguration": "js"
+        },
+        "coverage": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "c8 yarn test",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "test": {
+            "inputs": ["{workspaceRoot}/index.js", "{workspaceRoot}/test.js"],
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "ava",
+                "cwd": "{workspaceRoot}"
+            }
+        }
+	}
+}

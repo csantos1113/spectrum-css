@@ -149,21 +149,21 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-TreeView-item {
-  /* Don't let child treeviews that are open spill out */
-  overflow: hidden;
+	/* Don't let child treeviews that are open spill out */
+	overflow: hidden;
 
-  &.is-open {
-    > .spectrum-TreeView-itemLink > .spectrum-TreeView-itemIndicator {
-      /* Rotate the chevron */
-      transform: logical rotate(90deg);
-    }
+	&.is-open {
+		> .spectrum-TreeView-itemLink > .spectrum-TreeView-itemIndicator {
+			/* Rotate the chevron */
+			transform: logical rotate(90deg);
+		}
 
-    > .spectrum-TreeView {
-      /* Open the treeview */
-      block-size: auto;
-      visibility: visible;
-    }
-  }
+		> .spectrum-TreeView {
+			/* Open the treeview */
+			block-size: auto;
+			visibility: visible;
+		}
+	}
 
   &.is-selected,
   &.is-drop-target {
@@ -219,9 +219,9 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-TreeView-itemLabel {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: relative;
 }
 
 .spectrum-TreeView-itemLink {
@@ -305,11 +305,11 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-TreeView-itemIndicator {
-  display: block;
-  box-sizing: content-box;
+	display: block;
+	box-sizing: content-box;
 
-  float: inline-start;
-  position: relative;
+	float: inline-start;
+	position: relative;
 
   /* Make sure hover doesn't block clicks on the chevron. */
   z-index: 1;
@@ -327,7 +327,7 @@ governing permissions and limitations under the License.
   transform: logical rotate(0deg);
   transition: transform ease var(--mod-treeview-indicator-animation-duration, var(--spectrum-treeview-indicator-animation-duration));
 
-  pointer-events: all;
+	pointer-events: all;
 }
 
 .spectrum-TreeView-heading {

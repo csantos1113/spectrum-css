@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "tags": ["tooling", "postcss"],
+    "name": "postcss-droproot",
+	"targets": {
+		"build": {
+			"executor": "nx:noop"
+		},
+        "lint": {
+            "defaultConfiguration": "js"
+        },
+        "coverage": {},
+        "test": {
+            "cwd": "plugins/postcss/postcss-droproot",
+            "defaultConfiguration": "plugins",
+            "inputs": ["{workspaceRoot}/index.js", "{workspaceRoot}/test.js", "{workspaceRoot}/expected/*.css", "{workspaceRoot}/fixtures/*.css"]
+        }
+	}
+}

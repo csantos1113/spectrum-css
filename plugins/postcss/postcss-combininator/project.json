@@ -1,0 +1,21 @@
+{
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "tags": ["tooling", "postcss"],
+    "name": "postcss-combininator",
+	"targets": {
+		"build": {
+			"executor": "nx:noop"
+		},
+        "lint": {
+            "defaultConfiguration": "js"
+        },
+        "coverage": {},
+        "test": {
+            "inputs": ["{workspaceRoot}/index.js", "{workspaceRoot}/test.js", "{workspaceRoot}/expected/*.css", "{workspaceRoot}/fixtures/*.css"],
+            "defaultConfiguration": "plugins",
+            "options": {
+                "cwd": "plugins/postcss/postcss-combininator"
+            }
+        }
+	}
+}

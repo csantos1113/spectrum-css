@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "tags": ["tooling", "postcss"],
+    "name": "postcss-custom-properties-mapping",
+	"targets": {
+		"build": {
+			"executor": "nx:noop"
+		},
+        "lint": {
+            "defaultConfiguration": "js"
+        },
+        "coverage": {},
+        "test": {
+            "defaultConfiguration": "plugins",
+            "options": {
+                "cwd": "plugins/postcss/postcss-custom-properties-mapping"
+            }
+        }
+	}
+}

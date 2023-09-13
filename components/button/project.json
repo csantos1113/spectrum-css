@@ -1,0 +1,14 @@
+{
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"name": "button",
+	"tags": ["component"],
+	"targets": {
+		"build": {},
+		"test": {
+			"defaultConfiguration": "scoped"
+		},
+		"lint": {},
+		"clean": {},
+		"watch": {}
+	}
+}

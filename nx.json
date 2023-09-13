@@ -1,18 +1,116 @@
 {
-	"npmScope": "@spectrum-css",
-	"tasksRunnerOptions": {
-		"default": {
-			"runner": "nx/tasks-runners/default",
-			"options": {
-				"cacheableOperations": ["build"]
-			}
-		}
-	},
-	"targetDefaults": {
-		"build": {
-			"dependsOn": ["clean", "^build"],
-			"inputs": ["{workspaceRoot}/*.css"]
-		}
-	},
-	"includedScripts": ["build"]
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test"
+        ],
+        "accessToken": "MjkzYTUzM2MtZTA4Ni00NmYwLThlYWQtZGNiOTM0NDUxOThhfHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "versionMismatch": true
+    },
+    "packageManager": "yarn",
+    "analytics": false
+  },
+  "targetDefaults": {
+    "clean": {
+      "inputs": [
+        "{workspaceRoot}/dist/**"
+      ],
+      "outputs": [],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "rimraf {inputs}",
+        "color": true
+      }
+    },
+    "lint": {
+      "inputs": [
+        "{projectRoot}/**/*.css",
+        "{projectRoot}/.stylelintignore",
+        "{projectRoot}/.stylelintrc.json"
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "stylelint index.css themes/*.css --fix"
+      },
+      "configurations": {
+        "js": {
+          "command": "eslint --ext .js --fix"
+        }
+      }
+    },
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "executor": "@spectrum-css/component-builder:build",
+      "options": {
+        "sourceFiles": [
+          "{workspaceRoot}/index.css"
+        ],
+        "themeFiles": [
+          "{workspaceRoot}/themes/spectrum.css",
+          "{workspaceRoot}/themes/*.css"
+        ],
+        "outputPath": "{workspaceRoot}/dist"
+      },
+      "configurations": {
+        "legacy": {
+          "sourceFiles": [
+            "{workspaceRoot}/index.css"
+          ],
+          "themeFiles": [
+            "{workspaceRoot}/skin.css"
+          ]
+        }
+      }
+    },
+    "coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "c8 nx test"
+      }
+    },
+    "test": {
+      "inputs": [
+        "default",
+        "^default"
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "chromatic --build-script-name build --junit-report"
+      },
+      "configurations": {
+        "scoped": {
+          "command": "chromatic --build-script-name build --junit-report --only-story-names $NX_TASK_TARGET_PROJECT"
+        },
+        "ci": {
+          "command": "chromatic --build-script-name build --junit-report --exit-zero-on-changes --only-changed"
+        },
+        "plugins": {
+          "command": "ava test.js"
+        }
+      }
+    },
+    "watch": {
+      "dependsOn": [
+        "build"
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx watch --projects $NX_TASK_TARGET_PROJECT -- nx run \\$NX_PROJECT_NAME:build"
+      }
+    }
+  }
 }
