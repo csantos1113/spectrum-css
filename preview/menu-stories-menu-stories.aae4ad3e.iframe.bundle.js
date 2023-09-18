@@ -1,0 +1,2 @@
+/*! For license information please see menu-stories-menu-stories.aae4ad3e.iframe.bundle.js.LICENSE.txt */
+"use strict";(globalThis.webpackChunk_spectrum_css_preview=globalThis.webpackChunk_spectrum_css_preview||[]).push([[1738],{"../../node_modules/lit-html/directives/when.js":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{function n(n,o,r){return n?o():null==r?void 0:r()}__webpack_require__.d(__webpack_exports__,{g:()=>n})}}]);
