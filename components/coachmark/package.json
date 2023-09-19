@@ -1,6 +1,6 @@
 {
   "name": "@spectrum-css/coachmark",
-  "version": "6.0.0-beta.0",
+  "version": "6.0.0-beta.1",
   "description": "The Spectrum CSS coachmark component",
   "license": "Apache-2.0",
   "author": "Adobe",
@@ -27,9 +27,9 @@
     "@spectrum-css/tokens": ">=11"
   },
   "devDependencies": {
-    "@spectrum-css/button": "^11.0.11",
     "@spectrum-css/actionbutton": "^5.0.6",
     "@spectrum-css/actionmenu": "^4.0.58",
+    "@spectrum-css/button": "^11.0.11",
     "@spectrum-css/buttongroup": "^6.1.5",
     "@spectrum-css/component-builder-simple": "^2.0.17",
     "@spectrum-css/menu": "^5.0.9",
