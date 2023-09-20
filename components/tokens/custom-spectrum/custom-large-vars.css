@@ -87,4 +87,12 @@ governing permissions and limitations under the License.
   --spectrum-treeview-item-indentation-large: 25px;
   --spectrum-treeview-item-indentation-extra-large: 30px;
   --spectrum-treeview-indicator-inset-block-start: 6px;
+
+  --spectrum-dial-border-radius: 20px;
+  --spectrum-dial-handle-position: 10px;
+  --spectrum-dial-handle-block-margin: 20px;
+  --spectrum-dial-handle-inline-margin: 20px;
+  --spectrum-dial-controls-margin: calc(20px / 2);
+  --spectrum-dial-label-gap-y: 6px;
+  --spectrum-dial-label-container-top-to-text: 5px;
 }
