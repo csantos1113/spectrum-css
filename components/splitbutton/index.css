@@ -12,6 +12,11 @@ governing permissions and limitations under the License.
 
 @import "@spectrum-css/vars/css/components/spectrum-button.css";
 
+/**
+ * @namespace spectrum
+ * @component SplitButton
+ * @category Buttons
+ */
 .spectrum-SplitButton {
 	--spectrum-splitbutton-trigger-border-left: 0;
 	--spectrum-splitbutton-trigger-min-width: 0;
@@ -83,10 +88,10 @@ governing permissions and limitations under the License.
 		);
 	}
 
-  &::after {
-    border-start-end-radius: var(--spectrum-splitbutton-border-radius-edge);
-    border-end-end-radius: var(--spectrum-splitbutton-border-radius-edge);
-  }
+	&::after {
+		border-start-end-radius: var(--spectrum-splitbutton-border-radius-edge);
+		border-end-end-radius: var(--spectrum-splitbutton-border-radius-edge);
+	}
 }
 
 .spectrum-SplitButton-trigger {
@@ -117,14 +122,14 @@ governing permissions and limitations under the License.
 		);
 	}
 
-  &:focus-visible {
-    box-shadow: none;
-  }
+	&:focus-visible {
+		box-shadow: none;
+	}
 
-  &::after {
-    border-start-start-radius: var(--spectrum-splitbutton-border-radius-edge);
-    border-end-start-radius: var(--spectrum-splitbutton-border-radius-edge);
-  }
+	&::after {
+		border-start-start-radius: var(--spectrum-splitbutton-border-radius-edge);
+		border-end-start-radius: var(--spectrum-splitbutton-border-radius-edge);
+	}
 }
 
 .spectrum-SplitButton-icon {
@@ -136,11 +141,11 @@ governing permissions and limitations under the License.
 .spectrum-SplitButton-trigger {
 	position: relative;
 
-  &:focus-visible {
-    /* Be on top when focused or border leaks */
-    z-index: 1;
-    outline: none;
-  }
+	&:focus-visible {
+		/* Be on top when focused or border leaks */
+		z-index: 1;
+		outline: none;
+	}
 }
 
 .spectrum-SplitButton-action {
@@ -173,13 +178,17 @@ governing permissions and limitations under the License.
 			);
 		}
 
-    &::after {
-      border-start-start-radius: var(--spectrum-splitbutton-border-radius-edge);
-      border-start-end-radius: var(--spectrum-button-m-primary-outline-texticon-border-radius);
-      border-end-end-radius: var(--spectrum-button-m-primary-outline-texticon-border-radius);
-      border-end-start-radius: var(--spectrum-splitbutton-border-radius-edge);
-    }
-  }
+		&::after {
+			border-start-start-radius: var(--spectrum-splitbutton-border-radius-edge);
+			border-start-end-radius: var(
+				--spectrum-button-m-primary-outline-texticon-border-radius
+			);
+			border-end-end-radius: var(
+				--spectrum-button-m-primary-outline-texticon-border-radius
+			);
+			border-end-start-radius: var(--spectrum-splitbutton-border-radius-edge);
+		}
+	}
 
 	.spectrum-SplitButton-trigger {
 		margin-inline-end: 0;
@@ -213,11 +222,15 @@ governing permissions and limitations under the License.
 			);
 		}
 
-    &::after {
-      border-start-start-radius: var(--spectrum-button-m-primary-outline-texticon-border-radius);
-      border-start-end-radius: var(--spectrum-splitbutton-border-radius-edge);
-      border-end-end-radius: var(--spectrum-splitbutton-border-radius-edge);
-      border-end-start-radius: var(--spectrum-button-m-primary-outline-texticon-border-radius);
-    }
-  }
+		&::after {
+			border-start-start-radius: var(
+				--spectrum-button-m-primary-outline-texticon-border-radius
+			);
+			border-start-end-radius: var(--spectrum-splitbutton-border-radius-edge);
+			border-end-end-radius: var(--spectrum-splitbutton-border-radius-edge);
+			border-end-start-radius: var(
+				--spectrum-button-m-primary-outline-texticon-border-radius
+			);
+		}
+	}
 }

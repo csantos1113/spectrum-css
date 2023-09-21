@@ -10,13 +10,17 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+/**
+ * @namespace spectrum
+ * @component Textfield
+ */
 .spectrum-Textfield {
-  /* set input line-height to the height of the textfield - prevents the cutting off of diacritics in some languages */
+	/* set input line-height to the height of the textfield - prevents the cutting off of diacritics in some languages */
 
-  /* disallow mod for max compatibility */
-  --spectrum-textfield-input-line-height: var(--spectrum-textfield-height);
-	
-  --spectrum-texfield-animation-duration: var(
+	/* disallow mod for max compatibility */
+	--spectrum-textfield-input-line-height: var(--spectrum-textfield-height);
+
+	--spectrum-texfield-animation-duration: var(
 		--spectrum-animation-duration-100
 	);
 
@@ -99,10 +103,16 @@ governing permissions and limitations under the License.
 
 	/* TODO - icon spacing override for search - reevaluate after search is migrated */
 
-	/* @deprecation --spectrum-Textfield-workflow-icon-width and --spectrum-Textfield-workflow-icon-gap will be removed during the S2 migration; 
+	/* @deprecation --spectrum-Textfield-workflow-icon-width and --spectrum-Textfield-workflow-icon-gap will be removed during the S2 migration;
 	please update your code to --spectrum-textfield-workflow-icon-width and --spectrum-textfield-workflow-icon-gap */
-	--spectrum-textfield-workflow-icon-width: var(--spectrum-Textfield-workflow-icon-width, 18px);
-	--spectrum-textfield-workflow-icon-gap: var(--spectrum-Textfield-workflow-icon-gap, 6px);
+	--spectrum-textfield-workflow-icon-width: var(
+		--spectrum-Textfield-workflow-icon-width,
+		18px
+	);
+	--spectrum-textfield-workflow-icon-gap: var(
+		--spectrum-Textfield-workflow-icon-gap,
+		6px
+	);
 
 	/* font styles */
 	--spectrum-textfield-font-family: var(--spectrum-sans-font-family-stack);
@@ -456,13 +466,14 @@ governing permissions and limitations under the License.
 		content: "";
 		position: absolute;
 		inset-block-end: calc(
-			-1 * (
-				var(--mod-textfield-focus-indicator-gap,
-				var(--spectrum-textfield-focus-indicator-gap)
-			) +
-				var(--mod-textfield-focus-indicator-width,
-				var(--spectrum-textfield-focus-indicator-width)
-			))
+			-1 * (var(
+							--mod-textfield-focus-indicator-gap,
+							var(--spectrum-textfield-focus-indicator-gap)
+						) +
+						var(
+							--mod-textfield-focus-indicator-width,
+							var(--spectrum-textfield-focus-indicator-width)
+						))
 		);
 		inset-inline-start: 0;
 		inline-size: 100%;
@@ -685,8 +696,8 @@ governing permissions and limitations under the License.
 
 /********* Child Element - Input *********/
 .spectrum-Textfield-input {
-  /* no mod defined to allow for maximum compatibility */
-  line-height: var(--spectrum-textfield-input-line-height);
+	/* no mod defined to allow for maximum compatibility */
+	line-height: var(--spectrum-textfield-input-line-height);
 	box-sizing: border-box;
 	inline-size: 100%;
 	min-inline-size: var(
@@ -834,7 +845,6 @@ governing permissions and limitations under the License.
 		opacity: 100%;
 	}
 	/* stylelint-enable selector-no-vendor-prefix */
-
 
 	/*** Input Placeholder Text ***/
 	&::placeholder {
@@ -1270,9 +1280,9 @@ governing permissions and limitations under the License.
 
 /*** Text Area ***/
 .spectrum-Textfield--multiline {
-  --spectrum-textfield-input-line-height: normal;
+	--spectrum-textfield-input-line-height: normal;
 
-  .spectrum-Textfield-input {
+	.spectrum-Textfield-input {
 		min-inline-size: var(
 			--mod-text-area-min-inline-size,
 			var(--spectrum-text-area-min-inline-size)

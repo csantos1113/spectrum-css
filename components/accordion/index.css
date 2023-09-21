@@ -10,6 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+/**
+ * @namespace spectrum
+ * @component Accordion
+ */
 .spectrum-Accordion {
 	--spectrum-accordion-item-height: var(--spectrum-component-height-200);
 	--spectrum-accordion-item-width: var(--spectrum-accordion-minimum-width);

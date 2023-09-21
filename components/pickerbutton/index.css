@@ -10,14 +10,22 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+/**
+ * @namespace spectrum
+ * @component PickerButton
+ */
 .spectrum-PickerButton {
 	--spectrum-picker-button-height: var(--spectrum-component-height-100);
 	--spectrum-picker-button-width: var(--spectrum-component-height-100);
 	--spectrum-picker-button-gap: var(--spectrum-text-to-visual-50);
 
-	--spectrum-picker-button-padding: var(--spectrum-in-field-button-edge-to-fill);
+	--spectrum-picker-button-padding: var(
+		--spectrum-in-field-button-edge-to-fill
+	);
 	--spectrum-picker-button-label-padding: var(--spectrum-text-to-visual-50);
-	--spectrum-picker-button-fill-padding: var(--spectrum-field-edge-to-disclosure-icon-100);
+	--spectrum-picker-button-fill-padding: var(
+		--spectrum-field-edge-to-disclosure-icon-100
+	);
 
 	--spectrum-picker-button-border-radius-rounded: var(
 		--spectrum-corner-radius-200
@@ -134,7 +142,9 @@ governing permissions and limitations under the License.
 		--spectrum-picker-button-width: var(--spectrum-component-height-75);
 		--spectrum-picker-button-label-padding: var(--spectrum-spacing-75);
 		--spectrum-picker-button-font-size: var(--spectrum-font-size-75);
-		--spectrum-picker-button-fill-padding: var(--spectrum-field-edge-to-disclosure-icon-75);
+		--spectrum-picker-button-fill-padding: var(
+			--spectrum-field-edge-to-disclosure-icon-75
+		);
 	}
 
 	&.spectrum-PickerButton--sizeL {
@@ -142,7 +152,9 @@ governing permissions and limitations under the License.
 		--spectrum-picker-button-width: var(--spectrum-component-height-200);
 		--spectrum-picker-button-label-padding: var(--spectrum-text-to-visual-200);
 		--spectrum-picker-button-font-size: var(--spectrum-font-size-200);
-		--spectrum-picker-button-fill-padding: var(--spectrum-field-edge-to-disclosure-icon-200);
+		--spectrum-picker-button-fill-padding: var(
+			--spectrum-field-edge-to-disclosure-icon-200
+		);
 	}
 
 	&.spectrum-PickerButton--sizeXL {
@@ -150,7 +162,9 @@ governing permissions and limitations under the License.
 		--spectrum-picker-button-width: var(--spectrum-component-height-300);
 		--spectrum-picker-button-label-padding: var(--spectrum-text-to-visual-300);
 		--spectrum-picker-button-font-size: var(--spectrum-font-size-300);
-		--spectrum-picker-button-fill-padding: var(--spectrum-field-edge-to-disclosure-icon-300);
+		--spectrum-picker-button-fill-padding: var(
+			--spectrum-field-edge-to-disclosure-icon-300
+		);
 	}
 }
 
@@ -355,7 +369,17 @@ governing permissions and limitations under the License.
 		var(--spectrum-picker-button-border-width)
 	);
 	border-style: solid;
-	padding: calc(var(--mod-picker-button-fill-padding, var(--spectrum-picker-button-fill-padding)) - var(--mod-picker-button-padding, var(--spectrum-picker-button-padding)) - var(--mod-picker-button-border-width, var(--spectrum-picker-button-border-width)));
+	padding: calc(
+		var(
+				--mod-picker-button-fill-padding,
+				var(--spectrum-picker-button-fill-padding)
+			) -
+			var(--mod-picker-button-padding, var(--spectrum-picker-button-padding)) -
+			var(
+				--mod-picker-button-border-width,
+				var(--spectrum-picker-button-border-width)
+			)
+	);
 
 	border-end-end-radius: var(
 		--mod-picker-button-border-radius,

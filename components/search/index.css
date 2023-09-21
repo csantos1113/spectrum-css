@@ -10,6 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+/**
+ * @namespace spectrum
+ * @component Search
+ */
 .spectrum-Search {
 	/* Size / Spacing */
 	--spectrum-search-inline-size: var(--spectrum-field-width);
@@ -268,7 +272,6 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Search-icon {
-
 	--spectrum-search-color: var(
 		--highcontrast-search-color-default,
 		var(--mod-search-color-default, var(--spectrum-search-color-default))

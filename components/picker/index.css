@@ -12,6 +12,10 @@ governing permissions and limitations under the License.
 
 @import "@spectrum-css/commons";
 
+/**
+ * @namespace spectrum
+ * @component Picker
+ */
 .spectrum-Picker {
 	/* font */
 	--spectrum-picker-font-size: var(--spectrum-font-size-100);
@@ -553,10 +557,16 @@ governing permissions and limitations under the License.
 			border-color: transparent;
 		}
 
-    &.is-placeholder .spectrum-Picker-label {
-      color: var(--highcontrast-picker-font-color-default, var(--mod-picker-font-color-active, var(--spectrum-picker-font-color-active)));
-    }
-  }
+		&.is-placeholder .spectrum-Picker-label {
+			color: var(
+				--highcontrast-picker-font-color-default,
+				var(
+					--mod-picker-font-color-active,
+					var(--spectrum-picker-font-color-active)
+				)
+			);
+		}
+	}
 
 	&:focus-visible,
 	&.is-focused {
@@ -620,9 +630,6 @@ governing permissions and limitations under the License.
 		}
 	}
 
-  &.is-invalid {
-    border-color: var(--highcontrast-picker-border-color-error-default, var(--mod-picker-border-color-error-default, var(--spectrum-picker-border-color-error-default)));
-
 	&.is-invalid {
 		border-color: var(
 			--highcontrast-picker-border-color-error-default,
@@ -632,107 +639,95 @@ governing permissions and limitations under the License.
 			)
 		);
 
-		.spectrum-Picker-validationIcon {
-			color: var(
-				--highcontrast-picker-icon-color-error-default,
-				var(
-					--mod-picker-icon-color-error,
-					var(--spectrum-picker-icon-color-error)
-				)
-			);
-		}
-
-		&:hover {
-			border-color: var(
-				--highcontrast-picker-border-color-error-hover,
-				var(
-					--mod-picker-border-color-error-hover,
-					var(--spectrum-picker-border-color-error-hover)
-				)
-			);
-		}
-
-		&:active {
-			border-color: var(
-				--highcontrast-picker-border-color-error-active,
-				var(
-					--mod-picker-border-color-error-active,
-					var(--spectrum-picker-border-color-error-active)
-				)
-			);
-		}
-
-		&.is-open {
-			border-color: var(
-				--highcontrast-picker-border-color-error-default-open,
-				var(
-					--mod-picker-border-color-error-default-open,
-					var(--spectrum-picker-border-color-error-default-open)
-				)
-			);
-		}
-
-		&:focus-visible,
-		&.is-focused {
+		&.is-invalid {
 			border-color: var(
 				--highcontrast-picker-border-color-error-default,
 				var(
-					--mod-picker-border-color-error-key-focus,
-					var(--spectrum-picker-border-color-error-key-focus)
+					--mod-picker-border-color-error-default,
+					var(--spectrum-picker-border-color-error-default)
 				)
 			);
-		}
-	}
 
-	&.is-loading {
-		.spectrum-Picker-menuIcon {
-			color: var(
-				--highcontrast-picker-icon-color-disabled,
+			.spectrum-Picker-validationIcon {
+				color: var(
+					--highcontrast-picker-icon-color-error-default,
+					var(
+						--mod-picker-icon-color-error,
+						var(--spectrum-picker-icon-color-error)
+					)
+				);
+			}
+
+			&:hover {
+				border-color: var(
+					--highcontrast-picker-border-color-error-hover,
+					var(
+						--mod-picker-border-color-error-hover,
+						var(--spectrum-picker-border-color-error-hover)
+					)
+				);
+			}
+
+			&:active {
+				border-color: var(
+					--highcontrast-picker-border-color-error-active,
+					var(
+						--mod-picker-border-color-error-active,
+						var(--spectrum-picker-border-color-error-active)
+					)
+				);
+			}
+
+			&.is-open {
+				border-color: var(
+					--highcontrast-picker-border-color-error-default-open,
+					var(
+						--mod-picker-border-color-error-default-open,
+						var(--spectrum-picker-border-color-error-default-open)
+					)
+				);
+			}
+
+			&:focus-visible,
+			&.is-focused {
+				border-color: var(
+					--highcontrast-picker-border-color-error-default,
+					var(
+						--mod-picker-border-color-error-key-focus,
+						var(--spectrum-picker-border-color-error-key-focus)
+					)
+				);
+			}
+		}
+
+		&.is-loading {
+			.spectrum-Picker-menuIcon {
+				color: var(
+					--highcontrast-picker-icon-color-disabled,
+					var(
+						--mod-picker-icon-color-disabled,
+						var(--spectrum-picker-icon-color-disabled)
+					)
+				);
+			}
+		}
+
+		&:disabled,
+		&.is-disabled {
+			border-width: var(
+				--mod-picker-border-width,
+				var(--spectrum-picker-border-width)
+			);
+			cursor: default;
+
+			background-color: var(
+				--highcontrast-picker-background-color-disabled,
 				var(
-					--mod-picker-icon-color-disabled,
-					var(--spectrum-picker-icon-color-disabled)
+					--mod-picker-background-color-disabled,
+					var(--spectrum-picker-background-color-disabled)
 				)
 			);
-		}
-	}
-
-	&:disabled,
-	&.is-disabled {
-		border-width: var(
-			--mod-picker-border-width,
-			var(--spectrum-picker-border-width)
-		);
-		cursor: default;
-
-		background-color: var(
-			--highcontrast-picker-background-color-disabled,
-			var(
-				--mod-picker-background-color-disabled,
-				var(--spectrum-picker-background-color-disabled)
-			)
-		);
-		border-color: transparent;
-		color: var(
-			--highcontrast-picker-font-color-disabled,
-			var(
-				--mod-picker-font-color-disabled,
-				var(--spectrum-picker-font-color-disabled)
-			)
-		);
-
-		.spectrum-Picker-icon,
-		.spectrum-Picker-menuIcon,
-		.spectrum-Picker-validationIcon {
-			color: var(
-				--highcontrast-picker-icon-color-disabled,
-				var(
-					--mod-picker-icon-color-disabled,
-					var(--spectrum-picker-icon-color-disabled)
-				)
-			);
-		}
-
-		.spectrum-Picker-label.is-placeholder {
+			border-color: transparent;
 			color: var(
 				--highcontrast-picker-font-color-disabled,
 				var(
@@ -740,102 +735,59 @@ governing permissions and limitations under the License.
 					var(--spectrum-picker-font-color-disabled)
 				)
 			);
+
+			.spectrum-Picker-icon,
+			.spectrum-Picker-menuIcon,
+			.spectrum-Picker-validationIcon {
+				color: var(
+					--highcontrast-picker-icon-color-disabled,
+					var(
+						--mod-picker-icon-color-disabled,
+						var(--spectrum-picker-icon-color-disabled)
+					)
+				);
+			}
+
+			.spectrum-Picker-label.is-placeholder {
+				color: var(
+					--highcontrast-picker-font-color-disabled,
+					var(
+						--mod-picker-font-color-disabled,
+						var(--spectrum-picker-font-color-disabled)
+					)
+				);
+			}
+		}
+
+		.spectrum-Picker-icon {
+			flex-shrink: 0;
+			margin-inline-end: var(
+				--mod-picker-spacing-text-to-icon,
+				var(--spectrum-picker-spacing-text-to-icon)
+			);
 		}
 	}
 
-	.spectrum-Picker-icon {
-		flex-shrink: 0;
-		margin-inline-end: var(
-			--mod-picker-spacing-text-to-icon,
-			var(--spectrum-picker-spacing-text-to-icon)
-		);
-	}
-}
-
-.spectrum-Picker.is-open {
-  color: var(--highcontrast-picker-font-color-default-open, var(--mod-picker-font-color-default-open, var(--spectrum-picker-font-color-default-open)));
-  background-color: var(--highcontrast-picker-background-default-open, var(--mod-picker-background-color-default-open, var(--spectrum-picker-background-color-default-open)));
-  border-color: var(--highcontrast-picker-border-color-default-open, var(--mod-picker-border-default-open, var(--spectrum-picker-border-color-default-open)));
-  
-  &:hover {
-    color: var(--highcontrast-picker-font-color-default, var(--mod-picker-font-color-hover-open, var(--spectrum-picker-font-color-hover-open)));
-    background-color: var(--highcontrast-picker-background-color-hover-open, var(--mod-picker-background-color-hover-open, var(--spectrum-picker-background-color-hover-open)));
-    border-color: var(--highcontrast-picker-border-color-hover-open, var(--mod-picker-border-color-hover-open, var(--spectrum-picker-border-color-hover-open)));
-
-    .spectrum-Picker-menuIcon {
-      color: var(--highcontrast-picker-icon-color-hover-open, var(--mod-picker-icon-color-hover-open, var(--spectrum-picker-icon-color-hover-open)));
-    }
-  }
-
-  .spectrum-Picker-menuIcon {
-    color: var(--highcontrast-picker-icon-color-default-open, var(--mod-picker-icon-color-default-open, var(--spectrum-picker-icon-color-default-open)));
-  }
-}
-
-.spectrum-Picker--quiet {
-	inline-size: auto;
-	min-inline-size: 0;
-
-	&:disabled,
-	&.is-disabled {
-		&:focus-visible {
-			border-color: transparent;
-		}
-	}
-}
-
-.spectrum-Picker-label {
-	/* Be the biggest, but also shrink! */
-	flex: 1 1 auto;
-
-	white-space: nowrap;
-	overflow: hidden;
-
-	font-size: var(--mod-picker-font-size, var(--spectrum-picker-font-size));
-	line-height: var(
-		--mod-picker-line-height,
-		var(--spectrum-picker-line-height)
-	);
-	font-weight: var(
-		--mod-picker-font-weight,
-		var(--spectrum-picker-font-weight)
-	);
-
-	text-overflow: ellipsis;
-	text-align: start;
-
-	margin-block-start: var(
-		--mod-picker-spacing-top-to-text,
-		var(--spectrum-picker-spacing-top-to-text)
-	);
-	margin-block-end: calc(
-		var(
-				--mod-picker-spacing-bottom-to-text,
-				var(--spectrum-picker-spacing-bottom-to-text)
-			) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
-	);
-
-	&.is-placeholder {
-		font-weight: var(
-			--mod-picker-placeholder-font-weight,
-			var(--spectrum-picker-font-weight)
-		);
-		font-style: var(
-			--mod-picker-placeholder-font-style,
-			var(--spectrum-picker-placeholder-font-style)
-		);
-		transition: color
-			var(
-				--mod-picker-animation-duration,
-				var(--spectrum-picker-animation-duration)
-			)
-			ease-in-out;
-
+	.spectrum-Picker.is-open {
 		color: var(
-			--highcontrast-picker-font-color-default,
+			--highcontrast-picker-font-color-default-open,
 			var(
-				--mod-picker-font-color-default,
-				var(--spectrum-picker-font-color-default)
+				--mod-picker-font-color-default-open,
+				var(--spectrum-picker-font-color-default-open)
+			)
+		);
+		background-color: var(
+			--highcontrast-picker-background-default-open,
+			var(
+				--mod-picker-background-color-default-open,
+				var(--spectrum-picker-background-color-default-open)
+			)
+		);
+		border-color: var(
+			--highcontrast-picker-border-color-default-open,
+			var(
+				--mod-picker-border-default-open,
+				var(--spectrum-picker-border-color-default-open)
 			)
 		);
 
@@ -843,213 +795,325 @@ governing permissions and limitations under the License.
 			color: var(
 				--highcontrast-picker-font-color-default,
 				var(
-					--mod-picker-font-color-hover,
-					var(--spectrum-picker-font-color-hover)
+					--mod-picker-font-color-hover-open,
+					var(--spectrum-picker-font-color-hover-open)
+				)
+			);
+			background-color: var(
+				--highcontrast-picker-background-color-hover-open,
+				var(
+					--mod-picker-background-color-hover-open,
+					var(--spectrum-picker-background-color-hover-open)
+				)
+			);
+			border-color: var(
+				--highcontrast-picker-border-color-hover-open,
+				var(
+					--mod-picker-border-color-hover-open,
+					var(--spectrum-picker-border-color-hover-open)
+				)
+			);
+
+			.spectrum-Picker-menuIcon {
+				color: var(
+					--highcontrast-picker-icon-color-hover-open,
+					var(
+						--mod-picker-icon-color-hover-open,
+						var(--spectrum-picker-icon-color-hover-open)
+					)
+				);
+			}
+		}
+
+		.spectrum-Picker-menuIcon {
+			color: var(
+				--highcontrast-picker-icon-color-default-open,
+				var(
+					--mod-picker-icon-color-default-open,
+					var(--spectrum-picker-icon-color-default-open)
 				)
 			);
 		}
+	}
 
-		&:active {
+	.spectrum-Picker--quiet {
+		inline-size: auto;
+		min-inline-size: 0;
+
+		&:disabled,
+		&.is-disabled {
+			&:focus-visible {
+				border-color: transparent;
+			}
+		}
+	}
+
+	.spectrum-Picker-label {
+		/* Be the biggest, but also shrink! */
+		flex: 1 1 auto;
+
+		white-space: nowrap;
+		overflow: hidden;
+
+		font-size: var(--mod-picker-font-size, var(--spectrum-picker-font-size));
+		line-height: var(
+			--mod-picker-line-height,
+			var(--spectrum-picker-line-height)
+		);
+		font-weight: var(
+			--mod-picker-font-weight,
+			var(--spectrum-picker-font-weight)
+		);
+
+		text-overflow: ellipsis;
+		text-align: start;
+
+		margin-block-start: var(
+			--mod-picker-spacing-top-to-text,
+			var(--spectrum-picker-spacing-top-to-text)
+		);
+		margin-block-end: calc(
+			var(
+					--mod-picker-spacing-bottom-to-text,
+					var(--spectrum-picker-spacing-bottom-to-text)
+				) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
+		);
+
+		&.is-placeholder {
+			font-weight: var(
+				--mod-picker-placeholder-font-weight,
+				var(--spectrum-picker-font-weight)
+			);
+			font-style: var(
+				--mod-picker-placeholder-font-style,
+				var(--spectrum-picker-placeholder-font-style)
+			);
+			transition: color
+				var(
+					--mod-picker-animation-duration,
+					var(--spectrum-picker-animation-duration)
+				)
+				ease-in-out;
+
 			color: var(
 				--highcontrast-picker-font-color-default,
 				var(
-					--mod-picker-font-color-active,
-					var(--spectrum-picker-font-color-active)
+					--mod-picker-font-color-default,
+					var(--spectrum-picker-font-color-default)
+				)
+			);
+
+			&:hover {
+				color: var(
+					--highcontrast-picker-font-color-default,
+					var(
+						--mod-picker-font-color-hover,
+						var(--spectrum-picker-font-color-hover)
+					)
+				);
+			}
+
+			&:active {
+				color: var(
+					--highcontrast-picker-font-color-default,
+					var(
+						--mod-picker-font-color-active,
+						var(--spectrum-picker-font-color-active)
+					)
+				);
+			}
+		}
+	}
+
+	/* The picker chevron */
+	.spectrum-Picker-menuIcon {
+		display: inline-block;
+		position: relative;
+		vertical-align: top;
+		transition: color
+			var(
+				--mod-picker-animation-duration,
+				var(--spectrum-picker-animation-duration)
+			)
+			ease-out;
+		flex-shrink: 0;
+
+		margin-inline-start: var(
+			--mod-picker-spacing-icon-to-disclosure-icon,
+			var(--spectrum-picker-spacing-icon-to-disclosure-icon)
+		);
+		margin-block: var(
+			--mod-picker-spacing-top-to-disclosure-icon,
+			var(--spectrum-picker-spacing-top-to-disclosure-icon)
+		);
+
+		color: var(
+			--highcontrast-picker-icon-color-default,
+			var(
+				--mod-picker-icon-color-default,
+				var(--spectrum-picker-icon-color-default)
+			)
+		);
+
+		&:active {
+			color: var(
+				--highcontrast-picker-icon-color-default,
+				var(
+					--mod-picker-icon-color-active,
+					var(--spectrum-picker-icon-color-active)
 				)
 			);
 		}
 	}
-}
 
-/* The picker chevron */
-.spectrum-Picker-menuIcon {
-	display: inline-block;
-	position: relative;
-	vertical-align: top;
-	transition: color
-		var(
-			--mod-picker-animation-duration,
-			var(--spectrum-picker-animation-duration)
-		)
-		ease-out;
-	flex-shrink: 0;
+	.spectrum-Picker-validationIcon,
+	.spectrum-Picker .spectrum-ProgressCircle {
+		margin-inline-start: var(
+			--mod-picker-spacing-text-to-alert-icon-inline-start,
+			var(--spectrum-picker-spacing-text-to-alert-icon-inline-start)
+		);
+	}
 
-	margin-inline-start: var(
-		--mod-picker-spacing-icon-to-disclosure-icon,
-		var(--spectrum-picker-spacing-icon-to-disclosure-icon)
-	);
-	margin-block: var(
-		--mod-picker-spacing-top-to-disclosure-icon,
-		var(--spectrum-picker-spacing-top-to-disclosure-icon)
-	);
-
-	color: var(
-		--highcontrast-picker-icon-color-default,
-		var(
-			--mod-picker-icon-color-default,
-			var(--spectrum-picker-icon-color-default)
-		)
-	);
-
-	&:active {
-		color: var(
-			--highcontrast-picker-icon-color-default,
+	.spectrum-Picker-validationIcon {
+		margin-block-start: calc(
 			var(
-				--mod-picker-icon-color-active,
-				var(--spectrum-picker-icon-color-active)
+					--mod-picker-spacing-top-to-alert-icon,
+					var(--spectrum-picker-spacing-top-to-alert-icon)
+				) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
+		);
+		margin-block-end: calc(
+			var(
+					--mod-picker-spacing-top-to-alert-icon,
+					var(--spectrum-picker-spacing-top-to-alert-icon)
+				) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
+		);
+	}
+
+	.spectrum-Picker .spectrum-ProgressCircle {
+		margin-block-start: calc(
+			var(
+					--mod-picker-spacing-top-to-progress-circle,
+					var(--spectrum-picker-spacing-top-to-progress-circle)
+				) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
+		);
+		margin-block-end: calc(
+			var(
+					--mod-picker-spacing-top-to-progress-circle,
+					var(--spectrum-picker-spacing-top-to-progress-circle)
+				) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
+		);
+	}
+
+	.spectrum-Picker-label ~ .spectrum-Picker-menuIcon {
+		margin-inline-start: var(
+			--mod-picker-spacing-text-to-icon,
+			var(--spectrum-picker-spacing-text-to-icon)
+		);
+	}
+
+	.spectrum-Picker + .spectrum-Popover--bottom.is-open {
+		transform: translateY(
+			var(
+				--mod-picker-spacing-picker-to-popover,
+				var(--spectrum-picker-spacing-picker-to-popover)
 			)
 		);
 	}
-}
 
-.spectrum-Picker-validationIcon,
-.spectrum-Picker .spectrum-ProgressCircle {
-	margin-inline-start: var(
-		--mod-picker-spacing-text-to-alert-icon-inline-start,
-		var(--spectrum-picker-spacing-text-to-alert-icon-inline-start)
-	);
-}
-
-.spectrum-Picker-validationIcon {
-	margin-block-start: calc(
-		var(
-				--mod-picker-spacing-top-to-alert-icon,
-				var(--spectrum-picker-spacing-top-to-alert-icon)
-			) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
-	);
-	margin-block-end: calc(
-		var(
-				--mod-picker-spacing-top-to-alert-icon,
-				var(--spectrum-picker-spacing-top-to-alert-icon)
-			) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
-	);
-}
-
-.spectrum-Picker .spectrum-ProgressCircle {
-	margin-block-start: calc(
-		var(
-				--mod-picker-spacing-top-to-progress-circle,
-				var(--spectrum-picker-spacing-top-to-progress-circle)
-			) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
-	);
-	margin-block-end: calc(
-		var(
-				--mod-picker-spacing-top-to-progress-circle,
-				var(--spectrum-picker-spacing-top-to-progress-circle)
-			) - var(--mod-picker-border-width, var(--spectrum-picker-border-width))
-	);
-}
-
-.spectrum-Picker-label ~ .spectrum-Picker-menuIcon {
-	margin-inline-start: var(
-		--mod-picker-spacing-text-to-icon,
-		var(--spectrum-picker-spacing-text-to-icon)
-	);
-}
-
-.spectrum-Picker + .spectrum-Popover--bottom.is-open {
-	transform: translateY(
-		var(
-			--mod-picker-spacing-picker-to-popover,
-			var(--spectrum-picker-spacing-picker-to-popover)
-		)
-	);
-}
-
-.spectrum-Picker--quiet {
-	border: none;
-	border-radius: 0;
-	padding-inline: var(
-		--mod-picker-spacing-edge-to-text-quiet,
-		var(--spectrum-picker-spacing-edge-to-text-quiet)
-	);
-	margin-block-start: calc(
-		var(
-				--mod-picker-spacing-label-to-picker-quiet,
-				var(--spectrum-picker-spacing-label-to-picker-quiet)
-			) + (1px)
-	);
-	color: var(
-		--highcontrast-picker-font-color-default,
-		var(
-			--mod-picker-font-color-default,
-			var(--spectrum-picker-font-color-default)
-		)
-	);
-	background-color: transparent;
-
-	&.spectrum-Picker--sideLabel {
-		margin-block-start: calc(
-			-1 * var(--spectrum-picker-spacing-top-to-text-side-label-quiet)
-		);
-	}
-
-	.spectrum-Picker-menuIcon {
-		margin-inline-end: var(
-			--mod-picker-spacing-edge-to-disclosure-icon-quiet,
-			var(--spectrum-picker-spacing-edge-to-disclosure-icon-quiet)
-		);
-	}
-
-	&::after {
+	.spectrum-Picker--quiet {
 		border: none;
-		block-size: auto;
-		inline-size: auto;
-	}
-
-	&:hover {
+		border-radius: 0;
+		padding-inline: var(
+			--mod-picker-spacing-edge-to-text-quiet,
+			var(--spectrum-picker-spacing-edge-to-text-quiet)
+		);
+		margin-block-start: calc(
+			var(
+					--mod-picker-spacing-label-to-picker-quiet,
+					var(--spectrum-picker-spacing-label-to-picker-quiet)
+				) + (1px)
+		);
+		color: var(
+			--highcontrast-picker-font-color-default,
+			var(
+				--mod-picker-font-color-default,
+				var(--spectrum-picker-font-color-default)
+			)
+		);
 		background-color: transparent;
-	}
 
-	&:focus-visible,
-	&.is-focused {
-		background-color: transparent;
+		&.spectrum-Picker--sideLabel {
+			margin-block-start: calc(
+				-1 * var(--spectrum-picker-spacing-top-to-text-side-label-quiet)
+			);
+		}
+
+		.spectrum-Picker-menuIcon {
+			margin-inline-end: var(
+				--mod-picker-spacing-edge-to-disclosure-icon-quiet,
+				var(--spectrum-picker-spacing-edge-to-disclosure-icon-quiet)
+			);
+		}
 
 		&::after {
 			border: none;
-			border-radius: 0;
-			box-shadow: 0
-				var(
-					--mod-picker-focus-indicator-thickness,
-					var(--spectrum-picker-focus-indicator-thickness)
-				)
-				0 0
-				var(
-					--highcontrast-picker-focus-indicator-color,
+			block-size: auto;
+			inline-size: auto;
+		}
+
+		&:hover {
+			background-color: transparent;
+		}
+
+		&:focus-visible,
+		&.is-focused {
+			background-color: transparent;
+
+			&::after {
+				border: none;
+				border-radius: 0;
+				box-shadow: 0
 					var(
-						--mod-picker-focus-indicator-color,
-						var(--spectrum-picker-focus-indicator-color)
+						--mod-picker-focus-indicator-thickness,
+						var(--spectrum-picker-focus-indicator-thickness)
 					)
-				);
-			margin: calc(
-					(
-							var(
-									--mod-picker-focus-indicator-gap,
-									var(--spectrum-picker-focus-indicator-gap)
-								) +
+					0 0
+					var(
+						--highcontrast-picker-focus-indicator-color,
+						var(
+							--mod-picker-focus-indicator-color,
+							var(--spectrum-picker-focus-indicator-color)
+						)
+					);
+				margin: calc(
+						(
 								var(
-									--mod-picker-border-width,
-									var(--spectrum-picker-border-width)
-								)
-						) * -1
-				)
-				0;
+										--mod-picker-focus-indicator-gap,
+										var(--spectrum-picker-focus-indicator-gap)
+									) +
+									var(
+										--mod-picker-border-width,
+										var(--spectrum-picker-border-width)
+									)
+							) * -1
+					)
+					0;
+			}
+		}
+
+		&:active,
+		&.is-open {
+			background-color: transparent;
+		}
+
+		&:disabled,
+		&.is-disabled {
+			background-color: transparent;
 		}
 	}
 
-	&:active,
-	&.is-open {
-		background-color: transparent;
+	.spectrum-Picker--sideLabel {
+		display: inline-flex;
+		vertical-align: top;
 	}
-
-	&:disabled,
-	&.is-disabled {
-		background-color: transparent;
-	}
-}
-
-.spectrum-Picker--sideLabel {
-	display: inline-flex;
-	vertical-align: top;
-}
 }

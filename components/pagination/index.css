@@ -10,49 +10,71 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+/**
+ * @namespace spectrum
+ * @component Pagination
+ * @descendents textfield, counter, prevButton, nextButton, pageButton
+ * @modifiers explicit, listing
+ * @utility is-selected
+ */
+.spectrum-Pagination {
+  --spectrum-pagination-textfield-width: var(--spectrum-global-dimension-size-600);
+  --spectrum-pagination-counter-margin-left: var(--spectrum-global-dimension-size-65);
+  --spectrum-pagination-page-button-margin-horizontal: var(--spectrum-global-dimension-size-65);
+  --spectrum-pagination-page-button-background-color-hover: var(--spectrum-alias-background-color-hover-overlay);
+  --spectrum-pagination-page-button-border-color-key-focus: var(--spectrum-alias-focus-color);
+  --spectrum-pagination-page-button-background-color-down: var(--spectrum-global-color-gray-800);
+  --spectrum-pagination-page-button-text-color-down: var(--spectrum-global-color-static-white);
+  --spectrum-alias-label-text-color: var(--spectrum-global-color-gray-700);
+}
+
 .spectrum-Pagination--explicit,
 .spectrum-Pagination--listing {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .spectrum-Pagination-textfield {
-  inline-size: var(--spectrum-pagination-textfield-width);
-  min-inline-size: var(--spectrum-pagination-textfield-width);
+	inline-size: var(--spectrum-pagination-textfield-width);
+	min-inline-size: var(--spectrum-pagination-textfield-width);
 }
 
 .spectrum-Pagination-counter {
-  margin-inline-start: var(--spectrum-pagination-counter-margin-left);
-  color: var(--spectrum-alias-label-text-color);
+	margin-inline-start: var(--spectrum-pagination-counter-margin-left);
+	color: var(--spectrum-alias-label-text-color);
 }
 
 .spectrum-Pagination-prevButton {
-  margin-inline-end: var(--spectrum-pagination-page-button-margin-horizontal);
+	margin-inline-end: var(--spectrum-pagination-page-button-margin-horizontal);
 }
 
 .spectrum-Pagination-nextButton {
-  margin-inline-start: var(--spectrum-pagination-page-button-margin-horizontal);
+	margin-inline-start: var(--spectrum-pagination-page-button-margin-horizontal);
 }
 
 .spectrum-Pagination-prevButton,
 .spectrum-Pagination-nextButton {
-  .spectrum-Icon {
-    transform: logical rotate(0deg);
-  }
+	.spectrum-Icon {
+		transform: logical rotate(0deg);
+	}
 }
 
 .spectrum-Pagination-pageButton {
-  &:hover {
-    background-color: var(--spectrum-pagination-page-button-background-color-hover);
-  }
+	&:hover {
+		background-color: var(
+			--spectrum-pagination-page-button-background-color-hover
+		);
+	}
 
-  &:focus {
-    border-color: var(--spectrum-pagination-page-button-border-color-key-focus);
-  }
+	&:focus {
+		border-color: var(--spectrum-pagination-page-button-border-color-key-focus);
+	}
 
-  &.is-selected {
-    background-color: var(--spectrum-pagination-page-button-background-color-down);
-    color: var(--spectrum-pagination-page-button-text-color-down);
-  }
+	&.is-selected {
+		background-color: var(
+			--spectrum-pagination-page-button-background-color-down
+		);
+		color: var(--spectrum-pagination-page-button-text-color-down);
+	}
 }

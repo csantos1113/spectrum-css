@@ -1,123 +1,113 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "tasksRunnerOptions": {
-    "default": {
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test"
-        ]
-      }
-    }
-  },
-  "cli": {
-    "warnings": {
-      "versionMismatch": true
-    },
-    "packageManager": "yarn",
-    "analytics": false
-  },
-  "targetDefaults": {
-    "clean": {
-      "inputs": [
-        "{workspaceRoot}/dist"
-      ],
-      "outputs": [],
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "rimraf ./dist",
-        "color": true
-      }
-    },
-    "profile": {
-      "dependsOn": [
-        "build"
-      ],
-      "inputs": [
-        "{workspaceRoot}/dist/*.css",
-        "{workspaceRoot}/dist/themes/*.css"
-      ],
-      "outputs": ["{workspaceRoot}/dist/profile.json"],
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "glob-concat ./components/{projectName}/dist/index.css | wallace --json > ./components/{projectName}/dist/profile.json"
-      }
-    },
-    "lint": {
-      "inputs": [
-        "{projectRoot}/**/*.css",
-        "{projectRoot}/.stylelintignore",
-        "{projectRoot}/stylelint.config.js"
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "stylelint *.css themes/*.css --fix"
-      },
-      "configurations": {
-        "js": {
-          "cwd": "{projectRoot}",
-          "command": "eslint --ext .js --fix"
-        }
-      }
-    },
-    "build": {
-      "dependsOn": ["^build", "clean"],
-      "inputs": [
-        "{workspaceRoot}/index.css",
-        "{workspaceRoot}/themes/spectrum.css",
-        "{workspaceRoot}/themes/*.css"
-      ],
-      "outputs": [
-        "{workspaceRoot}/dist/**/*"
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "postcss --verbose ./components/{projectName}/index*.css --dir ./components/{projectName}/dist || exit 0",
-          "postcss --verbose ./components/{projectName}/index.css --output ./components/{projectName}/dist/index-vars.css",
-          "postcss --verbose ./components/{projectName}/vars.css --output ./components/{projectName}/dist/vars.css || exit 0",
-          "[[ -d \"./components/{projectName}/themes\" ]] && postcss --verbose ./components/{projectName}/themes/*.css --dir ./components/{projectName}/dist --base ./components/{projectName}/ || exit 0"
-        ]
-      }
-    },
-    "coverage": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "c8 nx test"
-      }
-    },
-    "test": {
-      "inputs": [
-        "default",
-        "^default"
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "chromatic --build-script-name build"
-      },
-      "configurations": {
-        "scoped": {
-          "command": "chromatic --build-script-name build --only-story-names $NX_TASK_TARGET_PROJECT"
-        },
-        "ci": {
-          "command": "chromatic --build-script-name build --exit-zero-on-changes --only-changed"
-        },
-        "plugins": {
-          "inputs": ["{workspaceRoot}/index.js", "{workspaceRoot}/test.js", "{workspaceRoot}/expected/*.css", "{workspaceRoot}/fixtures/*.css"],
-          "command": "ava test.js"
-        }
-      }
-    },
-    "watch": {
-      "dependsOn": [
-        "build"
-      ],
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "nx watch --projects $NX_TASK_TARGET_PROJECT -- nx run \\$NX_PROJECT_NAME:build"
-      }
-    }
-  }
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"tasksRunnerOptions": {
+		"default": {
+			"options": {
+				"cacheableOperations": ["build", "lint", "test"]
+			}
+		}
+	},
+	"cli": {
+		"warnings": {
+			"versionMismatch": true
+		},
+		"packageManager": "yarn",
+		"analytics": false
+	},
+	"targetDefaults": {
+		"clean": {
+			"inputs": ["{workspaceRoot}/dist"],
+			"outputs": [],
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "rimraf ./dist",
+				"color": true
+			}
+		},
+		"profile": {
+			"dependsOn": ["build"],
+			"inputs": [
+				"{workspaceRoot}/dist/*.css",
+				"{workspaceRoot}/dist/themes/*.css"
+			],
+			"outputs": ["{workspaceRoot}/dist/profile.json"],
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "glob-concat ./components/{projectName}/dist/index.css | wallace --json > ./components/{projectName}/dist/profile.json"
+			}
+		},
+		"lint": {
+			"inputs": [
+				"{projectRoot}/**/*.css",
+				"{projectRoot}/.stylelintignore",
+				"{projectRoot}/stylelint.config.js"
+			],
+			"executor": "nx:run-commands",
+			"options": {
+				"cwd": "{projectRoot}",
+				"command": "stylelint *.css themes/*.css --fix"
+			},
+			"configurations": {
+				"js": {
+					"cwd": "{projectRoot}",
+					"command": "eslint --ext .js --fix"
+				}
+			}
+		},
+		"build": {
+			"dependsOn": ["^build", "clean"],
+			"inputs": [
+				"{workspaceRoot}/index.css",
+				"{workspaceRoot}/themes/spectrum.css",
+				"{workspaceRoot}/themes/*.css"
+			],
+			"outputs": ["{workspaceRoot}/dist/**/*"],
+			"executor": "nx:run-commands",
+			"options": {
+				"commands": [
+					"postcss --verbose ./components/{projectName}/index.css --output ./components/{projectName}/dist/index.css && cp ./components/{projectName}/dist/index.css ./components/{projectName}/dist/index-vars.css",
+					"postcss --verbose ./components/{projectName}/index-*.css --dir ./components/{projectName}/dist || exit 0",
+					"postcss --verbose ./components/{projectName}/vars.css --output ./components/{projectName}/dist/vars.css || exit 0",
+					"[[ -d \"./components/{projectName}/themes\" ]] && postcss --verbose ./components/{projectName}/themes/*.css --dir ./components/{projectName}/dist --base ./components/{projectName}/ || exit 0"
+				]
+			}
+		},
+		"coverage": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "c8 nx test"
+			}
+		},
+		"test": {
+			"inputs": ["default", "^default"],
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "chromatic --build-script-name build"
+			},
+			"configurations": {
+				"scoped": {
+					"command": "chromatic --build-script-name build --only-story-names $NX_TASK_TARGET_PROJECT"
+				},
+				"ci": {
+					"command": "chromatic --build-script-name build --exit-zero-on-changes --only-changed"
+				},
+				"plugins": {
+					"inputs": [
+						"{workspaceRoot}/index.js",
+						"{workspaceRoot}/test.js",
+						"{workspaceRoot}/expected/*.css",
+						"{workspaceRoot}/fixtures/*.css"
+					],
+					"command": "ava test.js"
+				}
+			}
+		},
+		"watch": {
+			"dependsOn": ["build"],
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "nx watch --projects $NX_TASK_TARGET_PROJECT -- nx run \\$NX_PROJECT_NAME:build"
+			}
+		}
+	}
 }

@@ -25,7 +25,12 @@ module.exports = {
 	],
 	rules: {
 		"block-no-empty": null,
-		"at-rule-no-unknown": null,
+		"at-rule-no-unknown": [
+			true,
+			{
+				ignoreAtRules: [/^extend/, /^container/],
+			},
+		],
 		"selector-class-pattern": null,
 		"declaration-empty-line-before": null,
 		"custom-property-empty-line-before": null,
@@ -41,7 +46,7 @@ module.exports = {
 				severity: "warning",
 			},
 		],
-		"no-vendor-prefix": [
+		"value-no-vendor-prefix": [
 			true,
 			{
 				disableFix: true,
@@ -69,6 +74,7 @@ module.exports = {
 				checkPrefixed: true,
 			},
 		],
+		"declaration-block-no-duplicate-custom-properties": true,
 		"declaration-property-value-no-unknown": [
 			true,
 			{

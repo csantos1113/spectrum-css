@@ -18,8 +18,46 @@ module.exports = ({ fix = true, ignoreList = [] } = {}) => ({
 		const usedAnywhere = new Set();
 		const usedInProps = new Set();
 		const variableRelationships = {};
+		const allowedPassthroughs = new Set();
 
 		return {
+			Comment(comment) {
+				if (!comment.text.startsWith("@passthrough")) return;
+				// Look for a start or end indicator
+				const start = comment.text.endsWith("start");
+				const end = comment.text.endsWith("end");
+
+				let nextLine = comment.next();
+
+				// If there is neither a start, nor end identifier, capture the next line
+				if (!start && !end && nextLine) {
+					if (
+						nextLine &&
+						nextLine.type === "declaration" &&
+						next.prop.startsWith("--")
+					) {
+						allowedPassthroughs.add(nextLine.prop);
+					}
+				}
+
+				if (end) return;
+
+				// If this comment is a start indicator, capture the declarations after it until the end indicator
+				if (start) {
+					while (nextLine) {
+						if (nextLine.type === "decl" && nextLine.prop.startsWith("--")) {
+							allowedPassthroughs.add(nextLine.prop);
+						} else if (
+							nextLine.type === "comment" &&
+							nextLine.text === "@passthrough end"
+						) {
+							break;
+						}
+
+						nextLine = nextLine.next();
+					}
+				}
+			},
 			// Drop unused variable definitions
 			Declaration(decl) {
 				const usedInDecl = new Set();
@@ -61,7 +99,8 @@ module.exports = ({ fix = true, ignoreList = [] } = {}) => ({
 					// Note if it seems like this variable is unused
 					if (
 						!usedAnywhere.has(varName) &&
-						!ignoreList.some((regex) => regex.test(varName))
+						!ignoreList.some((regex) => regex.test(varName)) &&
+						!allowedPassthroughs.has(varName)
 					) {
 						if (!fix) {
 							decl.warn(

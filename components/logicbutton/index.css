@@ -10,39 +10,44 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-@import "@spectrum-css/vars/css/scales/spectrum-large.css";
-@import "@spectrum-css/vars/css/scales/spectrum-medium.css";
-
+/**
+ * @namespace spectrum
+ * @component LogicButton
+ */
 .spectrum-LogicButton {
-  /* Contain halo */
-  position: relative;
+	/* Contain halo */
+	position: relative;
 
-  display: inline-flex;
-  box-sizing: border-box;
+	display: inline-flex;
+	box-sizing: border-box;
 
-  align-items: center;
-  justify-content: center;
+	align-items: center;
+	justify-content: center;
 
-  /* Show the button overflow in Edge. */
-  overflow: visible;
+	/* Show the button overflow in Edge. */
+	overflow: visible;
 
-  &::after {
-    /* Override border-radius set in %spectrum-ButtonWithFocusRing since this is not a pill button */
-    border-radius: calc(
-      var(--spectrum-logicbutton-and-border-radius) +
-        var(--spectrum-alias-focus-ring-gap)
-    );
-  }
+	&::after {
+		/* Override border-radius set in %spectrum-ButtonWithFocusRing since this is not a pill button */
+		border-radius: calc(
+			var(--spectrum-logicbutton-and-border-radius) +
+				var(--spectrum-alias-focus-ring-gap)
+		);
+	}
 }
 
 .spectrum-LogicButton {
-  &:focus-visible {
-    outline: none;
+	&:focus-visible {
+		outline: none;
 
-    &::after {
-      box-shadow: 0 0 0 var(--spectrum-button-m-primary-outline-texticon-focus-ring-size) var(--spectrum-button-m-primary-outline-texticon-focus-ring-color-key-focus);
-    }
-  }
+		&::after {
+			box-shadow: 0 0 0
+				var(--spectrum-button-m-primary-outline-texticon-focus-ring-size)
+				var(
+					--spectrum-button-m-primary-outline-texticon-focus-ring-color-key-focus
+				);
+		}
+	}
 }
 
 .spectrum-LogicButton--and {

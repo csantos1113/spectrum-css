@@ -13,15 +13,19 @@ governing permissions and limitations under the License.
 /** @todo should this be sourced from commons? */
 @import "@spectrum-css/overlay";
 
+/**
+ * @namespace spectrum
+ * @component Dialog
+ */
 .spectrum-Dialog {
 	/* The font-size of the fullscreen dialog header */
 	--spectrum-dialog-fullscreen-header-text-size: 28px;
 
-  --spectrum-dialog-confirm-small-width: 400px;
-  --spectrum-dialog-confirm-medium-width: 480px;
-  --spectrum-dialog-confirm-large-width: 640px;
-  --spectrum-dialog-confirm-max-inline-size: 90vw;
-  --spectrum-dialog-confirm-max-height: 90vh;
+	--spectrum-dialog-confirm-small-width: 400px;
+	--spectrum-dialog-confirm-medium-width: 480px;
+	--spectrum-dialog-confirm-large-width: 640px;
+	--spectrum-dialog-confirm-max-inline-size: 90vw;
+	--spectrum-dialog-confirm-max-height: 90vh;
 
 	--spectrum-dialog-confirm-hero-height: var(
 		--spectrum-global-dimension-size-1600
@@ -49,6 +53,21 @@ governing permissions and limitations under the License.
 	--spectrum-dialog-confirm-divider-height: var(
 		--spectrum-global-dimension-static-size-25
 	);
+
+  --spectrum-dialog-confirm-min-width: var(--spectrum-global-dimension-static-size-3600);
+  --spectrum-dialog-confirm-border-radius: var(--spectrum-alias-component-border-radius);
+  --spectrum-dialog-confirm-padding: undefined;
+  --spectrum-dialog-confirm-title-text-size: undefined;
+  --spectrum-dialog-confirm-title-text-font-weight: var(--spectrum-alias-heading-text-font-weight-regular);
+  --spectrum-dialog-confirm-title-text-line-height: var(--spectrum-alias-heading-text-line-height);
+  --spectrum-dialog-confirm-divider-margin-top: var(--spectrum-global-dimension-static-size-150);
+  --spectrum-dialog-confirm-divider-margin-bottom: var(--spectrum-global-dimension-static-size-200);
+  --spectrum-dialog-confirm-divider-height: var(--spectrum-global-dimension-size-25);
+  --spectrum-dialog-confirm-description-text-size: undefined;
+  --spectrum-dialog-confirm-description-text-font-weight: var(--spectrum-global-font-weight-regular);
+  --spectrum-dialog-confirm-description-text-line-height: var(--spectrum-alias-component-text-line-height);
+  --spectrum-dialog-confirm-title-text-color: var(--spectrum-alias-heading-text-color);
+  --spectrum-dialog-confirm-description-text-color: var(--spectrum-global-color-gray-800);
 }
 
 .spectrum-Dialog {
@@ -93,22 +112,22 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Dialog .spectrum-Dialog-grid {
-  display: grid;
-  grid-template-columns:
-    var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
-    var(--spectrum-dialog-confirm-padding);
-  grid-template-rows: auto var(--spectrum-dialog-confirm-padding) auto auto 1fr auto var(
-      --spectrum-dialog-confirm-padding
-    );
-  grid-template-areas:
-    "hero hero    hero    hero        hero        hero"
-    ".    .       .       .           .           ."
-    ".    heading header  header      header      ."
-    ".    divider divider divider     divider     ."
-    ".    content content content     content     ."
-    ".    footer  footer  buttonGroup buttonGroup ."
-    ".    .       .       .           .           .";
-  inline-size: 100%;
+	display: grid;
+	grid-template-columns:
+		var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
+		var(--spectrum-dialog-confirm-padding);
+	grid-template-rows: auto var(--spectrum-dialog-confirm-padding) auto auto 1fr auto var(
+			--spectrum-dialog-confirm-padding
+		);
+	grid-template-areas:
+		"hero hero    hero    hero        hero        hero"
+		".    .       .       .           .           ."
+		".    heading header  header      header      ."
+		".    divider divider divider     divider     ."
+		".    content content content     content     ."
+		".    footer  footer  buttonGroup buttonGroup ."
+		".    .       .       .           .           .";
+	inline-size: 100%;
 }
 
 .spectrum-Dialog-heading {
@@ -147,7 +166,8 @@ governing permissions and limitations under the License.
 .spectrum-Dialog .spectrum-Dialog-divider {
 	grid-area: divider;
 	inline-size: 100%;
-	margin-block: var(--spectrum-dialog-confirm-divider-margin-top) var(--spectrum-dialog-confirm-divider-margin-bottom);
+	margin-block: var(--spectrum-dialog-confirm-divider-margin-top)
+		var(--spectrum-dialog-confirm-divider-margin-bottom);
 }
 
 /* remove top vertical padding of spectrum-Dialog-content from bottom margin of first divider after heading */
@@ -234,9 +254,12 @@ governing permissions and limitations under the License.
 
 .spectrum-Dialog.spectrum-Dialog--dismissable .spectrum-Dialog-grid {
 	grid-template:
-		"hero hero    hero    hero        hero        hero        hero" auto ".    .       .       .           .           closeButton closeButton" var(--spectrum-dialog-confirm-padding) ".    heading header  header      typeIcon    closeButton closeButton" auto ".    divider divider divider     divider     divider     ." auto ".    content content content     content     content     ." 1fr ".    footer  footer  buttonGroup buttonGroup buttonGroup ." auto ".    .       .       .           .           .           ." var(
+		"hero hero    hero    hero        hero        hero        hero" auto ".    .       .       .           .           closeButton closeButton" var(
 			--spectrum-dialog-confirm-padding
-		) / var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
+		) ".    heading header  header      typeIcon    closeButton closeButton" auto ".    divider divider divider     divider     divider     ." auto ".    content content content     content     content     ." 1fr ".    footer  footer  buttonGroup buttonGroup buttonGroup ." auto ".    .       .       .           .           .           ." var(
+			--spectrum-dialog-confirm-padding
+		)
+		/ var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
 		minmax(0, var(--spectrum-dialog-confirm-close-button-size)) var(--spectrum-dialog-confirm-padding);
 
 	.spectrum-Dialog-buttonGroup {
@@ -278,11 +301,13 @@ governing permissions and limitations under the License.
 
 	&.spectrum-Dialog .spectrum-Dialog-grid {
 		display: grid;
-		grid-template: ".    .       .       .            ." var(--spectrum-dialog-confirm-padding) ".    heading header  buttonGroup  ." auto ".    divider divider divider      ." auto ".    content content content      ." 1fr ".    .       .       .            ." var(
+		grid-template:
+			".    .       .       .            ." var(
 				--spectrum-dialog-confirm-padding
-			) / var(--spectrum-dialog-confirm-padding) 1fr auto auto var(
+			) ".    heading header  buttonGroup  ." auto ".    divider divider divider      ." auto ".    content content content      ." 1fr ".    .       .       .            ." var(
 				--spectrum-dialog-confirm-padding
-			);
+			)
+			/ var(--spectrum-dialog-confirm-padding) 1fr auto auto var(--spectrum-dialog-confirm-padding);
 	}
 
 	.spectrum-Dialog-heading {
@@ -309,41 +334,41 @@ governing permissions and limitations under the License.
 }
 
 @media screen and (width <= 700px) {
-  .spectrum-Dialog .spectrum-Dialog-grid {
-    grid-template-columns:
-      var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
-      var(--spectrum-dialog-confirm-padding);
-    grid-template-rows: auto var(--spectrum-dialog-confirm-padding) auto auto auto 1fr auto var(
-        --spectrum-dialog-confirm-padding
-      );
-    grid-template-areas:
-      "hero hero    hero    hero        hero        hero"
-      ".    .       .       .           .           ."
-      ".    heading heading heading     heading   ."
-      ".    header  header  header      header      ."
-      ".    divider divider divider     divider     ."
-      ".    content content content     content     ."
-      ".    footer  footer  buttonGroup buttonGroup ."
-      ".    .       .       .           .           .";
-  }
+	.spectrum-Dialog .spectrum-Dialog-grid {
+		grid-template-columns:
+			var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
+			var(--spectrum-dialog-confirm-padding);
+		grid-template-rows: auto var(--spectrum-dialog-confirm-padding) auto auto auto 1fr auto var(
+				--spectrum-dialog-confirm-padding
+			);
+		grid-template-areas:
+			"hero hero    hero    hero        hero        hero"
+			".    .       .       .           .           ."
+			".    heading heading heading     heading   ."
+			".    header  header  header      header      ."
+			".    divider divider divider     divider     ."
+			".    content content content     content     ."
+			".    footer  footer  buttonGroup buttonGroup ."
+			".    .       .       .           .           .";
+	}
 
-  .spectrum-Dialog.spectrum-Dialog--dismissable .spectrum-Dialog-grid {
-    grid-template-columns:
-      var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
-      minmax(0, var(--spectrum-dialog-confirm-close-button-size)) var(--spectrum-dialog-confirm-padding);
-    grid-template-rows: auto var(--spectrum-dialog-confirm-padding) auto auto auto 1fr auto var(
-        --spectrum-dialog-confirm-padding
-      );
-    grid-template-areas:
-      "hero hero    hero    hero        hero        hero        hero"
-      ".    .       .       .           .           closeButton closeButton"
-      ".    heading heading heading     heading    closeButton closeButton"
-      ".    header  header  header      header      header      ."
-      ".    divider divider divider     divider     divider     ."
-      ".    content content content     content     content     ."
-      ".    footer  footer  buttonGroup buttonGroup buttonGroup ."
-      ".    .       .       .           .           .           .";
-  }
+	.spectrum-Dialog.spectrum-Dialog--dismissable .spectrum-Dialog-grid {
+		grid-template-columns:
+			var(--spectrum-dialog-confirm-padding) auto 1fr auto minmax(0, auto)
+			minmax(0, var(--spectrum-dialog-confirm-close-button-size)) var(--spectrum-dialog-confirm-padding);
+		grid-template-rows: auto var(--spectrum-dialog-confirm-padding) auto auto auto 1fr auto var(
+				--spectrum-dialog-confirm-padding
+			);
+		grid-template-areas:
+			"hero hero    hero    hero        hero        hero        hero"
+			".    .       .       .           .           closeButton closeButton"
+			".    heading heading heading     heading    closeButton closeButton"
+			".    header  header  header      header      header      ."
+			".    divider divider divider     divider     divider     ."
+			".    content content content     content     content     ."
+			".    footer  footer  buttonGroup buttonGroup buttonGroup ."
+			".    .       .       .           .           .           .";
+	}
 
 	.spectrum-Dialog .spectrum-Dialog-header {
 		justify-content: flex-start;
@@ -353,11 +378,13 @@ governing permissions and limitations under the License.
 	.spectrum-Dialog--fullscreenTakeover {
 		&.spectrum-Dialog .spectrum-Dialog-grid {
 			display: grid;
-			grid-template: ".    .            ." var(--spectrum-dialog-confirm-padding) ".    heading      ." auto ".    header       ." auto ".    divider      ." auto ".    content      ." 1fr ".    buttonGroup  ." auto ".    .            ." var(
+			grid-template:
+				".    .            ." var(
 					--spectrum-dialog-confirm-padding
-				) / var(--spectrum-dialog-confirm-padding) 1fr var(
+				) ".    heading      ." auto ".    header       ." auto ".    divider      ." auto ".    content      ." 1fr ".    buttonGroup  ." auto ".    .            ." var(
 					--spectrum-dialog-confirm-padding
-				);
+				)
+				/ var(--spectrum-dialog-confirm-padding) 1fr var(--spectrum-dialog-confirm-padding);
 		}
 
 		.spectrum-Dialog-buttonGroup {

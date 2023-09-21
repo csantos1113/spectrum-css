@@ -212,7 +212,6 @@ module.exports = (ctx) => {
 							: false,
 				  }
 				: false,
-			"postcss-use": {},
 			"postcss-sorting": {
 				order: ["custom-properties", "declarations", "at-rules", "rules"],
 				"properties-order": "alphabetical",
@@ -227,10 +226,6 @@ module.exports = (ctx) => {
 			"@spectrum-tools/postcss-dropunusedvars": {
 				fix: false,
 				ignoreList: [/^--mod-/, /^--system/],
-			},
-			/** @note this enables reporting of duplicate variables in a file */
-			"@spectrum-tools/postcss-dropdupedvars": {
-				lint: true,
 			},
 			// "@spectrum-tools/postcss-custom-properties-mapping": {
 			// 	lint: true,
@@ -264,6 +259,10 @@ module.exports = (ctx) => {
 			},
 			/* After cleaning up comments, remove all empty rules */
 			"postcss-discard-empty": {},
+			stylelint: {
+				fix: true,
+				configFile: path.join(__dirname, "stylelint.config.js"),
+			},
 			/* Ensure the license is at the top of the file */
 			"postcss-licensing": {
 				filename: "COPYRIGHT",

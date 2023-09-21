@@ -13,7 +13,21 @@ governing permissions and limitations under the License.
 /** @todo should this be sourced from commons? */
 @import "@spectrum-css/overlay";
 
+/**
+ * @namespace spectrum
+ * @component QuickActions
+ */
 .spectrum-QuickActions {
+  --spectrum-picker-m-texticon-popover-offset-y: var(--spectrum-global-dimension-size-75);
+  --spectrum-quickactions-padding-y: var(--spectrum-global-dimension-size-50);
+  --spectrum-quickactions-padding-x: var(--spectrum-global-dimension-size-50);
+  --spectrum-quickactions-height: var(--spectrum-global-dimension-size-500);
+  --spectrum-quickactions-border-radius: var(--spectrum-alias-border-radius-regular);
+  --spectrum-quickactions-button-gap-x: var(--spectrum-global-dimension-size-100);
+  --spectrum-quickactions-text-button-gap-x: var(--spectrum-global-dimension-size-50);
+  --spectrum-quickactions-overlay-color: var(--spectrum-alias-background-color-quickactions-overlay);
+  --spectrum-quickactions-background-color: var(--spectrum-alias-background-color-quickactions);
+
 	box-sizing: border-box;
 
 	display: inline-flex;
@@ -59,4 +73,4 @@ governing permissions and limitations under the License.
 
 .spectrum-QuickActions-overlay {
 	background-color: var(--spectrum-quickactions-overlay-color);
-  }
+}

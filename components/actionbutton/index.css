@@ -12,6 +12,11 @@ governing permissions and limitations under the License.
 
 @import "@spectrum-css/commons";
 
+/**
+ * @namespace spectrum
+ * @component ActionButton
+ * @category Buttons
+ */
 .spectrum-ActionButton {
 	--spectrum-actionbutton-animation-duration: var(
 		--spectrum-animation-duration-100
@@ -120,8 +125,11 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-ActionButton--sizeXS {
-  --spectrum-actionbutton-min-width: calc((var(--spectrum-component-edge-to-visual-only-50) * 2) + var(--spectrum-workflow-icon-size-50));
-  --spectrum-actionbutton-height: var(--spectrum-component-height-50);
+	--spectrum-actionbutton-min-width: calc(
+		(var(--spectrum-component-edge-to-visual-only-50) * 2) +
+			var(--spectrum-workflow-icon-size-50)
+	);
+	--spectrum-actionbutton-height: var(--spectrum-component-height-50);
 
 	--spectrum-actionbutton-icon-size: var(--spectrum-workflow-icon-size-50);
 	--spectrum-actionbutton-font-size: var(--spectrum-font-size-50);
@@ -252,14 +260,14 @@ governing permissions and limitations under the License.
 }
 
 @media (forced-colors: active) {
-  .spectrum-ActionButton {
-    /* force a more visible focus indicator color */
-    --highcontrast-actionbutton-focus-indicator-color: ButtonText;
+	.spectrum-ActionButton {
+		/* force a more visible focus indicator color */
+		--highcontrast-actionbutton-focus-indicator-color: ButtonText;
 
-    &::after {
-      /* make sure focus indicator renders */
-      forced-color-adjust: none;
-    }
+		&::after {
+			/* make sure focus indicator renders */
+			forced-color-adjust: none;
+		}
 
 		&.is-selected {
 			--highcontrast-actionbutton-background-color-default: Highlight;
@@ -295,8 +303,14 @@ governing permissions and limitations under the License.
 .spectrum-ActionButton {
 	position: relative;
 
-  min-inline-size: var(--mod-actionbutton-min-width, var(--spectrum-actionbutton-min-width));
-  block-size: var(--mod-actionbutton-height, var(--spectrum-actionbutton-height));
+	min-inline-size: var(
+		--mod-actionbutton-min-width,
+		var(--spectrum-actionbutton-min-width)
+	);
+	block-size: var(
+		--mod-actionbutton-height,
+		var(--spectrum-actionbutton-height)
+	);
 
 	border-radius: var(
 		--mod-actionbutton-border-radius,
@@ -378,11 +392,29 @@ governing permissions and limitations under the License.
 		);
 	}
 
-  &:focus-visible {
-    background-color: var(--highcontrast-actionbutton-background-color-focus, var(--mod-actionbutton-background-color-focus, var(--spectrum-actionbutton-background-color-focus)));
-    border-color: var(--highcontrast-actionbutton-border-color-focus, var(--mod-actionbutton-border-color-focus, var(--spectrum-actionbutton-border-color-focus)));
-    color: var(--highcontrast-actionbutton-content-color-focus, var(--mod-actionbutton-content-color-focus, var(--spectrum-actionbutton-content-color-focus)));
-  }
+	&:focus-visible {
+		background-color: var(
+			--highcontrast-actionbutton-background-color-focus,
+			var(
+				--mod-actionbutton-background-color-focus,
+				var(--spectrum-actionbutton-background-color-focus)
+			)
+		);
+		border-color: var(
+			--highcontrast-actionbutton-border-color-focus,
+			var(
+				--mod-actionbutton-border-color-focus,
+				var(--spectrum-actionbutton-border-color-focus)
+			)
+		);
+		color: var(
+			--highcontrast-actionbutton-content-color-focus,
+			var(
+				--mod-actionbutton-content-color-focus,
+				var(--spectrum-actionbutton-content-color-focus)
+			)
+		);
+	}
 
 	&:active {
 		background-color: var(
@@ -439,9 +471,14 @@ a.spectrum-ActionButton {
 }
 
 .spectrum-ActionButton-icon {
-
-  inline-size: var(--mod-actionbutton-icon-size, var(--spectrum-actionbutton-icon-size));
-  block-size: var(--mod-actionbutton-icon-size, var(--spectrum-actionbutton-icon-size));
+	inline-size: var(
+		--mod-actionbutton-icon-size,
+		var(--spectrum-actionbutton-icon-size)
+	);
+	block-size: var(
+		--mod-actionbutton-icon-size,
+		var(--spectrum-actionbutton-icon-size)
+	);
 
 	/* adjust icon positioning to match UI kit */
 	margin-inline-start: calc(
@@ -486,7 +523,7 @@ a.spectrum-ActionButton {
 }
 
 .spectrum-ActionButton-label {
-  pointer-events: none;
+	pointer-events: none;
 
 	font-size: var(
 		--mod-actionbutton-font-size,
@@ -498,7 +535,7 @@ a.spectrum-ActionButton {
 	text-overflow: ellipsis;
 	overflow: hidden;
 
-  @extend %spectrum-ButtonLabel;
+	@extend %spectrum-ButtonLabel;
 }
 
 .spectrum-ActionButton-hold {
@@ -526,7 +563,7 @@ a.spectrum-ActionButton {
 
 	color: inherit;
 
-  transform: logical rotate(0deg); /* stylelint-disable-line declaration-property-value-no-unknown */
+	transform: logical rotate(0deg); /* stylelint-disable-line declaration-property-value-no-unknown */
 }
 
 /* special cases for focus-ring */
@@ -538,9 +575,9 @@ a.spectrum-ActionButton {
 		)
 		ease-in-out;
 
-  &::after {
-    position: absolute;
-    inset: 0;
+	&::after {
+		position: absolute;
+		inset: 0;
 
 		margin: calc(
 			(
@@ -571,13 +608,24 @@ a.spectrum-ActionButton {
 		content: "";
 	}
 
-  &:focus-visible {
-    /* kill the default ring */
-    box-shadow: none;
-    outline: none;
+	&:focus-visible {
+		/* kill the default ring */
+		box-shadow: none;
+		outline: none;
 
-    &::after {
-      box-shadow: 0 0 0 var(--mod-actionbutton-focus-indicator-thickness, var(--spectrum-actionbutton-focus-indicator-thickness)) var(--highcontrast-actionbutton-focus-indicator-color, var(--mod-actionbutton-focus-indicator-color, var(--spectrum-actionbutton-focus-indicator-color)));
-    }
-  }
+		&::after {
+			box-shadow: 0 0 0
+				var(
+					--mod-actionbutton-focus-indicator-thickness,
+					var(--spectrum-actionbutton-focus-indicator-thickness)
+				)
+				var(
+					--highcontrast-actionbutton-focus-indicator-color,
+					var(
+						--mod-actionbutton-focus-indicator-color,
+						var(--spectrum-actionbutton-focus-indicator-color)
+					)
+				);
+		}
+	}
 }

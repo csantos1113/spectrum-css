@@ -10,6 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+/**
+ * @namespace spectrum
+ * @component Card
+ */
 .spectrum-Card {
 	/* Default Layout */
 	--spectrum-card-background-color: var(--spectrum-background-layer-2-color);
@@ -292,18 +296,18 @@ governing permissions and limitations under the License.
 		);
 	}
 
-  &.is-focused,
-  &.is-selected,
-  &:focus,
-  &:hover {
-    .spectrum-Card-quickActions,
-    .spectrum-Card-actions {
-      /* Ideally, this would simply apply is-open to the QuickActions component */
-      visibility: visible;
-      opacity: 100%;
-      pointer-events: all;
-    }
-  }
+	&.is-focused,
+	&.is-selected,
+	&:focus,
+	&:hover {
+		.spectrum-Card-quickActions,
+		.spectrum-Card-actions {
+			/* Ideally, this would simply apply is-open to the QuickActions component */
+			visibility: visible;
+			opacity: 100%;
+			pointer-events: all;
+		}
+	}
 }
 
 .spectrum-Card-quickActions {
@@ -372,9 +376,9 @@ governing permissions and limitations under the License.
 	);
 	box-sizing: border-box;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 	border-start-start-radius: calc(
 		var(--mod-card-corner-radius, var(--spectrum-card-corner-radius)) -
@@ -773,7 +777,7 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Card--horizontal {
-  flex-direction: row;
+	flex-direction: row;
 
 	&:hover {
 		.spectrum-Card-preview {
@@ -823,11 +827,11 @@ governing permissions and limitations under the License.
 		);
 	}
 
-  .spectrum-Card-header,
-  .spectrum-Card-content {
-    margin-block-start: 0;
-    block-size: auto;
-  }
+	.spectrum-Card-header,
+	.spectrum-Card-content {
+		margin-block-start: 0;
+		block-size: auto;
+	}
 
 	.spectrum-Card-content {
 		margin-block-end: 0;
@@ -837,11 +841,11 @@ governing permissions and limitations under the License.
 		padding-inline-end: 0;
 	}
 
-  .spectrum-Card-body {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+	.spectrum-Card-body {
+		flex-shrink: 0;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
 
 		padding-block: 0;
 		padding-inline: var(
@@ -852,10 +856,10 @@ governing permissions and limitations under the License.
 }
 
 .spectrum-Card--gallery {
-  min-inline-size: 0;
+	min-inline-size: 0;
 
-  .spectrum-Card-preview {
-    padding: 0;
-    border-radius: 0;
-  }
+	.spectrum-Card-preview {
+		padding: 0;
+		border-radius: 0;
+	}
 }
